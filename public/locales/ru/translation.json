@@ -121,5 +121,23 @@
   },
   "common": {
     "loading": "Загрузка..."
+  },
+  "enums": {
+    "setupType": {
+      "DIY": "DIY",
+      "XA_MINER": "XA-Miner"
+    },
+    "nodeManagementStrategy": {
+      "MAX_PERFORMANCE": "Макс. производительность",
+      "BALANCED": "Сбалансированный",
+      "LOW_IMPACT": "Низкое влияние",
+      "AUTOMATIC": "Автоматический"
+    },
+    "tradingStrategy": {
+      "LOW_RISK_DCA": "Низкий риск (DCA)",
+      "MEDIUM_RISK_SWING": "Средний риск (Swing)",
+      "HIGH_RISK_MOMENTUM": "Высокий риск (Momentum)",
+      "AUTOMATIC": "Автоматический"
+    }
   }
 }

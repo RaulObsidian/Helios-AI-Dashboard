@@ -121,5 +121,23 @@
   },
   "common": {
     "loading": "Wird geladen..."
+  },
+  "enums": {
+    "setupType": {
+      "DIY": "DIY",
+      "XA_MINER": "XA-Miner"
+    },
+    "nodeManagementStrategy": {
+      "MAX_PERFORMANCE": "Max Performance",
+      "BALANCED": "Balanced",
+      "LOW_IMPACT": "Low Impact",
+      "AUTOMATIC": "Automatic"
+    },
+    "tradingStrategy": {
+      "LOW_RISK_DCA": "Low Risk DCA",
+      "MEDIUM_RISK_SWING": "Medium Risk Swing",
+      "HIGH_RISK_MOMENTUM": "High Risk Momentum",
+      "AUTOMATIC": "Automatic"
+    }
   }
 }

@@ -28,10 +28,10 @@ export enum DataProvider {
 }
 
 export enum TradingStrategy {
-    LOW_RISK_DCA = 'Low Risk DCA',
-    MEDIUM_RISK_SWING = 'Medium Risk Swing',
-    HIGH_RISK_MOMENTUM = 'High Risk Momentum',
-    AUTOMATIC = 'Automatic',
+    LOW_RISK_DCA = 'LOW_RISK_DCA',
+    MEDIUM_RISK_SWING = 'MEDIUM_RISK_SWING',
+    HIGH_RISK_MOMENTUM = 'HIGH_RISK_MOMENTUM',
+    AUTOMATIC = 'AUTOMATIC',
 }
 
 export enum WalletType {

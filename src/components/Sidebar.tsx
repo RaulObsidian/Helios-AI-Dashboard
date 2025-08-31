@@ -1,6 +1,8 @@
 import React from 'react';
 import { NavLink as RouterNavLink } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { CpuChipIcon, ChartBarIcon, ScaleIcon, BookOpenIcon, CogIcon } from './icons';
+import { APP_VERSION } from '../version';
 
 // Componente reutilizable para los enlaces de navegación, ahora usando el NavLink de react-router-dom
 const NavLink: React.FC<{ icon: React.ReactNode; label: string; to: string }> = ({ icon, label, to }) => (
@@ -20,6 +22,7 @@ const NavLink: React.FC<{ icon: React.ReactNode; label: string; to: string }> = 
 );
 
 const Sidebar: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <aside className="w-64 bg-helios-gray flex-shrink-0 p-6 flex flex-col">
       <div className="flex items-center mb-10">
@@ -27,13 +30,13 @@ const Sidebar: React.FC = () => {
         <h1 className="text-2xl font-bold text-white ml-3">Helios AI</h1>
       </div>
       <nav className="flex-grow space-y-2">
-        <NavLink icon={<ChartBarIcon className="w-6 h-6" />} label="Dashboard" to="/" />
-        <NavLink icon={<ScaleIcon className="w-6 h-6" />} label="Trading" to="/trading" />
-        <NavLink icon={<BookOpenIcon className="w-6 h-6" />} label="Logs" to="/logs" />
-        <NavLink icon={<CogIcon className="w-6 h-6" />} label="Settings" to="/settings" />
+        <NavLink icon={<ChartBarIcon className="w-6 h-6" />} label={t('nav.dashboard')} to="/" />
+        <NavLink icon={<ScaleIcon className="w-6 h-6" />} label={t('nav.trading')} to="/trading" />
+        <NavLink icon={<BookOpenIcon className="w-6 h-6" />} label={t('nav.logs')} to="/logs" />
+        <NavLink icon={<CogIcon className="w-6 h-6" />} label={t('nav.settings')} to="/settings" />
       </nav>
       <div className="text-xs text-gray-500">
-        <p>Version 0.2.0-beta</p>
+        <p>Version {APP_VERSION}</p>
         <p>&copy; 2025 Schmidt&Rueda</p>
       </div>
     </aside>

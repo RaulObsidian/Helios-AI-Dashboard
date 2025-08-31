@@ -121,5 +121,23 @@
   },
   "common": {
     "loading": "読み込み中..."
+  },
+  "enums": {
+    "setupType": {
+      "DIY": "DIY",
+      "XA_MINER": "XA-Miner"
+    },
+    "nodeManagementStrategy": {
+      "MAX_PERFORMANCE": "最大パフォーマンス",
+      "BALANCED": "バランス",
+      "LOW_IMPACT": "低影響",
+      "AUTOMATIC": "自動"
+    },
+    "tradingStrategy": {
+      "LOW_RISK_DCA": "低リスクDCA",
+      "MEDIUM_RISK_SWING": "中リスクスイング",
+      "HIGH_RISK_MOMENTUM": "高リスクモメンタム",
+      "AUTOMATIC": "自動"
+    }
   }
 }
