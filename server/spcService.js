@@ -27,12 +27,16 @@ const parseNumericValue = (text, regex) => {
  * Obtiene y parsea el estado de la cartera y del host.
  * @returns {Promise<object>} - Un objeto con el estado de la cartera.
  */
-export const getWalletAndHostState = async () => {
+export const getWalletAndHostState = async (apiPassword) => {
     try {
+        const options = {
+            env: { SPC_API_PASSWORD: apiPassword }
+        };
+
         // Ejecutar ambos comandos en paralelo para máxima eficiencia.
         const [walletResult, hostResult] = await Promise.all([
-            execa(SPC_PATH, ['wallet']),
-            execa(SPC_PATH, ['host', '-v']) // -v para obtener detalles como el collateral
+            execa(SPC_PATH, ['wallet'], options),
+            execa(SPC_PATH, ['host', '-v'], options) // -v para obtener detalles como el collateral
         ]);
 
         const walletText = walletResult.stdout;
@@ -71,9 +75,12 @@ export const getWalletAndHostState = async () => {
  * Obtiene el estado general del host (altura de bloque, peers, etc.).
  * @returns {Promise<object>} - Un objeto con el estado del host.
  */
-export const getHostStatus = async () => {
+export const getHostStatus = async (apiPassword) => {
     try {
-        const { stdout } = await execa(SPC_PATH); // Sin el 'host'
+        const options = {
+            env: { SPC_API_PASSWORD: apiPassword }
+        };
+        const { stdout } = await execa(SPC_PATH, [], options); // Sin el 'host'
         console.log("Salida de 'spc.exe host':", stdout); // <-- AÑADIMOS ESTO
         
         // Busca: "Height: 359404"

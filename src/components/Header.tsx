@@ -22,16 +22,34 @@ const ConnectionStatus: React.FC = () => {
 
 const Header: React.FC = () => {
   const [password, setPassword] = useState('');
-  const { nodeConnectionStatus, setNodeConnectionStatus } = useAppStore();
+  const { nodeConnectionStatus, setNodeConnectionStatus, fetchWalletState, fetchHostState } = useAppStore();
   const { t, i18n } = useTranslation();
 
   const handleConnect = async () => {
     setNodeConnectionStatus(ConnectionStatusEnum.CONNECTING);
-    await mockApi.connect(password);
+    try {
+      const response = await fetch('http://localhost:3001/api/connect', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ password }),
+      });
+      if (!response.ok) {
+        throw new Error('Connection failed');
+      }
+      // Si la conexión es exitosa, carga los datos inmediatamente
+      await Promise.all([fetchHostState(), fetchWalletState()]);
+    } catch (error) {
+      console.error("Connection error:", error);
+      setNodeConnectionStatus(ConnectionStatusEnum.FAILED);
+    }
   };
 
   const handleDisconnect = () => {
-    mockApi.disconnect();
+    // Por ahora, simplemente resetea el estado.
+    // Más adelante, podríamos tener un endpoint /api/disconnect en el backend.
+    setNodeConnectionStatus(ConnectionStatusEnum.DISCONNECTED);
   };
 
   const handleLanguageChange = (e: React.ChangeEvent<HTMLSelectElement>) => {

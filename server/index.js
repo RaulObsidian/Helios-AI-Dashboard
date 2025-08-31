@@ -10,11 +10,31 @@ dotenv.config();
 const app = express();
 const port = 3001;
 
+// Variable para almacenar la contraseña de la API en memoria
+let apiPassword = '';
+
 // --- Middleware ---
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173'
+}));
 app.use(express.json());
 
 // --- Rutas de la API ---
+
+/**
+ * Endpoint para recibir y almacenar la contraseña de la API.
+ */
+app.post('/api/connect', (req, res) => {
+    const { password } = req.body;
+    if (typeof password === 'string') {
+        apiPassword = password;
+        console.log("API password set.");
+        // Opcional: Realizar una prueba de conexión aquí para validar la contraseña
+        res.json({ success: true, message: 'API password set.' });
+    } else {
+        res.status(400).json({ success: false, error: 'Invalid password format.' });
+    }
+});
 
 /**
  * Endpoint para obtener el estado financiero de la cartera y el nodo.
@@ -22,7 +42,7 @@ app.use(express.json());
  */
 app.get('/api/wallet-status', async (req, res) => {
     try {
-        const walletState = await getWalletAndHostState();
+        const walletState = await getWalletAndHostState(apiPassword);
         res.json(walletState);
     } catch (error) {
         // Enviar una respuesta de error estandarizada
@@ -38,7 +58,7 @@ app.get('/api/wallet-status', async (req, res) => {
  */
 app.get('/api/host-status', async (req, res) => {
     try {
-        const hostStatus = await getHostStatus();
+        const hostStatus = await getHostStatus(apiPassword);
         res.json(hostStatus);
     } catch (error) {
         res.status(500).json({
