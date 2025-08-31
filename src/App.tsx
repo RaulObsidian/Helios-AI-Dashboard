@@ -9,6 +9,23 @@ import Logs from './pages/Logs';
 import Settings from './pages/Settings';
 
 function App() {
+  const fetchHostState = useAppStore((state) => state.fetchHostState);
+  const fetchWalletState = useAppStore((state) => state.fetchWalletState);
+  const fetchMarketData = useAppStore((state) => state.fetchMarketData);
+
+  useEffect(() => {
+    const fetchData = () => {
+      fetchHostState();
+      fetchWalletState();
+      fetchMarketData();
+    };
+
+    fetchData(); // Llama una vez al inicio
+    const intervalId = setInterval(fetchData, 15000); // Y luego cada 15 segundos
+
+    return () => clearInterval(intervalId);
+  }, [fetchHostState, fetchWalletState, fetchMarketData]);
+
   return (
     <div className="flex h-screen bg-helios-dark text-gray-200 font-sans">
       <Sidebar />

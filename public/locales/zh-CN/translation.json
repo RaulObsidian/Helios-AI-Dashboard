@@ -120,8 +120,28 @@
     }
   },
   "common": {
+    "common": {
     "loading": "加载中..."
   },
+  "enums": {
+    "setupType": {
+      "DIY": "DIY",
+      "XA_MINER": "XA-Miner"
+    },
+    "nodeManagementStrategy": {
+      "MAX_PERFORMANCE": "最高性能",
+      "BALANCED": "均衡",
+      "LOW_IMPACT": "低影响",
+      "AUTOMATIC": "自动"
+    },
+    "tradingStrategy": {
+      "LOW_RISK_DCA": "低风险定投",
+      "MEDIUM_RISK_SWING": "中风险波段",
+      "HIGH_RISK_MOMENTUM": "高风险动量",
+      "AUTOMATIC": "自动"
+    }
+  }
+}
   "enums": {
     "setupType": {
       "DIY": "DIY",

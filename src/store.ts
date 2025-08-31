@@ -1,5 +1,6 @@
 import { create } from 'zustand';
-import type { AppState, AppConfig, TradingConnection, WalletState } from './types.ts';
+import { fetchMarketData as fetchMarketDataFromApi } from './services/heliosAiService';
+import type { AppState, AppConfig, TradingConnection, WalletState, MarketData } from './types.ts';
 import { SetupType, NodeManagementStrategy, TradingStrategy, DataProvider, ChartType, ConnectionStatus } from './types.ts';
 
 // --- Estado Inicial Simulado ---
@@ -74,18 +75,21 @@ const initialState: Omit<AppState, 'config'> = {
 
 // --- Definición del Store ---
 interface AppStateWithActions extends AppState {
+    prevMarketData: MarketData | null; // Para comparar cambios de precio
     config: AppConfig;
     fetchHostState: () => Promise<void>;
-    fetchWalletState: () => Promise<void>; // Nueva acción
-    setLanguage: (lang: 'en' | 'es') => void;
+    fetchWalletState: () => Promise<void>;
+    fetchMarketData: () => Promise<void>; // Nueva acción
+    setLanguage: (lang: string) => void;
     setNodeConnectionStatus: (status: ConnectionStatus) => void;
     updateConfig: (newConfig: Partial<AppConfig>) => void;
     addTradingConnection: (connection: TradingConnection) => void;
     removeTradingConnection: (id: string) => void;
 }
 
-export const useAppStore = create<AppStateWithActions>((set) => ({
+export const useAppStore = create<AppStateWithActions>((set, get) => ({
     ...initialState,
+    prevMarketData: null,
     config: initialConfig,
     fetchHostState: async () => {
         try {
@@ -116,7 +120,35 @@ export const useAppStore = create<AppStateWithActions>((set) => ({
             console.error("Failed to fetch wallet state:", error);
         }
     },
-    setLanguage: (lang) => set(state => ({ config: { ...state.config, language: lang } })),
+    fetchMarketData: async () => {
+        const { marketData } = get(); // Obtiene el estado actual para la comparación
+        try {
+            const response = await fetch('http://localhost:3001/api/market-data');
+            if (!response.ok) {
+                throw new Error('Network response was not ok for market data');
+            }
+            const apiData = await response.json();
+            if (!apiData || apiData.length === 0) {
+                console.warn('CoinGecko API returned empty data for scprime.');
+                return; // No actualiza el estado si no hay datos
+            }
+            const newMarketData: MarketData = {
+                provider: DataProvider.COINGECKO, // Por ahora, fijo
+                priceUSD: apiData[0].current_price || 0,
+                marketCapUSD: apiData[0].market_cap || 0,
+                volume24hUSD: apiData[0].total_volume || 0,
+                tickVolume: 0, // No podemos calcularlo así ahora
+                buySellRatio: 0.5, // No disponible
+            };
+            set({
+                marketData: newMarketData,
+                prevMarketData: marketData,
+            });
+        } catch (error) {
+            console.error("Failed to fetch market data:", error);
+        }
+    },
+    setLanguage: (lang: string) => set(state => ({ config: { ...state.config, language: lang } })),
     setNodeConnectionStatus: (status) => set({ nodeConnectionStatus: status }),
     updateConfig: (newConfig) => set(state => ({ config: { ...state.config, ...newConfig } })),
     addTradingConnection: (connection) => set(state => ({

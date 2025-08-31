@@ -68,6 +68,27 @@ app.get('/api/host-status', async (req, res) => {
     }
 });
 
+/**
+ * Endpoint para obtener datos de mercado de CoinGecko.
+ * Actúa como un proxy para evitar problemas de CORS en el frontend.
+ */
+app.get('/api/market-data', async (req, res) => {
+    try {
+        const fetch = (await import('node-fetch')).default;
+        const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=scprime');
+        if (!response.ok) {
+            throw new Error(`CoinGecko API request failed with status: ${response.status}`);
+        }
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({
+            error: 'Failed to retrieve market data.',
+            details: error.message
+        });
+    }
+});
+
 
 // --- Inicio del Servidor ---
 app.listen(port, () => {
