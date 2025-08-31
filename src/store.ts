@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { AppState, AppConfig, TradingConnection } from './types.ts';
+import type { AppState, AppConfig, TradingConnection, WalletState } from './types.ts';
 import { SetupType, NodeManagementStrategy, TradingStrategy, DataProvider, ChartType, ConnectionStatus } from './types.ts';
 
 // --- Estado Inicial Simulado ---
@@ -75,7 +75,8 @@ const initialState: Omit<AppState, 'config'> = {
 // --- Definición del Store ---
 interface AppStateWithActions extends AppState {
     config: AppConfig;
-    fetchHostState: () => Promise<void>; // Nueva acción
+    fetchHostState: () => Promise<void>;
+    fetchWalletState: () => Promise<void>; // Nueva acción
     setLanguage: (lang: 'en' | 'es') => void;
     setNodeConnectionStatus: (status: ConnectionStatus) => void;
     updateConfig: (newConfig: Partial<AppConfig>) => void;
@@ -101,6 +102,18 @@ export const useAppStore = create<AppStateWithActions>((set) => ({
         } catch (error) {
             console.error("Failed to fetch host state:", error);
             set({ nodeConnectionStatus: ConnectionStatus.FAILED });
+        }
+    },
+    fetchWalletState: async () => {
+        try {
+            const response = await fetch('http://localhost:3001/api/wallet-status');
+            if (!response.ok) {
+                throw new Error('Network response was not ok for wallet status');
+            }
+            const data: WalletState = await response.json();
+            set({ walletState: data });
+        } catch (error) {
+            console.error("Failed to fetch wallet state:", error);
         }
     },
     setLanguage: (lang) => set(state => ({ config: { ...state.config, language: lang } })),

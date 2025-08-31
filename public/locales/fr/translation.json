@@ -35,12 +35,14 @@
   },
   "nodeStatus": {
     "title": "État du Nœud",
+    "blockHeight": "Hauteur du Bloc",
     "utilization": "Utilisation",
     "currentPrice": "Prix Actuel",
     "suggestion": "Suggestion de l'IA",
     "incentives": "Incitatifs",
     "unit": "SCP/TB",
     "status": {
+      "title": "Statut",
       "ok": "OK",
       "exceeded": "Dépassé"
     }
@@ -116,5 +118,8 @@
             "step8": "Revenez ici, collez les clés et cliquez sur 'Ajouter une Connexion'."
         }
     }
+  },
+  "common": {
+    "loading": "Chargement..."
   }
 }

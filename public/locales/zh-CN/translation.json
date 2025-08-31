@@ -35,12 +35,14 @@
   },
   "nodeStatus": {
     "title": "节点状态",
+    "blockHeight": "区块高度",
     "utilization": "利用率",
     "currentPrice": "当前价格",
     "suggestion": "AI 建议",
     "incentives": "激励",
     "unit": "SCP/TB",
     "status": {
+      "title": "状态",
       "ok": "正常",
       "exceeded": "已超出"
     }
@@ -116,5 +118,8 @@
             "step8": "返回此处，粘贴密钥，然后点击“添加连接”。"
         }
     }
+  },
+  "common": {
+    "loading": "加载中..."
   }
 }

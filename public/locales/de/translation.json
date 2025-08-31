@@ -35,12 +35,14 @@
   },
   "nodeStatus": {
     "title": "Knotenstatus",
+    "blockHeight": "Blockhöhe",
     "utilization": "Auslastung",
     "currentPrice": "Aktueller Preis",
     "suggestion": "KI-Vorschlag",
     "incentives": "Anreize",
     "unit": "SCP/TB",
     "status": {
+      "title": "Status",
       "ok": "OK",
       "exceeded": "Überschritten"
     }
@@ -116,5 +118,8 @@
             "step8": "Kehren Sie hierher zurück, fügen Sie die Schlüssel ein und klicken Sie auf 'Verbindung hinzufügen'."
         }
     }
+  },
+  "common": {
+    "loading": "Wird geladen..."
   }
 }

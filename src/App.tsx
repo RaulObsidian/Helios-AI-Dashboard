@@ -10,10 +10,23 @@ import Settings from './pages/Settings';
 
 function App() {
   const fetchHostState = useAppStore((state) => state.fetchHostState);
+  const fetchWalletState = useAppStore((state) => state.fetchWalletState);
 
   useEffect(() => {
+    // Llama a las funciones una vez al inicio
     fetchHostState();
-  }, []); // Array vacío para que se ejecute solo una vez
+    fetchWalletState();
+
+    // Configura un intervalo para llamar a ambas funciones cada 15 segundos
+    const intervalId = setInterval(() => {
+      fetchHostState();
+      fetchWalletState();
+    }, 15000);
+
+    // Función de limpieza: se ejecuta cuando el componente se desmonta
+    // para detener el intervalo y evitar fugas de memoria.
+    return () => clearInterval(intervalId);
+  }, [fetchHostState, fetchWalletState]);
 
   return (
     <div className="flex h-screen bg-helios-dark text-gray-200 font-sans">
