@@ -1,0 +1,120 @@
+{
+  "header": {
+    "title": "Painel Helios AI",
+    "subtitle": "versão beta {version}"
+  },
+  "nav": {
+    "dashboard": "Painel",
+    "trading": "Negociação",
+    "logs": "Registros",
+    "settings": "Configurações"
+  },
+  "connection": {
+    "title": "Conexão do Nó",
+    "nodeAddress": "Endereço do Nó",
+    "apiPassword": "Senha da API",
+    "passwordPlaceholder": "Digite a senha da API",
+    "connect": "Conectar",
+    "disconnect": "Desconectar",
+    "connecting": "Conectando...",
+    "status": {
+      "disconnected": "Desconectado",
+      "connecting": "Conectando",
+      "connected": "Conectado",
+      "failed": "Falha na conexão"
+    }
+  },
+  "walletStatus": {
+    "title": "Status da Carteira",
+    "totalBalance": "Saldo Total",
+    "unlocked": "Desbloqueado",
+    "collateral": "Garantia",
+    "profitBreakdown": "Detalhamento de Lucros",
+    "nodeProfits": "Nó",
+    "tradingProfits": "Negociação"
+  },
+  "nodeStatus": {
+    "title": "Status do Nó",
+    "utilization": "Utilização",
+    "currentPrice": "Preço Atual",
+    "suggestion": "Sugestão da IA",
+    "incentives": "Incentivos",
+    "unit": "SCP/TB",
+    "status": {
+      "ok": "OK",
+      "exceeded": "Excedido"
+    }
+  },
+  "marketData": {
+    "title": "Dados de Mercado",
+    "price": "Preço SCP",
+    "mcap": "Cap. de Mercado",
+    "volume": "Volume 24h",
+    "source": "Fonte",
+    "simulated": "Simulado"
+  },
+  "tradingLog": {
+    "title": "Registro de Negociação",
+    "header": {
+      "time": "Hora",
+      "action": "Ação",
+      "amount": "Quantidade (SCP)",
+      "price": "Preço"
+    },
+    "action": {
+      "buy": "COMPRA",
+      "sell": "VENDA"
+    }
+  },
+  "eventLog": {
+    "title": "Registro de Eventos do Agente"
+  },
+  "chart": {
+    "title": "Preço do SCP em Tempo Real"
+  },
+  "settings": {
+    "title": "Configurações",
+    "agent": {
+      "title": "Agente",
+      "profile": "Perfil de Hardware",
+      "nodeManagement": "Estratégia de Gerenciamento do Nó",
+      "strategy": "Estratégia de Negociação"
+    },
+    "data": {
+      "title": "Dados",
+      "provider": "Provedor de Preços"
+    }
+  },
+  "tradingPage": {
+    "title": "Negociação Automatizada",
+    "connectionsTitle": "Conexões de Exchange",
+    "apiKeyPlaceholder": "Chave de API",
+    "apiSecretPlaceholder": "Segredo de API",
+    "addButton": "Adicionar Conexão",
+    "tutorial": {
+        "title": "Como Conectar uma Conta de Exchange",
+        "intro": "Para permitir que a Helios AI negocie em seu nome, você precisa conectar sua conta de exchange usando Chaves de API.",
+        "security": {
+            "title": "IMPORTANTE: Segurança em Primeiro Lugar!",
+            "item1": "NUNCA compartilhe sua senha de login.",
+            "item1_body": "Este aplicativo nunca a solicitará.",
+            "item2": "Conceda APENAS permissões de 'Negociação'.",
+            "item2_body": "A IA só precisa de permissão para colocar e cancelar ordens.",
+            "item3": "SEMPRE DESATIVE as permissões de 'Saque'.",
+            "item3_body": "Este é o passo mais crítico. Garante que a IA nunca poderá mover seus fundos para fora da exchange."
+        },
+        "howTo": {
+            "title": "Passos Gerais para Criar Chaves de API",
+            "intro": "Os passos exatos variam entre as exchanges, mas o processo é geralmente o mesmo:",
+            "step1": "Faça login na sua conta no site da sua exchange.",
+            "step2": "Encontre 'Gerenciamento de API' ou 'Chaves de API' nas configurações da sua conta.",
+            "step3": "Clique em 'Criar API'.",
+            "step4": "Dê um nome memorável à chave (ex: 'HeliosAI').",
+            "step5": "Defina as permissões: APENAS 'Negociação à Vista' ativada. DESATIVE 'Saques'.",
+            "step6": "Complete qualquer verificação de segurança (2FA, código de e-mail).",
+            "step7": "Copie a 'Chave de API' e a 'Chave Secreta'.",
+            "step8": "Volte aqui, cole as chaves e clique em 'Adicionar Conexão'."
+        }
+    }
+  }
+}

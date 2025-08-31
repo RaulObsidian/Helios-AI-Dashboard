@@ -1,0 +1,120 @@
+{
+  "header": {
+    "title": "Helios AI 仪表盘",
+    "subtitle": "测试版 {version}"
+  },
+  "nav": {
+    "dashboard": "仪表盘",
+    "trading": "交易",
+    "logs": "日志",
+    "settings": "设置"
+  },
+  "connection": {
+    "title": "节点连接",
+    "nodeAddress": "节点地址",
+    "apiPassword": "API 密码",
+    "passwordPlaceholder": "输入 API 密码",
+    "connect": "连接",
+    "disconnect": "断开连接",
+    "connecting": "连接中...",
+    "status": {
+      "disconnected": "已断开",
+      "connecting": "连接中",
+      "connected": "已连接",
+      "failed": "连接失败"
+    }
+  },
+  "walletStatus": {
+    "title": "钱包状态",
+    "totalBalance": "总余额",
+    "unlocked": "已解锁",
+    "collateral": "抵押品",
+    "profitBreakdown": "利润明细",
+    "nodeProfits": "节点",
+    "tradingProfits": "交易"
+  },
+  "nodeStatus": {
+    "title": "节点状态",
+    "utilization": "利用率",
+    "currentPrice": "当前价格",
+    "suggestion": "AI 建议",
+    "incentives": "激励",
+    "unit": "SCP/TB",
+    "status": {
+      "ok": "正常",
+      "exceeded": "已超出"
+    }
+  },
+  "marketData": {
+    "title": "市场数据",
+    "price": "SCP 价格",
+    "mcap": "市值",
+    "volume": "24小时交易量",
+    "source": "来源",
+    "simulated": "模拟"
+  },
+  "tradingLog": {
+    "title": "交易日志",
+    "header": {
+      "time": "时间",
+      "action": "操作",
+      "amount": "数量 (SCP)",
+      "price": "价格"
+    },
+    "action": {
+      "buy": "买入",
+      "sell": "卖出"
+    }
+  },
+  "eventLog": {
+    "title": "代理事件日志"
+  },
+  "chart": {
+    "title": "SCP 实时价格"
+  },
+  "settings": {
+    "title": "设置",
+    "agent": {
+      "title": "代理",
+      "profile": "硬件配置文件",
+      "nodeManagement": "节点管理策略",
+      "strategy": "交易策略"
+    },
+    "data": {
+      "title": "数据",
+      "provider": "价格提供商"
+    }
+  },
+  "tradingPage": {
+    "title": "自动交易",
+    "connectionsTitle": "交易所连接",
+    "apiKeyPlaceholder": "API 密钥",
+    "apiSecretPlaceholder": "API 秘密",
+    "addButton": "添加连接",
+    "tutorial": {
+        "title": "如何连接交易所账户",
+        "intro": "要允许 Helios AI 代表您进行交易，您需要使用 API 密钥连接您的交易所账户。",
+        "security": {
+            "title": "重要：安全第一！",
+            "item1": "绝不分享您的登录密码。",
+            "item1_body": "此应用程序绝不会要求您提供。",
+            "item2": "仅授予“交易”权限。",
+            "item2_body": "AI 只需要下订单和取消订单的权限。",
+            "item3": "始终禁用“提款”权限。",
+            "item3_body": "这是最关键的一步。它确保 AI 永远无法将您的资金从交易所中移出。"
+        },
+        "howTo": {
+            "title": "创建 API 密钥的一般步骤",
+            "intro": "具体步骤因交易所而异，但过程大致相同：",
+            "step1": "在交易所网站上登录您的账户。",
+            "step2": "在您的账户设置中找到“API 管理”或“API 密钥”。",
+            "step3": "点击“创建 API”。",
+            "step4": "为密钥指定一个好记的名称（例如“HeliosAI”）。",
+            "step5": "设置权限：仅启用“现货交易”。禁用“提款”。",
+            "step6": "完成任何安全验证（2FA、电子邮件代码）。",
+            "step7": "复制“API 密钥”和“秘密密钥”。",
+            "step8": "返回此处，粘贴密钥，然后点击“添加连接”。"
+        }
+    }
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "header": {
+    "title": "Helios AI Dashboard",
+    "subtitle": "version beta {version}"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "trading": "Trading",
+    "logs": "Logs",
+    "settings": "Settings"
+  },
+  "connection": {
+    "title": "Node Connection",
+    "nodeAddress": "Node Address",
+    "apiPassword": "API Password",
+    "passwordPlaceholder": "Enter API password",
+    "connect": "Connect",
+    "disconnect": "Disconnect",
+    "connecting": "Connecting...",
+    "status": {
+      "disconnected": "Disconnected",
+      "connecting": "Connecting",
+      "connected": "Connected",
+      "failed": "Connection Failed"
+    }
+  },
+  "walletStatus": {
+    "title": "Wallet Status",
+    "totalBalance": "Total Balance",
+    "unlocked": "Unlocked",
+    "collateral": "Collateral",
+    "profitBreakdown": "Profit Breakdown",
+    "nodeProfits": "Node",
+    "tradingProfits": "Trading"
+  },
+  "nodeStatus": {
+    "title": "Node Status",
+    "utilization": "Utilization",
+    "currentPrice": "Current Price",
+    "suggestion": "AI Suggestion",
+    "incentives": "Incentives",
+    "unit": "SCP/TB",
+    "status": {
+      "ok": "OK",
+      "exceeded": "Exceeded"
+    }
+  },
+  "marketData": {
+    "title": "Market Data",
+    "price": "SCP Price",
+    "mcap": "Market Cap",
+    "volume": "24h Volume",
+    "source": "Source",
+    "simulated": "Simulated"
+  },
+  "tradingLog": {
+    "title": "Trading Log",
+    "header": {
+      "time": "Time",
+      "action": "Action",
+      "amount": "Amount (SCP)",
+      "price": "Price"
+    },
+    "action": {
+      "buy": "BUY",
+      "sell": "SELL"
+    }
+  },
+  "eventLog": {
+    "title": "Agent Event Log"
+  },
+  "chart": {
+    "title": "Live SCP Price"
+  },
+  "settings": {
+    "title": "Settings",
+    "agent": {
+      "title": "Agent",
+      "profile": "Hardware Profile",
+      "nodeManagement": "Node Management Strategy",
+      "strategy": "Trading Strategy"
+    },
+    "data": {
+      "title": "Data",
+      "provider": "Price Provider"
+    }
+  },
+  "tradingPage": {
+    "title": "Automated Trading",
+    "connectionsTitle": "Exchange Connections",
+    "apiKeyPlaceholder": "API Key",
+    "apiSecretPlaceholder": "API Secret",
+    "addButton": "Add Connection",
+    "tutorial": {
+        "title": "How to Connect an Exchange Account",
+        "intro": "To allow Helios AI to trade on your behalf, you need to connect your exchange account using API Keys.",
+        "security": {
+            "title": "IMPORTANT: Security First!",
+            "item1": "NEVER share your login password.",
+            "item1_body": "This app will never ask for it.",
+            "item2": "Grant 'Trading' permissions ONLY.",
+            "item2_body": "The AI only needs permission to place and cancel orders.",
+            "item3": "ALWAYS DISABLE 'Withdrawal' permissions.",
+            "item3_body": "This is the most critical step. It ensures the AI can never move your funds out of the exchange."
+        },
+        "howTo": {
+            "title": "General Steps to Create API Keys",
+            "intro": "The exact steps vary between exchanges, but the process is generally the same:",
+            "step1": "Log in to your exchange account on their website.",
+            "step2": "Find 'API Management' or 'API Keys' in your account settings.",
+            "step3": "Click 'Create API'.",
+            "step4": "Give the key a memorable name (e.g., 'HeliosAI').",
+            "step5": "Set permissions: ONLY 'Spot Trading' enabled. DISABLE 'Withdrawals'.",
+            "step6": "Complete any security verification (2FA, email code).",
+            "step7": "Copy both the 'API Key' and 'Secret Key'.",
+            "step8": "Return here, paste the keys, and click 'Add Connection'."
+        }
+    }
+  }
+}

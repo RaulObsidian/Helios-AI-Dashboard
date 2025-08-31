@@ -1,0 +1,120 @@
+{
+  "header": {
+    "title": "Tableau de Bord Helios AI",
+    "subtitle": "version bêta {version}"
+  },
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "trading": "Trading",
+    "logs": "Journaux",
+    "settings": "Paramètres"
+  },
+  "connection": {
+    "title": "Connexion au Nœud",
+    "nodeAddress": "Adresse du Nœud",
+    "apiPassword": "Mot de passe de l'API",
+    "passwordPlaceholder": "Entrez le mot de passe de l'API",
+    "connect": "Connecter",
+    "disconnect": "Déconnecter",
+    "connecting": "Connexion...",
+    "status": {
+      "disconnected": "Déconnecté",
+      "connecting": "Connexion",
+      "connected": "Connecté",
+      "failed": "Échec de la connexion"
+    }
+  },
+  "walletStatus": {
+    "title": "État du Portefeuille",
+    "totalBalance": "Solde Total",
+    "unlocked": "Débloqué",
+    "collateral": "Collatéral",
+    "profitBreakdown": "Répartition des Profits",
+    "nodeProfits": "Nœud",
+    "tradingProfits": "Trading"
+  },
+  "nodeStatus": {
+    "title": "État du Nœud",
+    "utilization": "Utilisation",
+    "currentPrice": "Prix Actuel",
+    "suggestion": "Suggestion de l'IA",
+    "incentives": "Incitatifs",
+    "unit": "SCP/TB",
+    "status": {
+      "ok": "OK",
+      "exceeded": "Dépassé"
+    }
+  },
+  "marketData": {
+    "title": "Données du Marché",
+    "price": "Prix SCP",
+    "mcap": "Cap. Boursière",
+    "volume": "Volume 24h",
+    "source": "Source",
+    "simulated": "Simulé"
+  },
+  "tradingLog": {
+    "title": "Journal de Trading",
+    "header": {
+      "time": "Heure",
+      "action": "Action",
+      "amount": "Montant (SCP)",
+      "price": "Prix"
+    },
+    "action": {
+      "buy": "ACHAT",
+      "sell": "VENTE"
+    }
+  },
+  "eventLog": {
+    "title": "Journal des Événements de l'Agent"
+  },
+  "chart": {
+    "title": "Prix SCP en Direct"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "agent": {
+      "title": "Agent",
+      "profile": "Profil Matériel",
+      "nodeManagement": "Stratégie de Gestion du Nœud",
+      "strategy": "Stratégie de Trading"
+    },
+    "data": {
+      "title": "Données",
+      "provider": "Fournisseur de Prix"
+    }
+  },
+  "tradingPage": {
+    "title": "Trading Automatisé",
+    "connectionsTitle": "Connexions aux Échanges",
+    "apiKeyPlaceholder": "Clé API",
+    "apiSecretPlaceholder": "Secret API",
+    "addButton": "Ajouter une Connexion",
+    "tutorial": {
+        "title": "Comment connecter un compte d'échange",
+        "intro": "Pour permettre à Helios AI de trader en votre nom, vous devez connecter votre compte d'échange à l'aide de clés API.",
+        "security": {
+            "title": "IMPORTANT : La sécurité d'abord !",
+            "item1": "Ne partagez JAMAIS votre mot de passe de connexion.",
+            "item1_body": "Cette application ne vous le demandera jamais.",
+            "item2": "N'accordez que les autorisations de 'Trading'.",
+            "item2_body": "L'IA n'a besoin que de l'autorisation de passer et d'annuler des ordres.",
+            "item3": "DÉSACTIVEZ TOUJOURS les autorisations de 'Retrait'.",
+            "item3_body": "C'est l'étape la plus critique. Elle garantit que l'IA ne pourra jamais déplacer vos fonds hors de l'échange."
+        },
+        "howTo": {
+            "title": "Étapes Générales pour Créer des Clés API",
+            "intro": "Les étapes exactes varient selon les échanges, mais le processus est généralement le même :",
+            "step1": "Connectez-vous à votre compte sur le site web de votre échange.",
+            "step2": "Trouvez 'Gestion API' ou 'Clés API' dans les paramètres de votre compte.",
+            "step3": "Cliquez sur 'Créer une API'.",
+            "step4": "Donnez un nom mémorable à la clé (par ex. 'HeliosAI').",
+            "step5": "Définissez les autorisations : activez UNIQUEMENT le 'Trading au comptant'. DÉSACTIVEZ les 'Retraits'.",
+            "step6": "Effectuez toute vérification de sécurité (2FA, code par e-mail).",
+            "step7": "Copiez la 'Clé API' et la 'Clé Secrète'.",
+            "step8": "Revenez ici, collez les clés et cliquez sur 'Ajouter une Connexion'."
+        }
+    }
+  }
+}

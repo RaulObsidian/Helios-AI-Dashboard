@@ -1,0 +1,120 @@
+{
+  "header": {
+    "title": "Helios AI Dashboard",
+    "subtitle": "Beta-Version {version}"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "trading": "Handel",
+    "logs": "Protokolle",
+    "settings": "Einstellungen"
+  },
+  "connection": {
+    "title": "Knotenverbindung",
+    "nodeAddress": "Knotenadresse",
+    "apiPassword": "API-Passwort",
+    "passwordPlaceholder": "API-Passwort eingeben",
+    "connect": "Verbinden",
+    "disconnect": "Trennen",
+    "connecting": "Verbinde...",
+    "status": {
+      "disconnected": "Getrennt",
+      "connecting": "Verbinde",
+      "connected": "Verbunden",
+      "failed": "Verbindung fehlgeschlagen"
+    }
+  },
+  "walletStatus": {
+    "title": "Wallet-Status",
+    "totalBalance": "Gesamtguthaben",
+    "unlocked": "Entsperrt",
+    "collateral": "Sicherheit",
+    "profitBreakdown": "Gewinnaufschlüsselung",
+    "nodeProfits": "Knoten",
+    "tradingProfits": "Handel"
+  },
+  "nodeStatus": {
+    "title": "Knotenstatus",
+    "utilization": "Auslastung",
+    "currentPrice": "Aktueller Preis",
+    "suggestion": "KI-Vorschlag",
+    "incentives": "Anreize",
+    "unit": "SCP/TB",
+    "status": {
+      "ok": "OK",
+      "exceeded": "Überschritten"
+    }
+  },
+  "marketData": {
+    "title": "Marktdaten",
+    "price": "SCP-Preis",
+    "mcap": "Marktkapitalisierung",
+    "volume": "24h-Volumen",
+    "source": "Quelle",
+    "simulated": "Simuliert"
+  },
+  "tradingLog": {
+    "title": "Handelsprotokoll",
+    "header": {
+      "time": "Zeit",
+      "action": "Aktion",
+      "amount": "Menge (SCP)",
+      "price": "Preis"
+    },
+    "action": {
+      "buy": "KAUFEN",
+      "sell": "VERKAUFEN"
+    }
+  },
+  "eventLog": {
+    "title": "Agenten-Ereignisprotokoll"
+  },
+  "chart": {
+    "title": "Live-SCP-Preis"
+  },
+  "settings": {
+    "title": "Einstellungen",
+    "agent": {
+      "title": "Agent",
+      "profile": "Hardware-Profil",
+      "nodeManagement": "Knotenverwaltungsstrategie",
+      "strategy": "Handelsstrategie"
+    },
+    "data": {
+      "title": "Daten",
+      "provider": "Preisanbieter"
+    }
+  },
+  "tradingPage": {
+    "title": "Automatisierter Handel",
+    "connectionsTitle": "Börsenverbindungen",
+    "apiKeyPlaceholder": "API-Schlüssel",
+    "apiSecretPlaceholder": "API-Geheimnis",
+    "addButton": "Verbindung hinzufügen",
+    "tutorial": {
+        "title": "Wie man ein Börsenkonto verbindet",
+        "intro": "Damit Helios AI in Ihrem Namen handeln kann, müssen Sie Ihr Börsenkonto über API-Schlüssel verbinden.",
+        "security": {
+            "title": "WICHTIG: Sicherheit zuerst!",
+            "item1": "Teilen Sie NIEMALS Ihr Anmeldepasswort.",
+            "item1_body": "Diese App wird Sie niemals danach fragen.",
+            "item2": "Erteilen Sie NUR 'Handels'-Berechtigungen.",
+            "item2_body": "Die KI benötigt nur die Berechtigung, Aufträge zu platzieren und zu stornieren.",
+            "item3": "Deaktivieren Sie IMMER 'Auszahlungs'-Berechtigungen.",
+            "item3_body": "Dies ist der wichtigste Schritt. Er stellt sicher, dass die KI Ihr Geld niemals von der Börse abheben kann."
+        },
+        "howTo": {
+            "title": "Allgemeine Schritte zur Erstellung von API-Schlüsseln",
+            "intro": "Die genauen Schritte variieren je nach Börse, aber der Prozess ist im Allgemeinen derselbe:",
+            "step1": "Melden Sie sich auf der Website Ihrer Börse in Ihrem Konto an.",
+            "step2": "Finden Sie 'API-Verwaltung' oder 'API-Schlüssel' in Ihren Kontoeinstellungen.",
+            "step3": "Klicken Sie auf 'API erstellen'.",
+            "step4": "Geben Sie dem Schlüssel einen einprägsamen Namen (z.B. 'HeliosAI').",
+            "step5": "Legen Sie die Berechtigungen fest: NUR 'Spot-Handel' aktivieren. 'Auszahlungen' DEAKTIVIEREN.",
+            "step6": "Schließen Sie alle Sicherheitsüberprüfungen ab (2FA, E-Mail-Code).",
+            "step7": "Kopieren Sie sowohl den 'API-Schlüssel' als auch den 'Geheimen Schlüssel'.",
+            "step8": "Kehren Sie hierher zurück, fügen Sie die Schlüssel ein und klicken Sie auf 'Verbindung hinzufügen'."
+        }
+    }
+  }
+}

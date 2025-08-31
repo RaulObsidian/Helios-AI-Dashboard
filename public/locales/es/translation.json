@@ -1,0 +1,120 @@
+{
+  "header": {
+    "title": "Dashboard de Helios AI",
+    "subtitle": "versión beta {version}"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "trading": "Trading",
+    "logs": "Registros",
+    "settings": "Configuración"
+  },
+  "connection": {
+    "title": "Conexión del Nodo",
+    "nodeAddress": "Dirección del Nodo",
+    "apiPassword": "Contraseña de API",
+    "passwordPlaceholder": "Introducir contraseña de API",
+    "connect": "Conectar",
+    "disconnect": "Desconectar",
+    "connecting": "Conectando...",
+    "status": {
+      "disconnected": "Desconectado",
+      "connecting": "Conectando",
+      "connected": "Conectado",
+      "failed": "Conexión Fallida"
+    }
+  },
+  "walletStatus": {
+    "title": "Estado de la Billetera",
+    "totalBalance": "Balance Total",
+    "unlocked": "Desbloqueado",
+    "collateral": "Colateral",
+    "profitBreakdown": "Desglose de Beneficios",
+    "nodeProfits": "Nodo",
+    "tradingProfits": "Trading"
+  },
+  "nodeStatus": {
+    "title": "Estado del Nodo",
+    "utilization": "Utilización",
+    "currentPrice": "Precio Actual",
+    "suggestion": "Sugerencia de IA",
+    "incentives": "Incentivos",
+    "unit": "SCP/TB",
+    "status": {
+      "ok": "OK",
+      "exceeded": "Excedido"
+    }
+  },
+  "marketData": {
+    "title": "Datos de Mercado",
+    "price": "Precio SCP",
+    "mcap": "Cap. de Mercado",
+    "volume": "Volumen 24h",
+    "source": "Fuente",
+    "simulated": "Simulado"
+  },
+  "tradingLog": {
+    "title": "Registro de Trading",
+    "header": {
+      "time": "Hora",
+      "action": "Acción",
+      "amount": "Cantidad (SCP)",
+      "price": "Precio"
+    },
+    "action": {
+      "buy": "COMPRA",
+      "sell": "VENTA"
+    }
+  },
+  "eventLog": {
+    "title": "Registro de Eventos del Agente"
+  },
+  "chart": {
+    "title": "Precio de SCP en Vivo"
+  },
+  "settings": {
+    "title": "Configuración",
+    "agent": {
+      "title": "Agente",
+      "profile": "Perfil de Hardware",
+      "nodeManagement": "Estrategia de Gestión del Nodo",
+      "strategy": "Estrategia de Trading"
+    },
+    "data": {
+      "title": "Datos",
+      "provider": "Proveedor de Precios"
+    }
+  },
+  "tradingPage": {
+    "title": "Trading Automatizado",
+    "connectionsTitle": "Conexiones de Exchange",
+    "apiKeyPlaceholder": "Clave de API",
+    "apiSecretPlaceholder": "Secreto de API",
+    "addButton": "Añadir Conexión",
+    "tutorial": {
+        "title": "Cómo Conectar una Cuenta de Exchange",
+        "intro": "Para permitir que Helios AI opere en tu nombre, necesitas conectar tu cuenta de exchange usando Claves de API.",
+        "security": {
+            "title": "IMPORTANTE: ¡La Seguridad Primero!",
+            "item1": "NUNCA compartas tu contraseña de inicio de sesión.",
+            "item1_body": "Esta aplicación nunca te la pedirá.",
+            "item2": "Otorga SÓLO permisos de 'Trading'.",
+            "item2_body": "La IA solo necesita permiso para colocar y cancelar órdenes.",
+            "item3": "SIEMPRE DESACTIVA los permisos de 'Retiro'.",
+            "item3_body": "Este es el paso más crítico. Asegura que la IA nunca pueda mover tus fondos fuera del exchange."
+        },
+        "howTo": {
+            "title": "Pasos Generales para Crear Claves de API",
+            "intro": "Los pasos exactos varían entre exchanges, pero el proceso es generalmente el mismo:",
+            "step1": "Inicia sesión en tu cuenta de exchange en su sitio web.",
+            "step2": "Busca 'Gestión de API' o 'Claves de API' en la configuración de tu cuenta.",
+            "step3": "Haz clic en 'Crear API'.",
+            "step4": "Dale un nombre a la clave (p. ej., 'HeliosAI').",
+            "step5": "Establece los permisos: SÓLO 'Trading al Contado' habilitado. DESACTIVA 'Retiros'.",
+            "step6": "Completa cualquier verificación de seguridad (2FA, código de correo electrónico).",
+            "step7": "Copia tanto la 'Clave de API' como la 'Clave Secreta'.",
+            "step8": "Vuelve aquí, pega las claves y haz clic en 'Añadir Conexión'."
+        }
+    }
+  }
+}
