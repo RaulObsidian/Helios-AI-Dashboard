@@ -23,33 +23,35 @@ const MetricRow: React.FC<{ label: string; value: React.ReactNode; }> = ({ label
 );
 
 const NodeStatusCard: React.FC = () => {
-    const { nodeMetrics } = useAppStore();
+    const blockHeight = useAppStore((state) => state.blockHeight);
+    const nodeConnectionStatus = useAppStore((state) => state.nodeConnectionStatus);
     const { t } = useTranslation();
 
-    const utilizationColor = nodeMetrics.utilization > 80 ? 'text-helios-green' : 'text-yellow-400';
+    const isConnected = nodeConnectionStatus === 'CONNECTED';
 
     return (
         <Card title={t('nodeStatus.title')} icon={<ServerIcon className="w-6 h-6" />}>
             <div className="space-y-4">
                 <MetricRow 
-                    label={t('nodeStatus.utilization')} 
-                    value={<span className={utilizationColor}>{nodeMetrics.utilization.toFixed(1)}%</span>} 
+                    label={t('nodeStatus.status.title')} 
+                    value={
+                        <span className={isConnected ? 'text-helios-green' : 'text-gray-400'}>
+                            {t(`connection.status.${nodeConnectionStatus.toLowerCase()}`)}
+                        </span>
+                    }
                 />
                 <MetricRow 
+                    label={t('nodeStatus.blockHeight')} 
+                    value={isConnected && blockHeight ? blockHeight.toLocaleString() : t('common.loading')} 
+                />
+                {/* Los datos de abajo siguen siendo simulados por ahora */}
+                <MetricRow 
                     label={t('nodeStatus.currentPrice')} 
-                    value={`${nodeMetrics.priceScpTb} ${t('nodeStatus.unit')}`}
+                    value={`1500 ${t('nodeStatus.unit')}`}
                 />
                 <MetricRow 
                     label={t('nodeStatus.suggestion')} 
-                    value={`${nodeMetrics.suggestedPriceScpTb} ${t('nodeStatus.unit')}`}
-                />
-                <MetricRow 
-                    label={t('nodeStatus.incentives')} 
-                    value={
-                        <span className={nodeMetrics.incentiveStatus === 'OK' ? 'text-helios-green' : 'text-helios-red'}>
-                            {t(`nodeStatus.status.${nodeMetrics.incentiveStatus.toLowerCase()}`)}
-                        </span>
-                    }
+                    value={`1450 ${t('nodeStatus.unit')}`}
                 />
             </div>
         </Card>

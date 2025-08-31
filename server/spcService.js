@@ -73,10 +73,11 @@ export const getWalletAndHostState = async () => {
  */
 export const getHostStatus = async () => {
     try {
-        const { stdout } = await execa(SPC_PATH, ['host']);
+        const { stdout } = await execa(SPC_PATH); // Sin el 'host'
+        console.log("Salida de 'spc.exe host':", stdout); // <-- AÑADIMOS ESTO
         
-        // Busca: "Block Height: 123456"
-        const blockHeightMatch = stdout.match(/Block Height:\s+(\d+)/);
+        // Busca: "Height: 359404"
+        const blockHeightMatch = stdout.match(/Height:\s+(\d+)/);
         // Busca: "Peers: 8"
         const peersMatch = stdout.match(/Peers:\s+(\d+)/);
 

@@ -75,6 +75,7 @@ const initialState: Omit<AppState, 'config'> = {
 // --- Definición del Store ---
 interface AppStateWithActions extends AppState {
     config: AppConfig;
+    fetchHostState: () => Promise<void>; // Nueva acción
     setLanguage: (lang: 'en' | 'es') => void;
     setNodeConnectionStatus: (status: ConnectionStatus) => void;
     updateConfig: (newConfig: Partial<AppConfig>) => void;
@@ -85,6 +86,23 @@ interface AppStateWithActions extends AppState {
 export const useAppStore = create<AppStateWithActions>((set) => ({
     ...initialState,
     config: initialConfig,
+    fetchHostState: async () => {
+        try {
+            const response = await fetch('http://localhost:3001/api/host-status');
+            if (!response.ok) {
+                throw new Error('Network response was not ok for host status');
+            }
+            const data = await response.json();
+            console.log("Datos recibidos de /api/host-status:", data); // <-- AÑADIMOS ESTO
+            set({ 
+                blockHeight: data.blockHeight,
+                nodeConnectionStatus: ConnectionStatus.CONNECTED 
+            });
+        } catch (error) {
+            console.error("Failed to fetch host state:", error);
+            set({ nodeConnectionStatus: ConnectionStatus.FAILED });
+        }
+    },
     setLanguage: (lang) => set(state => ({ config: { ...state.config, language: lang } })),
     setNodeConnectionStatus: (status) => set({ nodeConnectionStatus: status }),
     updateConfig: (newConfig) => set(state => ({ config: { ...state.config, ...newConfig } })),

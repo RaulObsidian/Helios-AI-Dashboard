@@ -1,4 +1,6 @@
 import { Routes, Route } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useAppStore } from './store';
 import Dashboard from './components/Dashboard';
 import Header from './components/Header';
 import Sidebar from './components/Sidebar';
@@ -7,6 +9,12 @@ import Logs from './pages/Logs';
 import Settings from './pages/Settings';
 
 function App() {
+  const fetchHostState = useAppStore((state) => state.fetchHostState);
+
+  useEffect(() => {
+    fetchHostState();
+  }, []); // Array vacío para que se ejecute solo una vez
+
   return (
     <div className="flex h-screen bg-helios-dark text-gray-200 font-sans">
       <Sidebar />
