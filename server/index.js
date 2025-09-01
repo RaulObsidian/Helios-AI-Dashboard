@@ -3,6 +3,7 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { getWalletAndHostState, getHostStatus } from './spcService.js';
+import { fetchDataFromProvider } from './marketService.js';
 
 // Cargar variables de entorno desde el archivo .env
 dotenv.config();
@@ -73,17 +74,13 @@ app.get('/api/host-status', async (req, res) => {
  * Actúa como un proxy para evitar problemas de CORS en el frontend.
  */
 app.get('/api/market-data', async (req, res) => {
+    const provider = req.query.provider || 'CoinGecko'; // Usa CoinGecko por defecto
     try {
-        const fetch = (await import('node-fetch')).default;
-        const response = await fetch('https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&ids=scprime');
-        if (!response.ok) {
-            throw new Error(`CoinGecko API request failed with status: ${response.status}`);
-        }
-        const data = await response.json();
-        res.json(data);
+        const marketData = await fetchDataFromProvider(provider);
+        res.json(marketData);
     } catch (error) {
         res.status(500).json({
-            error: 'Failed to retrieve market data.',
+            error: `Failed to retrieve market data from ${provider}.`,
             details: error.message
         });
     }

@@ -53,7 +53,9 @@
     "mcap": "Marktkapitalisierung",
     "volume": "24h-Volumen",
     "source": "Quelle",
-    "simulated": "Simuliert"
+    "simulated": "Simuliert",
+    "errorTitle": "Datenfehler",
+    "errorSuggestion": "Versuchen Sie einen anderen Anbieter oder wählen Sie in den Einstellungen Automatisch."
   },
   "tradingLog": {
     "title": "Handelsprotokoll",

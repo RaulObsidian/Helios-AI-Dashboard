@@ -53,7 +53,9 @@
     "mcap": "市值",
     "volume": "24小时交易量",
     "source": "来源",
-    "simulated": "模拟"
+    "simulated": "模拟",
+    "errorTitle": "数据错误",
+    "errorSuggestion": "请尝试其他提供商或在设置中选择自动。"
   },
   "tradingLog": {
     "title": "交易日志",

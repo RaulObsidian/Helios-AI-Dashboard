@@ -76,6 +76,7 @@ const initialState: Omit<AppState, 'config'> = {
 // --- Definición del Store ---
 interface AppStateWithActions extends AppState {
     prevMarketData: MarketData | null; // Para comparar cambios de precio
+    marketDataError: string | null; // Nuevo estado para el error
     config: AppConfig;
     fetchHostState: () => Promise<void>;
     fetchWalletState: () => Promise<void>;
@@ -90,6 +91,7 @@ interface AppStateWithActions extends AppState {
 export const useAppStore = create<AppStateWithActions>((set, get) => ({
     ...initialState,
     prevMarketData: null,
+    marketDataError: null,
     config: initialConfig,
     fetchHostState: async () => {
         try {
@@ -121,31 +123,40 @@ export const useAppStore = create<AppStateWithActions>((set, get) => ({
         }
     },
     fetchMarketData: async () => {
-        const { marketData } = get(); // Obtiene el estado actual para la comparación
+        const { marketData, config } = get();
+        const provider = config.priceProvider;
+
+        if (provider === DataProvider.AUTO) {
+            console.log("Market data provider is set to Automatic. Skipping fetch.");
+            return;
+        }
+
         try {
-            const response = await fetch('http://localhost:3001/api/market-data');
+            const response = await fetch(`http://localhost:3001/api/market-data?provider=${provider}`);
             if (!response.ok) {
-                throw new Error('Network response was not ok for market data');
+                const errorBody = await response.json();
+                throw new Error(errorBody.details || `Network response was not ok for ${provider}`);
             }
             const apiData = await response.json();
-            if (!apiData || apiData.length === 0) {
-                console.warn('CoinGecko API returned empty data for scprime.');
-                return; // No actualiza el estado si no hay datos
-            }
+            console.log(`[${provider}] Precio recibido:`, apiData.price); // <-- AÑADIMOS ESTO
+            
             const newMarketData: MarketData = {
-                provider: DataProvider.COINGECKO, // Por ahora, fijo
-                priceUSD: apiData[0].current_price || 0,
-                marketCapUSD: apiData[0].market_cap || 0,
-                volume24hUSD: apiData[0].total_volume || 0,
-                tickVolume: 0, // No podemos calcularlo así ahora
-                buySellRatio: 0.5, // No disponible
+                provider: provider,
+                priceUSD: apiData.price || 0,
+                marketCapUSD: apiData.marketCap || 0,
+                volume24hUSD: apiData.volume || 0,
+                tickVolume: 0,
+                buySellRatio: 0.5,
             };
             set({
                 marketData: newMarketData,
                 prevMarketData: marketData,
+                marketDataError: null, // Limpia el error si tiene éxito
             });
-        } catch (error) {
-            console.error("Failed to fetch market data:", error);
+        } catch (error: any) {
+            const errorMessage = `Failed to fetch from ${provider}: ${error.message}`;
+            console.error(errorMessage);
+            set({ marketDataError: errorMessage }); // Guarda el mensaje de error
         }
     },
     setLanguage: (lang: string) => set(state => ({ config: { ...state.config, language: lang } })),

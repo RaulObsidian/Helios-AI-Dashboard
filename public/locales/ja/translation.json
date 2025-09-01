@@ -53,7 +53,9 @@
     "mcap": "時価総額",
     "volume": "24時間取引量",
     "source": "ソース",
-    "simulated": "シミュレーション"
+    "simulated": "シミュレーション",
+    "errorTitle": "データエラー",
+    "errorSuggestion": "別のプロバイダーを試すか、設定で自動を選択してください。"
   },
   "tradingLog": {
     "title": "取引ログ",

@@ -53,7 +53,9 @@
     "mcap": "Cap. Boursière",
     "volume": "Volume 24h",
     "source": "Source",
-    "simulated": "Simulé"
+    "simulated": "Simulé",
+    "errorTitle": "Erreur de Données",
+    "errorSuggestion": "Essayez un autre fournisseur ou sélectionnez Automatique dans les Paramètres."
   },
   "tradingLog": {
     "title": "Journal de Trading",

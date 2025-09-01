@@ -18,8 +18,20 @@ const formatCurrency = (num: number) => `${(num / 1_000_000).toFixed(2)}M`;
 const formatPrice = (num: number) => `${num.toFixed(4)}`;
 
 const MarketDataCard: React.FC = () => {
-    const { marketData, prevMarketData } = useAppStore();
+    const { marketData, prevMarketData, marketDataError } = useAppStore();
     const { t } = useTranslation();
+
+    if (marketDataError) {
+        return (
+            <Card title={t('marketData.title')} icon={<ChartBarIcon className="w-6 h-6" />}>
+                <div className="text-center text-helios-red">
+                    <p className="font-bold">{t('marketData.errorTitle')}</p>
+                    <p className="text-xs mt-2">{marketDataError}</p>
+                    <p className="text-xs mt-2">{t('marketData.errorSuggestion')}</p>
+                </div>
+            </Card>
+        );
+    }
 
     if (!marketData) {
         return (

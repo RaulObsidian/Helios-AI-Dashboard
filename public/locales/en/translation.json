@@ -53,7 +53,9 @@
     "mcap": "Market Cap",
     "volume": "24h Volume",
     "source": "Source",
-    "simulated": "Simulated"
+    "simulated": "Simulated",
+    "errorTitle": "Data Error",
+    "errorSuggestion": "Try another provider or select Automatic in Settings."
   },
   "tradingLog": {
     "title": "Trading Log",

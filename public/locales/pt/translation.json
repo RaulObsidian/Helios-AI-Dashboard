@@ -53,7 +53,9 @@
     "mcap": "Cap. de Mercado",
     "volume": "Volume 24h",
     "source": "Fonte",
-    "simulated": "Simulado"
+    "simulated": "Simulado",
+    "errorTitle": "Erro de Dados",
+    "errorSuggestion": "Tente outro provedor ou selecione Automático nas Configurações."
   },
   "tradingLog": {
     "title": "Registro de Negociação",
