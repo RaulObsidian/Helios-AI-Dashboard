@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { GlobeAltIcon, CheckCircleIcon, XCircleIcon } from './icons';
 import { useAppStore } from '../store';
-import { mockApi } from '../services/mockApi';
 import { supportedLngs } from '../i18n';
 import { ConnectionStatus as ConnectionStatusEnum } from '../types';
 

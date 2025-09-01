@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import { fetchMarketData as fetchMarketDataFromApi } from './services/heliosAiService';
 import type { AppState, AppConfig, TradingConnection, WalletState, MarketData } from './types.ts';
 import { SetupType, NodeManagementStrategy, TradingStrategy, DataProvider, ChartType, ConnectionStatus } from './types.ts';
 
@@ -132,7 +131,12 @@ export const useAppStore = create<AppStateWithActions>((set, get) => ({
         }
 
         try {
-            const response = await fetch(`http://localhost:3001/api/market-data?provider=${provider}`);
+            const provider = config.priceProvider;
+            const url = provider === DataProvider.AUTO 
+                ? `http://localhost:3001/api/market-data?provider=Automatic`
+                : `http://localhost:3001/api/market-data?provider=${provider}`;
+
+            const response = await fetch(url);
             if (!response.ok) {
                 const errorBody = await response.json();
                 throw new Error(errorBody.details || `Network response was not ok for ${provider}`);

@@ -2,6 +2,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppStore } from '../store';
 import type { AppConfig } from '../types';
 import { SetupType, NodeManagementStrategy, TradingStrategy, DataProvider } from '../types';
+import React from 'react';
 
 // Componente para una sección de configuración
 const SettingsSection: React.FC<{ title: string; children: React.ReactNode }> = ({ title, children }) => (
@@ -33,7 +34,16 @@ const Settings: React.FC = () => {
     const { t } = useTranslation();
 
     const handleSelectChange = (key: keyof AppConfig) => (e: React.ChangeEvent<HTMLSelectElement>) => {
-        updateConfig({ [key]: e.target.value });
+        updateConfig({ [key]: e.target.value as any });
+    };
+    
+    const handleProviderChange = (provider: DataProvider) => {
+        updateConfig({ priceProvider: provider });
+    };
+
+    const providerGroups = {
+        CEX: [DataProvider.TRADEOGRE, DataProvider.KUCOIN, DataProvider.GATEIO],
+        AGGREGATOR: [DataProvider.COINGECKO, DataProvider.COINPAPRIKA],
     };
 
     return (
@@ -68,13 +78,36 @@ const Settings: React.FC = () => {
             </SettingsSection>
 
             <SettingsSection title={t('settings.data.title')}>
-                 <SelectControl 
-                    label={t('settings.data.provider')}
-                    value={config.priceProvider}
-                    onChange={handleSelectChange('priceProvider')}
-                    options={Object.values(DataProvider)}
-                    t={t}
-                />
+                 <div>
+                    <label className="block text-sm font-medium text-gray-300">{t('settings.data.provider')}</label>
+                    <div className="mt-2 space-y-4">
+                        <div >
+                            <h4 className="text-xs font-bold text-gray-400 uppercase">Automatic</h4>
+                             <button 
+                                onClick={() => handleProviderChange(DataProvider.AUTO)}
+                                className={`w-full px-3 py-2 text-sm rounded-md transition-colors ${config.priceProvider === DataProvider.AUTO ? 'bg-helios-accent text-white' : 'bg-helios-dark hover:bg-gray-700'}`}
+                            >
+                                Helios AI SmartSelector
+                            </button>
+                        </div>
+                        {Object.entries(providerGroups).map(([groupName, providers]) => (
+                            <div key={groupName}>
+                                <h4 className="text-xs font-bold text-gray-400 uppercase">{groupName}</h4>
+                                <div className="grid grid-cols-2 gap-2 mt-2">
+                                    {providers.map(provider => (
+                                        <button 
+                                            key={provider}
+                                            onClick={() => handleProviderChange(provider)}
+                                            className={`px-3 py-2 text-sm rounded-md transition-colors ${config.priceProvider === provider ? 'bg-helios-accent text-white' : 'bg-helios-dark hover:bg-gray-700'}`}
+                                        >
+                                            {provider}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             </SettingsSection>
         </div>
     );

@@ -3,7 +3,9 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { getWalletAndHostState, getHostStatus } from './spcService.js';
-import { fetchDataFromProvider } from './marketService.js';
+import { SmartSelector } from './SmartSelector.js';
+
+const selector = new SmartSelector();
 
 // Cargar variables de entorno desde el archivo .env
 dotenv.config();
@@ -74,13 +76,13 @@ app.get('/api/host-status', async (req, res) => {
  * Actúa como un proxy para evitar problemas de CORS en el frontend.
  */
 app.get('/api/market-data', async (req, res) => {
-    const provider = req.query.provider || 'CoinGecko'; // Usa CoinGecko por defecto
+    const provider = req.query.provider || 'Automatic'; // Usa Automático por defecto
     try {
-        const marketData = await fetchDataFromProvider(provider);
+        const marketData = await selector.getMarketData(provider);
         res.json(marketData);
     } catch (error) {
         res.status(500).json({
-            error: `Failed to retrieve market data from ${provider}.`,
+            error: `Failed to retrieve market data for selection ${provider}.`,
             details: error.message
         });
     }
