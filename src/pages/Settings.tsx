@@ -82,7 +82,7 @@ const Settings: React.FC = () => {
                     <label className="block text-sm font-medium text-gray-300">{t('settings.data.provider')}</label>
                     <div className="mt-2 space-y-4">
                         <div >
-                            <h4 className="text-xs font-bold text-gray-400 uppercase">Automatic</h4>
+                            <h4 className="text-xs font-bold text-gray-400 uppercase">{t('settings.data.automatic')}</h4>
                              <button 
                                 onClick={() => handleProviderChange(DataProvider.AUTO)}
                                 className={`w-full px-3 py-2 text-sm rounded-md transition-colors ${config.priceProvider === DataProvider.AUTO ? 'bg-helios-accent text-white' : 'bg-helios-dark hover:bg-gray-700'}`}

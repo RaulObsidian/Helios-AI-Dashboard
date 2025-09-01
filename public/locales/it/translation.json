@@ -1,0 +1,121 @@
+{
+  "header": {
+    "title": "Helios AI Dashboard",
+    "subtitle": "versione beta {version}"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "trading": "Trading",
+    "logs": "Log",
+    "settings": "Impostazioni"
+  },
+  "connection": {
+    "title": "Connessione Nodo",
+    "nodeAddress": "Indirizzo Nodo",
+    "apiPassword": "Password API",
+    "passwordPlaceholder": "Inserisci password API",
+    "connect": "Connetti",
+    "disconnect": "Disconnetti",
+    "connecting": "Connessione...",
+    "status": {
+      "disconnected": "Disconnesso",
+      "connecting": "Connessione",
+      "connected": "Connesso",
+      "failed": "Connessione fallita"
+    }
+  },
+  "walletStatus": {
+    "title": "Stato Portafoglio",
+    "totalBalance": "Saldo Totale",
+    "unlocked": "Sbloccato",
+    "collateral": "Collaterale",
+    "profitBreakdown": "Dettaglio Profitti",
+    "nodeProfits": "Nodo",
+    "tradingProfits": "Trading"
+  },
+  "nodeStatus": {
+    "title": "Stato Nodo",
+    "blockHeight": "Altezza Blocco",
+    "utilization": "Utilizzo",
+    "currentPrice": "Prezzo Corrente",
+    "suggestion": "Suggerimento IA",
+    "incentives": "Incentivi",
+    "unit": "SCP/TB",
+    "status": {
+      "title": "Stato",
+      "ok": "OK",
+      "exceeded": "Superato"
+    }
+  },
+  "marketData": {
+    "title": "Dati di Mercato",
+    "price": "Prezzo SCP",
+    "mcap": "Cap. di Mercato",
+    "volume": "Volume 24h",
+    "source": "Fonte",
+    "simulated": "Simulato",
+    "errorTitle": "Errore Dati",
+    "errorSuggestion": "Prova un altro provider o seleziona Automatico nelle Impostazioni."
+  },
+  "tradingLog": {
+    "title": "Log di Trading",
+    "header": {
+      "time": "Ora",
+      "action": "Azione",
+      "amount": "Importo (SCP)",
+      "price": "Prezzo"
+    },
+    "action": {
+      "buy": "ACQUISTA",
+      "sell": "VENDI"
+    }
+  },
+  "eventLog": {
+    "title": "Log Eventi Agente"
+  },
+  "chart": {
+    "title": "Prezzo SCP in Tempo Reale"
+  },
+  "settings": {
+    "title": "Impostazioni",
+    "agent": {
+      "title": "Agente",
+      "profile": "Profilo Hardware",
+      "nodeManagement": "Strategia Gestione Nodo",
+      "strategy": "Strategia di Trading"
+    },
+    "data": {
+      "title": "Dati",
+      "provider": "Provider Prezzi",
+      "automatic": "Automatico"
+    }
+  },
+  "tradingPage": {
+    "title": "Trading Automatizzato",
+    "connectionsTitle": "Connessioni Exchange",
+    "apiKeyPlaceholder": "Chiave API",
+    "apiSecretPlaceholder": "Segreto API",
+    "addButton": "Aggiungi Connessione"
+  },
+  "common": {
+    "loading": "Caricamento..."
+  },
+  "enums": {
+    "setupType": {
+      "DIY": "DIY",
+      "XA_MINER": "XA-Miner"
+    },
+    "nodeManagementStrategy": {
+      "MAX_PERFORMANCE": "Massime Prestazioni",
+      "BALANCED": "Bilanciato",
+      "LOW_IMPACT": "Basso Impatto",
+      "AUTOMATIC": "Automatico"
+    },
+    "tradingStrategy": {
+      "LOW_RISK_DCA": "Basso Rischio (DCA)",
+      "MEDIUM_RISK_SWING": "Medio Rischio (Swing)",
+      "HIGH_RISK_MOMENTUM": "Alto Rischio (Momentum)",
+      "AUTOMATIC": "Automatico"
+    }
+  }
+}

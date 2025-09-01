@@ -86,7 +86,8 @@
     },
     "data": {
       "title": "Datos",
-      "provider": "Proveedor de Precios"
+      "provider": "Proveedor de Precios",
+      "automatic": "Automático"
     }
   },
   "tradingPage": {

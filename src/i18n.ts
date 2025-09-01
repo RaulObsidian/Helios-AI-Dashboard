@@ -8,6 +8,7 @@ export const supportedLngs = {
   es: 'Español',
   de: 'Deutsch',
   fr: 'Français',
+  it: 'Italiano', // <-- AÑADIDO
   'zh-CN': '简体中文',
   pt: 'Português',
   ja: '日本語',
