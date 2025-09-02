@@ -1,20 +1,31 @@
 // server/SmartSelector.js
+import { CoinExProvider } from './providers/CoinExProvider.js';
+import { TradeOgreProvider } from './providers/TradeOgreProvider.js';
+import { SouthXchangeProvider } from './providers/SouthXchangeProvider.js';
 import { CoinGeckoProvider } from './providers/CoinGeckoProvider.js';
 import { CoinPaprikaProvider } from './providers/CoinPaprikaProvider.js';
-import { TradeOgreProvider } from './providers/TradeOgreProvider.js';
-// ... importaremos más proveedores aquí
+// Faltan los proveedores con API Key y los DEX
+
+import { JupiterProvider } from './providers/JupiterProvider.js';
+import { BirdeyeProvider } from './providers/BirdeyeProvider.js';
+// ... (resto de imports)
 
 export class SmartSelector {
     constructor() {
         this.providers = {
+            'CoinEx': new CoinExProvider(),
+            'TradeOgre': new TradeOgreProvider(),
+            'SouthXchange': new SouthXchangeProvider(),
             'CoinGecko': new CoinGeckoProvider(),
             'CoinPaprika': new CoinPaprikaProvider(),
-            'TradeOgre': new TradeOgreProvider(),
-            // ... inicializaremos más proveedores aquí
+            'Jupiter': new JupiterProvider(),
+            'Birdeye': new BirdeyeProvider(),
+            // Faltan los proveedores con API Key
         };
         // Lista priorizada para el modo automático
-        this.autoProviderList = ['TradeOgre', 'CoinPaprika', 'CoinGecko'];
+        this.autoProviderList = ['TradeOgre', 'CoinEx', 'CoinPaprika', 'CoinGecko', 'SouthXchange', 'Jupiter', 'Birdeye'];
     }
+// ... (resto del archivo)
 
     scoreProvider(provider) {
         if (provider.success_rate > 0.95) {
@@ -27,12 +38,11 @@ export class SmartSelector {
 
     async getMarketData(providerSelection) {
         if (providerSelection === 'Automatic') {
-            // Lógica automática: prueba los proveedores en orden hasta que uno funcione
             for (const providerId of this.autoProviderList) {
                 try {
                     const provider = this.providers[providerId];
                     const data = await provider.fetch();
-                    if (data.price > 0) { // Asegurarse de que no sea una respuesta vacía normalizada
+                    if (data.price > 0) {
                         return data;
                     }
                 } catch (error) {
@@ -41,7 +51,6 @@ export class SmartSelector {
             }
             throw new Error("All automatic providers failed.");
         } else {
-            // Lógica manual
             const provider = this.providers[providerSelection];
             if (!provider) {
                 throw new Error(`Provider ${providerSelection} not found.`);

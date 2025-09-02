@@ -18,7 +18,6 @@ export class CoinGeckoProvider extends BaseProvider {
 
     _normalize(raw_data, currency) {
         if (!raw_data || raw_data.length === 0) {
-            // Devuelve 0 en lugar de lanzar error para que el SmartSelector pueda penalizar y probar otro.
             console.warn('CoinGecko API returned an empty array for scprime.');
             return { price: 0, marketCap: 0, volume: 0, provider: this.id };
         }

@@ -28,7 +28,6 @@ const SelectControl: React.FC<{ label: string; value: string; onChange: (e: Reac
     </div>
 );
 
-
 const Settings: React.FC = () => {
     const { config, updateConfig } = useAppStore();
     const { t } = useTranslation();
@@ -37,17 +36,31 @@ const Settings: React.FC = () => {
         updateConfig({ [key]: e.target.value as any });
     };
     
-    const handleProviderChange = (provider: DataProvider) => {
-        updateConfig({ priceProvider: provider });
+    const handleProviderChange = (provider: DataProvider | string) => {
+        updateConfig({ priceProvider: provider as DataProvider });
     };
 
     const providerGroups = {
-        CEX: [DataProvider.TRADEOGRE, DataProvider.KUCOIN, DataProvider.GATEIO],
-        AGGREGATOR: [DataProvider.COINGECKO, DataProvider.COINPAPRIKA],
+        'Exchanges (CEX) - SCP Nativo (PoW)': [
+            { name: 'CoinEx', type: 'CEX', usage: 'Trading, Heatmap L2, Ticker' },
+            { name: 'TradeOgre', type: 'CEX', usage: 'Trading, Heatmap L2, Ticker' },
+            { name: 'SouthXchange', type: 'CEX', usage: 'Ticker de respaldo' },
+        ],
+        'Agregadores de Datos (Global)': [
+            { name: 'CoinGecko', type: 'Agregador', usage: 'Ticker robusto, Market Cap, i18n' },
+            { name: 'CoinPaprika', type: 'Agregador', usage: 'Ticker robusto, alternativa rápida' },
+            { name: 'CoinMarketCap', type: 'Agregador', usage: 'Estándar de la industria (Requiere API Key)' },
+            { name: 'CryptoCompare', type: 'Agregador', usage: 'Datos históricos (Requiere API Key)' },
+            { name: 'LiveCoinWatch', type: 'Agregador', usage: 'Ticker de respaldo (Requiere API Key)' },
+        ],
+        'Exchanges (DEX) y Seguimiento (SCP en Solana - SPL)': [
+            { name: 'Jupiter', type: 'DEX Agg.', usage: 'Descubrimiento de precio en Solana' },
+            { name: 'Birdeye', type: 'DEX Tracker', usage: 'Datos detallados de trading en Solana' },
+        ]
     };
 
     return (
-        <div className="space-y-8 max-w-2xl mx-auto">
+        <div className="space-y-8 max-w-4xl mx-auto">
             <h1 className="text-3xl font-bold text-white">{t('settings.title')}</h1>
             
             <SettingsSection title={t('settings.agent.title')}>
@@ -78,34 +91,53 @@ const Settings: React.FC = () => {
             </SettingsSection>
 
             <SettingsSection title={t('settings.data.title')}>
-                 <div>
-                    <label className="block text-sm font-medium text-gray-300">{t('settings.data.provider')}</label>
-                    <div className="mt-2 space-y-4">
-                        <div >
-                            <h4 className="text-xs font-bold text-gray-400 uppercase">{t('settings.data.automatic')}</h4>
-                             <button 
-                                onClick={() => handleProviderChange(DataProvider.AUTO)}
-                                className={`w-full px-3 py-2 text-sm rounded-md transition-colors ${config.priceProvider === DataProvider.AUTO ? 'bg-helios-accent text-white' : 'bg-helios-dark hover:bg-gray-700'}`}
-                            >
-                                Helios AI SmartSelector
-                            </button>
-                        </div>
-                        {Object.entries(providerGroups).map(([groupName, providers]) => (
-                            <div key={groupName}>
-                                <h4 className="text-xs font-bold text-gray-400 uppercase">{groupName}</h4>
-                                <div className="grid grid-cols-2 gap-2 mt-2">
-                                    {providers.map(provider => (
-                                        <button 
-                                            key={provider}
-                                            onClick={() => handleProviderChange(provider)}
-                                            className={`px-3 py-2 text-sm rounded-md transition-colors ${config.priceProvider === provider ? 'bg-helios-accent text-white' : 'bg-helios-dark hover:bg-gray-700'}`}
-                                        >
-                                            {provider}
-                                        </button>
-                                    ))}
-                                </div>
-                            </div>
-                        ))}
+                <div className="space-y-4">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-300 mb-2">{t('settings.data.provider')}</label>
+                        <button 
+                            onClick={() => handleProviderChange(DataProvider.AUTO)}
+                            className={`w-full px-3 py-2 text-sm rounded-md transition-colors mb-4 ${config.priceProvider === DataProvider.AUTO ? 'bg-helios-accent text-white font-bold' : 'bg-helios-dark hover:bg-gray-700'}`}
+                        >
+                            Helios AI SmartSelector ({t('settings.data.automatic')})
+                        </button>
+                    </div>
+                    <div className="overflow-x-auto">
+                        <table className="min-w-full">
+                            <thead className="bg-helios-dark">
+                                <tr>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Proveedor</th>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Tipo</th>
+                                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-300 uppercase tracking-wider">Uso Principal</th>
+                                    <th scope="col" className="relative px-6 py-3">
+                                        <span className="sr-only">Seleccionar</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody className="bg-helios-gray">
+                                {Object.entries(providerGroups).map(([groupName, providers]) => (
+                                    <React.Fragment key={groupName}>
+                                        <tr>
+                                            <td colSpan={4} className="px-6 py-2 bg-helios-dark text-sm font-bold text-helios-accent">{groupName}</td>
+                                        </tr>
+                                        {providers.map((provider) => (
+                                            <tr key={provider.name} className="border-b border-gray-700">
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-white">{provider.name}</td>
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{provider.type}</td>
+                                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-400">{provider.usage}</td>
+                                                <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                    <button
+                                                        onClick={() => handleProviderChange(provider.name as DataProvider)}
+                                                        className={`px-3 py-1 text-xs rounded-full ${config.priceProvider === provider.name ? 'bg-helios-accent text-white' : 'bg-gray-600 hover:bg-gray-500'}`}
+                                                    >
+                                                        {config.priceProvider === provider.name ? 'Seleccionado' : 'Seleccionar'}
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </React.Fragment>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </SettingsSection>

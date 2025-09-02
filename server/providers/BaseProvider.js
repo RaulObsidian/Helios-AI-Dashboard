@@ -1,8 +1,7 @@
 // server/providers/BaseProvider.js
 import fetch from 'node-fetch';
 
-// En un entorno real, esto sería más sofisticado.
-// Por ahora, es una simple función de reintento.
+// Simulación de un decorador de reintentos
 const retry = async (fn, retries = 3, delay = 1000) => {
     for (let i = 0; i < retries; i++) {
         try {
