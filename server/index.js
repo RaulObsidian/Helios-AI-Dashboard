@@ -5,11 +5,13 @@ import dotenv from 'dotenv';
 import { getWalletAndHostState, getHostStatus } from './spcService.js';
 import { SmartSelector } from './SmartSelector.js';
 import { SecurityManager } from './SecurityManager.js';
-import { DatabaseManager } from './DatabaseManager.js';
+import { HeliosMemory } from './HeliosMemory.js';
+import { AutonomousDirector } from './AutonomousDirector.js';
 
-const dbManager = new DatabaseManager();
+const heliosMemory = new HeliosMemory();
 let securityManager; // Se inicializará cuando el usuario se conecte
 let selector; // Se inicializará después de securityManager
+let director; // Se inicializará después de securityManager
 
 // Cargar variables de entorno desde el archivo .env
 dotenv.config();
@@ -37,8 +39,9 @@ app.post('/api/connect', (req, res) => {
         apiPassword = password;
         // Inicializa el SecurityManager con la contraseña maestra del usuario
         securityManager = new SecurityManager(password || 'default-password');
-        selector = new SmartSelector(dbManager, securityManager); // Ahora inicializamos el selector aquí
-        console.log("API password set and SecurityManager/SmartSelector initialized.");
+        selector = new SmartSelector(heliosMemory, securityManager); // Ahora inicializamos el selector aquí
+        director = new AutonomousDirector(heliosMemory, selector);
+        console.log("API password set and all services initialized.");
         res.json({ success: true, message: 'API password set.' });
     } else {
         res.status(400).json({ success: false, error: 'Invalid password format.' });
@@ -56,7 +59,7 @@ app.post('/api/keys', async (req, res) => {
     try {
         const encryptedKey = securityManager.encryptData(apiKey);
         const encryptedSecret = apiSecret ? securityManager.encryptData(apiSecret) : null;
-        await dbManager.saveApiKey(provider, encryptedKey, encryptedSecret);
+        await heliosMemory.saveApiKey(provider, encryptedKey, encryptedSecret);
         res.json({ success: true, message: `${provider} API key saved.` });
     } catch (error) {
         res.status(500).json({ error: 'Failed to save API key.', details: error.message });
@@ -112,9 +115,27 @@ app.get('/api/market-data', async (req, res) => {
     }
 });
 
+/**
+ * Endpoint para obtener las alertas y recomendaciones del Director de IA.
+ */
+app.get('/api/ai/recommendations', (req, res) => {
+    if (!director) {
+        return res.json({ alerts: [] }); // Si el director no está listo, devuelve un array vacío.
+    }
+    const alerts = director.getAlerts();
+    res.json({ alerts });
+});
+
 
 // --- Inicio del Servidor ---
 app.listen(port, () => {
     console.log(`Backend server listening at http://localhost:${port}`);
     console.log("Asegúrate de que la variable SPC_CLI_PATH en el archivo 'server/.env' es correcta.");
+
+    // Iniciar el ciclo de diagnóstico del Director
+    setInterval(() => {
+        if (director) {
+            director.runDiagnostics();
+        }
+    }, 60000); // Ejecutar diagnósticos cada 60 segundos
 });

@@ -189,3 +189,11 @@ export interface ToastNotification {
   message: string;
   type: 'success' | 'error' | 'warning' | 'info';
 }
+
+export interface Alert {
+    id: string;
+    type: string;
+    message: string;
+    recommendation: string;
+    timestamp: string;
+}

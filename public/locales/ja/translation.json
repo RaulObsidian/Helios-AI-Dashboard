@@ -1,7 +1,8 @@
 {
   "header": {
     "title": "ヘリオスAIダッシュボード",
-    "subtitle": "ベータ版 {version}"
+    "subtitle": "ベータ版 {version}",
+    "alerts": "ヘリオスAIアラート"
   },
   "nav": {
     "dashboard": "ダッシュボード",

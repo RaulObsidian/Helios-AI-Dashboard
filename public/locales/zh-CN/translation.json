@@ -1,7 +1,8 @@
 {
   "header": {
     "title": "Helios AI 仪表盘",
-    "subtitle": "测试版 {version}"
+    "subtitle": "测试版 {version}",
+    "alerts": "Helios AI 警报"
   },
   "nav": {
     "dashboard": "仪表盘",

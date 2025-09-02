@@ -12,12 +12,14 @@ function App() {
   const fetchHostState = useAppStore((state) => state.fetchHostState);
   const fetchWalletState = useAppStore((state) => state.fetchWalletState);
   const fetchMarketData = useAppStore((state) => state.fetchMarketData);
+  const fetchAlerts = useAppStore((state) => state.fetchAlerts);
 
   useEffect(() => {
     const fetchData = () => {
       fetchHostState();
       fetchWalletState();
       fetchMarketData();
+      fetchAlerts();
     };
 
     fetchData(); // Llama una vez al inicio

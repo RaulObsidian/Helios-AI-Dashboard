@@ -1,7 +1,8 @@
 {
   "header": {
     "title": "Tableau de Bord Helios AI",
-    "subtitle": "version bêta {version}"
+    "subtitle": "version bêta {version}",
+    "alerts": "Alertes de Helios AI"
   },
   "nav": {
     "dashboard": "Tableau de bord",

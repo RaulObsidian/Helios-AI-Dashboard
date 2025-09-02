@@ -1,7 +1,8 @@
 {
   "header": {
     "title": "Панель управления Helios AI",
-    "subtitle": "бета-версия {version}"
+    "subtitle": "бета-версия {version}",
+    "alerts": "Оповещения Helios AI"
   },
   "nav": {
     "dashboard": "Панель",

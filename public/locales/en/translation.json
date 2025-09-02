@@ -1,7 +1,8 @@
 {
   "header": {
     "title": "Helios AI Dashboard",
-    "subtitle": "version beta {version}"
+    "subtitle": "version beta {version}",
+    "alerts": "Helios AI Alerts"
   },
   "nav": {
     "dashboard": "Dashboard",

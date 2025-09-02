@@ -1,7 +1,8 @@
 {
   "header": {
     "title": "Painel Helios AI",
-    "subtitle": "versão beta {version}"
+    "subtitle": "versão beta {version}",
+    "alerts": "Alertas da Helios AI"
   },
   "nav": {
     "dashboard": "Painel",

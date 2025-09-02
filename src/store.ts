@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { AppState, AppConfig, TradingConnection, WalletState, MarketData } from './types.ts';
+import type { AppState, AppConfig, TradingConnection, WalletState, MarketData, Alert } from './types.ts';
 import { SetupType, NodeManagementStrategy, TradingStrategy, DataProvider, ChartType, ConnectionStatus } from './types.ts';
 
 // --- Estado Inicial Simulado ---
@@ -76,10 +76,13 @@ const initialState: Omit<AppState, 'config'> = {
 interface AppStateWithActions extends AppState {
     prevMarketData: MarketData | null; // Para comparar cambios de precio
     marketDataError: string | null; // Nuevo estado para el error
+    alerts: Alert[]; // <-- AÑADIDO
     config: AppConfig;
     fetchHostState: () => Promise<void>;
     fetchWalletState: () => Promise<void>;
     fetchMarketData: () => Promise<void>; // Nueva acción
+    fetchAlerts: () => Promise<void>; // <-- AÑADIDO
+    dismissAlert: (id: string) => void; // <-- AÑADIDO
     setLanguage: (lang: string) => void;
     setNodeConnectionStatus: (status: ConnectionStatus) => void;
     updateConfig: (newConfig: Partial<AppConfig>) => void;
@@ -89,6 +92,7 @@ interface AppStateWithActions extends AppState {
 
 export const useAppStore = create<AppStateWithActions>((set, get) => ({
     ...initialState,
+    alerts: [], // <-- AÑADIDO
     prevMarketData: null,
     marketDataError: null,
     config: initialConfig,
@@ -171,5 +175,18 @@ export const useAppStore = create<AppStateWithActions>((set, get) => ({
     })),
     removeTradingConnection: (id) => set(state => ({
         config: { ...state.config, tradingConnections: state.config.tradingConnections.filter(c => c.id !== id) }
+    })),
+    fetchAlerts: async () => {
+        try {
+            const response = await fetch('http://localhost:3001/api/ai/recommendations');
+            if (!response.ok) throw new Error('Failed to fetch alerts');
+            const data = await response.json();
+            set({ alerts: data.alerts });
+        } catch (error) {
+            console.error("Failed to fetch alerts:", error);
+        }
+    },
+    dismissAlert: (id) => set(state => ({
+        alerts: state.alerts.filter(alert => alert.id !== id)
     })),
 }));
