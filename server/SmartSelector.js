@@ -10,8 +10,14 @@ import { JupiterProvider } from './providers/JupiterProvider.js';
 import { BirdeyeProvider } from './providers/BirdeyeProvider.js';
 // ... (resto de imports)
 
+import { CoinMarketCapProvider } from './providers/CoinMarketCapProvider.js';
+import { CryptoCompareProvider } from './providers/CryptoCompareProvider.js';
+import { LiveCoinWatchProvider } from './providers/LiveCoinWatchProvider.js';
+
 export class SmartSelector {
-    constructor() {
+    constructor(dbManager, securityManager) {
+        this.dbManager = dbManager;
+        this.securityManager = securityManager;
         this.providers = {
             'CoinEx': new CoinExProvider(),
             'TradeOgre': new TradeOgreProvider(),
@@ -20,10 +26,50 @@ export class SmartSelector {
             'CoinPaprika': new CoinPaprikaProvider(),
             'Jupiter': new JupiterProvider(),
             'Birdeye': new BirdeyeProvider(),
-            // Faltan los proveedores con API Key
         };
+        this._initializeApiProviders();
         // Lista priorizada para el modo automático
         this.autoProviderList = ['TradeOgre', 'CoinEx', 'CoinPaprika', 'CoinGecko', 'SouthXchange', 'Jupiter', 'Birdeye'];
+    }
+
+    async _initializeApiProviders() {
+        if (!this.securityManager || !this.dbManager) return;
+
+        // CoinMarketCap
+        try {
+            const cmcApiKeyRecord = await this.dbManager.getApiKey('CoinMarketCap');
+            if (cmcApiKeyRecord && cmcApiKeyRecord.api_key) {
+                const decryptedKey = this.securityManager.decryptData(cmcApiKeyRecord.api_key);
+                this.providers['CoinMarketCap'] = new CoinMarketCapProvider(decryptedKey);
+                this.autoProviderList.push('CoinMarketCap');
+            }
+        } catch (error) {
+            console.error("Failed to initialize CoinMarketCap provider:", error.message);
+        }
+
+        // CryptoCompare
+        try {
+            const ccApiKeyRecord = await this.dbManager.getApiKey('CryptoCompare');
+            if (ccApiKeyRecord && ccApiKeyRecord.api_key) {
+                const decryptedKey = this.securityManager.decryptData(ccApiKeyRecord.api_key);
+                this.providers['CryptoCompare'] = new CryptoCompareProvider(decryptedKey);
+                this.autoProviderList.push('CryptoCompare');
+            }
+        } catch (error) {
+            console.error("Failed to initialize CryptoCompare provider:", error.message);
+        }
+
+        // LiveCoinWatch
+        try {
+            const lcwApiKeyRecord = await this.dbManager.getApiKey('LiveCoinWatch');
+            if (lcwApiKeyRecord && lcwApiKeyRecord.api_key) {
+                const decryptedKey = this.securityManager.decryptData(lcwApiKeyRecord.api_key);
+                this.providers['LiveCoinWatch'] = new LiveCoinWatchProvider(decryptedKey);
+                this.autoProviderList.push('LiveCoinWatch');
+            }
+        } catch (error) {
+            console.error("Failed to initialize LiveCoinWatch provider:", error.message);
+        }
     }
 // ... (resto del archivo)
 

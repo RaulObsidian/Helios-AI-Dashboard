@@ -4,8 +4,12 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 import { getWalletAndHostState, getHostStatus } from './spcService.js';
 import { SmartSelector } from './SmartSelector.js';
+import { SecurityManager } from './SecurityManager.js';
+import { DatabaseManager } from './DatabaseManager.js';
 
-const selector = new SmartSelector();
+const dbManager = new DatabaseManager();
+let securityManager; // Se inicializará cuando el usuario se conecte
+let selector; // Se inicializará después de securityManager
 
 // Cargar variables de entorno desde el archivo .env
 dotenv.config();
@@ -31,11 +35,31 @@ app.post('/api/connect', (req, res) => {
     const { password } = req.body;
     if (typeof password === 'string') {
         apiPassword = password;
-        console.log("API password set.");
-        // Opcional: Realizar una prueba de conexión aquí para validar la contraseña
+        // Inicializa el SecurityManager con la contraseña maestra del usuario
+        securityManager = new SecurityManager(password || 'default-password');
+        selector = new SmartSelector(dbManager, securityManager); // Ahora inicializamos el selector aquí
+        console.log("API password set and SecurityManager/SmartSelector initialized.");
         res.json({ success: true, message: 'API password set.' });
     } else {
         res.status(400).json({ success: false, error: 'Invalid password format.' });
+    }
+});
+
+/**
+ * Endpoint para guardar una clave de API cifrada.
+ */
+app.post('/api/keys', async (req, res) => {
+    if (!securityManager) {
+        return res.status(401).json({ error: 'Not connected. Please set API password first.' });
+    }
+    const { provider, apiKey, apiSecret } = req.body;
+    try {
+        const encryptedKey = securityManager.encryptData(apiKey);
+        const encryptedSecret = apiSecret ? securityManager.encryptData(apiSecret) : null;
+        await dbManager.saveApiKey(provider, encryptedKey, encryptedSecret);
+        res.json({ success: true, message: `${provider} API key saved.` });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to save API key.', details: error.message });
     }
 });
 

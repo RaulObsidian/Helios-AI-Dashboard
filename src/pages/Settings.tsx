@@ -31,6 +31,10 @@ const SelectControl: React.FC<{ label: string; value: string; onChange: (e: Reac
 const Settings: React.FC = () => {
     const { config, updateConfig } = useAppStore();
     const { t } = useTranslation();
+    const [cmcKey, setCmcKey] = React.useState('');
+    const [ccKey, setCcKey] = React.useState('');
+    const [lcwKey, setLcwKey] = React.useState('');
+    // ... (otros estados para otras claves)
 
     const handleSelectChange = (key: keyof AppConfig) => (e: React.ChangeEvent<HTMLSelectElement>) => {
         updateConfig({ [key]: e.target.value as any });
@@ -38,6 +42,20 @@ const Settings: React.FC = () => {
     
     const handleProviderChange = (provider: DataProvider | string) => {
         updateConfig({ priceProvider: provider as DataProvider });
+    };
+
+    const handleSaveApiKey = async (provider: string, apiKey: string, apiSecret?: string) => {
+        try {
+            const response = await fetch('http://localhost:3001/api/keys', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ provider, apiKey, apiSecret }),
+            });
+            if (!response.ok) throw new Error('Failed to save key');
+            alert(`${provider} API Key saved successfully!`);
+        } catch (error: any) {
+            alert(`Error saving key: ${error.message}`);
+        }
     };
 
     const providerGroups = {
@@ -138,6 +156,59 @@ const Settings: React.FC = () => {
                                 ))}
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </SettingsSection>
+
+            <SettingsSection title="Configuración de API Keys">
+                <div className="space-y-4">
+                    {/* CoinMarketCap */}
+                    <div className="flex items-center space-x-4">
+                        <label className="w-1/4 text-sm font-medium text-gray-300">CoinMarketCap API Key</label>
+                        <input 
+                            type="password" 
+                            value={cmcKey}
+                            onChange={(e) => setCmcKey(e.target.value)}
+                            className="flex-grow bg-helios-dark border border-gray-600 rounded-md px-3 py-1 text-sm"
+                        />
+                        <button 
+                            onClick={() => handleSaveApiKey('CoinMarketCap', cmcKey)}
+                            className="bg-helios-accent hover:bg-blue-500 text-white font-bold py-1 px-4 rounded-md text-sm"
+                        >
+                            Guardar
+                        </button>
+                    </div>
+                    {/* CryptoCompare */}
+                    <div className="flex items-center space-x-4">
+                        <label className="w-1/4 text-sm font-medium text-gray-300">CryptoCompare API Key</label>
+                        <input 
+                            type="password" 
+                            value={ccKey}
+                            onChange={(e) => setCcKey(e.target.value)}
+                            className="flex-grow bg-helios-dark border border-gray-600 rounded-md px-3 py-1 text-sm"
+                        />
+                        <button 
+                            onClick={() => handleSaveApiKey('CryptoCompare', ccKey)}
+                            className="bg-helios-accent hover:bg-blue-500 text-white font-bold py-1 px-4 rounded-md text-sm"
+                        >
+                            Guardar
+                        </button>
+                    </div>
+                    {/* LiveCoinWatch */}
+                    <div className="flex items-center space-x-4">
+                        <label className="w-1/4 text-sm font-medium text-gray-300">LiveCoinWatch API Key</label>
+                        <input 
+                            type="password" 
+                            value={lcwKey}
+                            onChange={(e) => setLcwKey(e.target.value)}
+                            className="flex-grow bg-helios-dark border border-gray-600 rounded-md px-3 py-1 text-sm"
+                        />
+                        <button 
+                            onClick={() => handleSaveApiKey('LiveCoinWatch', lcwKey)}
+                            className="bg-helios-accent hover:bg-blue-500 text-white font-bold py-1 px-4 rounded-md text-sm"
+                        >
+                            Guardar
+                        </button>
                     </div>
                 </div>
             </SettingsSection>
