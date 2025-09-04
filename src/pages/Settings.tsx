@@ -34,6 +34,7 @@ const Settings: React.FC = () => {
     const [cmcKey, setCmcKey] = React.useState('');
     const [ccKey, setCcKey] = React.useState('');
     const [lcwKey, setLcwKey] = React.useState('');
+    const [llmKey, setLlmKey] = React.useState('');
     // ... (otros estados para otras claves)
 
     const handleSelectChange = (key: keyof AppConfig) => (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -205,6 +206,22 @@ const Settings: React.FC = () => {
                         />
                         <button 
                             onClick={() => handleSaveApiKey('LiveCoinWatch', lcwKey)}
+                            className="bg-helios-accent hover:bg-blue-500 text-white font-bold py-1 px-4 rounded-md text-sm"
+                        >
+                            Guardar
+                        </button>
+                    </div>
+                    {/* LLM API Key */}
+                    <div className="flex items-center space-x-4 pt-4 border-t border-gray-700">
+                        <label className="w-1/4 text-sm font-medium text-helios-accent">LLM API Key (OpenAI/Google)</label>
+                        <input 
+                            type="password" 
+                            value={llmKey}
+                            onChange={(e) => setLlmKey(e.target.value)}
+                            className="flex-grow bg-helios-dark border border-gray-600 rounded-md px-3 py-1 text-sm"
+                        />
+                        <button 
+                            onClick={() => handleSaveApiKey('LLM', llmKey)}
                             className="bg-helios-accent hover:bg-blue-500 text-white font-bold py-1 px-4 rounded-md text-sm"
                         >
                             Guardar

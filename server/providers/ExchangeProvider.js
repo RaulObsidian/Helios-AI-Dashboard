@@ -3,26 +3,44 @@ import { BaseProvider } from './BaseProvider.js';
 import ccxt from 'ccxt';
 
 export class ExchangeProvider extends BaseProvider {
-    constructor(providerId, symbol) {
-        super(providerId, 'CEX');
+    constructor(exchangeId, symbol) {
+        super(exchangeId, 'CEX');
         this.symbol = symbol;
+        // Inicializamos el exchange de CCXT. No se necesita API Key para tickers públicos.
+        this.exchange = new ccxt[exchangeId]();
+    }
+
+    async _fetch() {
+        const ticker = await this.exchange.fetchTicker(this.symbol);
         
-        if (!ccxt.hasOwnProperty(providerId)) {
-            throw new Error(`Exchange ${providerId} is not supported by CCXT.`);
+        // Si el par es contra BTC, necesitamos obtener el precio de BTC/USD para convertir.
+        if (this.symbol.endsWith('/BTC')) {
+            // Hacemos una llamada directa y fiable a CoinGecko para el precio de BTC.
+            const btcPriceUrl = 'https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd';
+            const btcResponse = await fetch(btcPriceUrl);
+            if (!btcResponse.ok) {
+                throw new Error('Failed to fetch BTC price from CoinGecko for conversion.');
+            }
+            const btcPriceData = await btcResponse.json();
+            // Adjuntamos el precio de BTC al ticker para usarlo en la normalización.
+            ticker.btcPriceUsd = btcPriceData.bitcoin.usd;
         }
-        this.exchange = new ccxt[providerId]();
+        
+        return ticker;
     }
 
-    async _fetchImplementation(currency) {
-        return await this.exchange.fetchTicker(this.symbol);
-    }
+    _normalize(ticker) {
+        let priceInUsd = ticker.last;
 
-    _normalize(raw_data, currency) {
-        // La conversión de BTC a USD se manejará en una etapa posterior si es necesario.
+        // Si el precio original estaba en BTC, lo convertimos a USD.
+        if (this.symbol.endsWith('/BTC') && ticker.btcPriceUsd) {
+            priceInUsd = ticker.last * ticker.btcPriceUsd;
+        }
+
         return {
-            price: raw_data.last || 0,
-            volume: raw_data.baseVolume || 0,
-            marketCap: 0, // No disponible en tickers de CEX
+            price: priceInUsd || 0,
+            marketCap: 0, // CCXT no proporciona market cap
+            volume: ticker.baseVolume || 0, // Volumen en la moneda base (SCP)
             provider: this.id,
         };
     }

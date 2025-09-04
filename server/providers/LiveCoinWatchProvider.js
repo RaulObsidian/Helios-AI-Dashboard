@@ -8,7 +8,7 @@ export class LiveCoinWatchProvider extends BaseProvider {
         this.baseUrl = 'https://api.livecoinwatch.com/coins/single';
     }
 
-    async _fetchImplementation(currency) {
+    async _fetch() {
         if (!this.apiKey) {
             throw new Error('LiveCoinWatch API Key is required.');
         }
@@ -19,7 +19,7 @@ export class LiveCoinWatchProvider extends BaseProvider {
                 'x-api-key': this.apiKey,
             },
             body: JSON.stringify({
-                currency: currency.toUpperCase(),
+                currency: 'USD',
                 code: "SCP",
                 meta: true,
             }),
@@ -30,11 +30,11 @@ export class LiveCoinWatchProvider extends BaseProvider {
         return await response.json();
     }
 
-    _normalize(raw_data, currency) {
+    _normalize(data) {
         return {
-            price: raw_data.rate || 0,
-            marketCap: raw_data.cap || 0,
-            volume: raw_data.volume || 0,
+            price: data.rate || 0,
+            marketCap: data.cap || 0,
+            volume: data.volume || 0,
             provider: this.id,
         };
     }

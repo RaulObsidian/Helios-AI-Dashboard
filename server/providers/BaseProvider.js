@@ -1,52 +1,68 @@
 // server/providers/BaseProvider.js
-import fetch from 'node-fetch';
-
-// Simulación de un decorador de reintentos
-const retry = async (fn, retries = 3, delay = 1000) => {
-    for (let i = 0; i < retries; i++) {
-        try {
-            return await fn();
-        } catch (e) {
-            if (i === retries - 1) throw e;
-            await new Promise(res => setTimeout(res, delay));
-        }
-    }
-};
+import pRetry from 'p-retry';
 
 export class BaseProvider {
-    constructor(providerId, category) {
-        this.id = providerId;
+    constructor(id, category) {
+        this.id = id;
         this.category = category; // 'CEX', 'AGGREGATOR', 'DEX'
-        this.latency = 0;
-        this.success_rate = 1.0;
+        this.latency = 0; // en milisegundos
+        this.success_rate = 1.0; // Tasa de éxito (0.0 a 1.0)
+        this.last_error = null;
+        this.cooldown_until = 0; // Timestamp hasta el cual el proveedor está en cooldown
     }
 
-    async fetch(currency = "USD") {
-        const start_time = Date.now();
-        try {
-            const raw_data = await retry(() => this._fetchImplementation(currency));
-            const normalized_data = this._normalize(raw_data, currency);
-            this.latency = Date.now() - start_time;
-            this._updateHealth(true);
-            return normalized_data;
-        } catch (e) {
-            this.latency = Date.now() - start_time;
-            this._updateHealth(false);
-            console.error(`Provider ${this.id} failed after retries:`, e.message);
-            throw e;
+    isAvailable() {
+        return Date.now() > this.cooldown_until;
+    }
+
+    async fetchWithMetrics() {
+        if (!this.isAvailable()) {
+            const remainingCooldown = Math.ceil((this.cooldown_until - Date.now()) / 1000);
+            throw new Error(`Provider ${this.id} is in cooldown for another ${remainingCooldown} seconds.`);
         }
-    }
 
-    _fetchImplementation(currency) {
-        throw new Error("_fetchImplementation must be overridden by subclass");
-    }
+        const startTime = Date.now();
+        try {
+            // Usamos p-retry para manejar los reintentos
+            const data = await pRetry(() => this._fetch(), {
+                retries: 2,
+                onFailedAttempt: error => {
+                    console.warn(`[${this.id}] Intento ${error.attemptNumber} fallido. Quedan ${error.retriesLeft} reintentos.`);
+                }
+            });
+            
+            this.latency = Date.now() - startTime;
+            this._updateHealth(true);
+            return this._normalize(data);
 
-    _normalize(raw_data, currency) {
-        throw new Error("_normalize must be overridden by subclass");
+        } catch (error) {
+            this.latency = Date.now() - startTime;
+            this.last_error = error.message;
+            this._updateHealth(false);
+
+            // Lógica de Cooldown para errores 429
+            if (error.message && error.message.includes('status 429')) {
+                this.cooldown_until = Date.now() + 300000; // Cooldown de 5 minutos
+                console.error(`[${this.id}] Rate Limit Hit (429). Cooling down for 5 minutes.`);
+            }
+
+            console.error(`[${this.id}] Falló después de todos los reintentos: ${error.message}`);
+            throw error; // Propagar el error para que el selector lo maneje
+        }
     }
 
     _updateHealth(success) {
-        const alpha = 0.1;
-        this.success_rate = alpha * (success ? 1 : 0) + (1 - alpha) * this.success_rate;
+        const alpha = 0.1; // Factor de suavizado para la Media Móvil Exponencial (EMA)
+        const newSuccessValue = success ? 1 : 0;
+        this.success_rate = alpha * newSuccessValue + (1 - alpha) * this.success_rate;
+    }
+
+    // Métodos que deben ser implementados por las clases hijas
+    async _fetch() {
+        throw new Error('_fetch() must be implemented by subclass');
+    }
+
+    _normalize(data) {
+        throw new Error('_normalize() must be implemented by subclass');
     }
 }

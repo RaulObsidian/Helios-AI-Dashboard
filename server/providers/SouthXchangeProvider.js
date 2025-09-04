@@ -3,13 +3,11 @@ import { BaseProvider } from './BaseProvider.js';
 
 export class SouthXchangeProvider extends BaseProvider {
     constructor() {
-        // Lo tratamos como un agregador ya que no está en CCXT
         super('SouthXchange', 'AGGREGATOR'); 
         this.baseUrl = 'https://www.southxchange.com/api/v3/book/SCP/USDT';
     }
 
-    async _fetchImplementation(currency) {
-        // SouthXchange solo tiene par USDT, así que ignoramos la moneda por ahora.
+    async _fetch() {
         const response = await fetch(this.baseUrl);
         if (!response.ok) {
             throw new Error(`API request failed with status ${response.status}`);
@@ -17,14 +15,13 @@ export class SouthXchangeProvider extends BaseProvider {
         return await response.json();
     }
 
-    _normalize(raw_data, currency) {
-        // La API de SouthXchange devuelve el precio en el libro de órdenes.
+    _normalize(data) {
         // Tomaremos el precio de la primera orden de compra como referencia.
-        const price = raw_data.BuyOrders.length > 0 ? raw_data.BuyOrders[0].Price : 0;
+        const price = data.BuyOrders.length > 0 ? data.BuyOrders[0].Price : 0;
         return {
             price: parseFloat(price) || 0,
-            marketCap: 0, // No disponible
-            volume: 0, // No disponible en este endpoint
+            marketCap: 0,
+            volume: 0,
             provider: this.id,
         };
     }

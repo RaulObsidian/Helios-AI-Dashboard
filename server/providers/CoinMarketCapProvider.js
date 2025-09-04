@@ -8,11 +8,11 @@ export class CoinMarketCapProvider extends BaseProvider {
         this.baseUrl = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest';
     }
 
-    async _fetchImplementation(currency) {
+    async _fetch() {
         if (!this.apiKey) {
             throw new Error('CoinMarketCap API Key is required.');
         }
-        const url = `${this.baseUrl}?symbol=SCP&convert=${currency.toUpperCase()}`;
+        const url = `${this.baseUrl}?symbol=SCP&convert=USD`;
         const response = await fetch(url, {
             headers: {
                 'X-CMC_PRO_API_KEY': this.apiKey,
@@ -25,10 +25,10 @@ export class CoinMarketCapProvider extends BaseProvider {
         return await response.json();
     }
 
-    _normalize(raw_data, currency) {
-        const quote = raw_data.data.SCP.quote[currency.toUpperCase()];
+    _normalize(data) {
+        const quote = data.data.SCP.quote['USD'];
         if (!quote) {
-            throw new Error(`Currency ${currency} not found in CoinMarketCap response`);
+            throw new Error(`USD quote not found in CoinMarketCap response`);
         }
         return {
             price: quote.price || 0,

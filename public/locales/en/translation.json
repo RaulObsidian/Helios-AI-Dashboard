@@ -4,6 +4,11 @@
     "subtitle": "version beta {version}",
     "alerts": "Helios AI Alerts"
   },
+  "chat": {
+    "title": "Helios AI Copilot",
+    "placeholder": "Ask about ScPrime, Trading...",
+    "send": "Send"
+  },
   "nav": {
     "dashboard": "Dashboard",
     "trading": "Trading",
@@ -121,6 +126,45 @@
             "step7": "Copy both the 'API Key' and 'Secret Key'.",
             "step8": "Return here, paste the keys, and click 'Add Connection'."
         }
+    }
+  },
+  "tradingBot": {
+    "title": "Grid Trading Bot",
+    "config": {
+      "title": "Configuration",
+      "lowerPrice": "Lower Price (USDT)",
+      "upperPrice": "Upper Price (USDT)",
+      "gridSize": "Grid Levels",
+      "investment": "Investment (USDT)"
+    },
+    "buttons": {
+      "configure": "Set Grid",
+      "propose": "Helios AI Suggestion",
+      "start": "Start Bot",
+      "stop": "Stop Bot"
+    },
+    "status": {
+      "title": "Status & PNL",
+      "state": "State",
+      "pnl": "Realized PNL",
+      "openOrders": "Open Orders"
+    }
+  },
+  "botTerminal": {
+    "noConfig": "No active configuration. Please configure the bot.",
+    "buttons": {
+      "configure": "Configure"
+    }
+  },
+  "botConfigModal": {
+    "title": "Configure Trading Bot",
+    "lowerPrice": "Lower Price (USDT)",
+    "upperPrice": "Upper Price (USDT)",
+    "gridSize": "Grid Levels",
+    "investment": "Investment (USDT)",
+    "buttons": {
+      "save": "Save & Reload Bot",
+      "propose": "Helios AI Suggestion"
     }
   },
   "common": {

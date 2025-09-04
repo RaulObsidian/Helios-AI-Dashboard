@@ -3,6 +3,7 @@ import { NavLink as RouterNavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { CpuChipIcon, ChartBarIcon, ScaleIcon, BookOpenIcon, CogIcon } from './icons';
 import { APP_VERSION } from '../version';
+import { SidebarChat } from './SidebarChat';
 
 // Componente reutilizable para los enlaces de navegación, ahora usando el NavLink de react-router-dom
 const NavLink: React.FC<{ icon: React.ReactNode; label: string; to: string }> = ({ icon, label, to }) => (
@@ -35,7 +36,10 @@ const Sidebar: React.FC = () => {
         <NavLink icon={<BookOpenIcon className="w-6 h-6" />} label={t('nav.logs')} to="/logs" />
         <NavLink icon={<CogIcon className="w-6 h-6" />} label={t('nav.settings')} to="/settings" />
       </nav>
-      <div className="text-xs text-gray-500">
+      <div className="flex-shrink-0 h-80 relative">
+        <SidebarChat />
+      </div>
+      <div className="text-xs text-gray-500 mt-4">
         <p>Version {APP_VERSION}</p>
         <p>&copy; 2025 Schmidt&Rueda</p>
       </div>

@@ -4,14 +4,15 @@ import { BaseProvider } from './BaseProvider.js';
 export class JupiterProvider extends BaseProvider {
     constructor() {
         super('Jupiter', 'DEX');
-        // La API de Jupiter para obtener el precio de un token específico (wSCP) es más compleja.
-        // Usaremos la API de precios v4. Se necesita la dirección del token de wSCP en Solana.
         this.baseUrl = 'https://price.jup.ag/v4/price';
-        this.wscpTokenAddress = 'SCPSPL……'; // <-- DIRECCIÓN REAL DEL TOKEN wSCP NECESARIA
+        // TODO: La dirección real del token wSCP en Solana es necesaria.
+        this.wscpTokenAddress = 'SCPSPLXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX'; 
     }
 
-    async _fetchImplementation(currency) {
-        // Jupiter devuelve precios en USDC (un stablecoin de USD) por defecto.
+    async _fetch() {
+        if (this.wscpTokenAddress.startsWith('SCPSPL')) {
+            throw new Error('Jupiter provider is not configured. Real wSCP token address is needed.');
+        }
         const url = `${this.baseUrl}?ids=${this.wscpTokenAddress}`;
         const response = await fetch(url);
         if (!response.ok) {
@@ -20,15 +21,15 @@ export class JupiterProvider extends BaseProvider {
         return await response.json();
     }
 
-    _normalize(raw_data, currency) {
-        const data = raw_data.data[this.wscpTokenAddress];
-        if (!data) {
+    _normalize(data) {
+        const tokenData = data.data[this.wscpTokenAddress];
+        if (!tokenData) {
             throw new Error('wSCP token not found in Jupiter API response');
         }
         return {
-            price: data.price || 0,
-            marketCap: 0, // No disponible
-            volume: 0, // No disponible directamente
+            price: tokenData.price || 0,
+            marketCap: 0,
+            volume: 0,
             provider: this.id,
         };
     }

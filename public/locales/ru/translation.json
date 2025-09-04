@@ -4,6 +4,11 @@
     "subtitle": "бета-версия {version}",
     "alerts": "Оповещения Helios AI"
   },
+  "chat": {
+    "title": "Копилот Helios AI",
+    "placeholder": "Спросите о ScPrime, Торговле...",
+    "send": "Отправить"
+  },
   "nav": {
     "dashboard": "Панель",
     "trading": "Торговля",
@@ -123,6 +128,45 @@
         }
     }
   },
+  "tradingBot": {
+    "title": "Торговый бот (Сетка)",
+    "config": {
+      "title": "Конфигурация",
+      "lowerPrice": "Нижняя цена (USDT)",
+      "upperPrice": "Верхняя цена (USDT)",
+      "gridSize": "Уровни сетки",
+      "investment": "Инвестиции (USDT)"
+    },
+    "buttons": {
+      "configure": "Установить сетку",
+      "propose": "Предложение Helios AI",
+      "start": "Запустить бота",
+      "stop": "Остановить бота"
+    },
+    "status": {
+      "title": "Статус и PNL",
+      "state": "Состояние",
+      "pnl": "Реализованный PNL",
+      "openOrders": "Открытые ордера"
+    }
+  },
+  "botTerminal": {
+    "noConfig": "Нет активной конфигурации. Пожалуйста, настройте бота.",
+    "buttons": {
+      "configure": "Настроить"
+    }
+  },
+  "botConfigModal": {
+    "title": "Настроить торгового бота",
+    "lowerPrice": "Нижняя цена (USDT)",
+    "upperPrice": "Верхняя цена (USDT)",
+    "gridSize": "Уровни сетки",
+    "investment": "Инвестиции (USDT)",
+    "buttons": {
+      "save": "Сохранить и перезагрузить бота",
+      "propose": "Предложение Helios AI"
+    }
+  },
   "common": {
     "loading": "Загрузка..."
   },
@@ -142,6 +186,13 @@
       "MEDIUM_RISK_SWING": "Средний риск (Swing)",
       "HIGH_RISK_MOMENTUM": "Высокий риск (Momentum)",
       "AUTOMATIC": "Автоматический"
+    },
+    "botState": {
+      "IDLE": "БЕЗДЕЙСТВУЕТ",
+      "RUNNING": "РАБОТАЕТ",
+      "PAUSED": "ПРИОСТАНОВЛЕН",
+      "ERROR": "ОШИБКА",
+      "CONFIGURED": "НАСТРОЕН"
     }
   }
 }

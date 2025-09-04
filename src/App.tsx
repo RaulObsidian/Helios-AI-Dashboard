@@ -11,6 +11,7 @@ import Settings from './pages/Settings';
 function App() {
   const fetchHostState = useAppStore((state) => state.fetchHostState);
   const fetchWalletState = useAppStore((state) => state.fetchWalletState);
+  const fetchNodeMetrics = useAppStore((state) => state.fetchNodeMetrics);
   const fetchMarketData = useAppStore((state) => state.fetchMarketData);
   const fetchAlerts = useAppStore((state) => state.fetchAlerts);
 
@@ -18,6 +19,7 @@ function App() {
     const fetchData = () => {
       fetchHostState();
       fetchWalletState();
+      fetchNodeMetrics();
       fetchMarketData();
       fetchAlerts();
     };
@@ -26,7 +28,7 @@ function App() {
     const intervalId = setInterval(fetchData, 15000); // Y luego cada 15 segundos
 
     return () => clearInterval(intervalId);
-  }, [fetchHostState, fetchWalletState, fetchMarketData]);
+  }, [fetchHostState, fetchWalletState, fetchNodeMetrics, fetchMarketData]);
 
   return (
     <div className="flex h-screen bg-helios-dark text-gray-200 font-sans">

@@ -4,6 +4,11 @@
     "subtitle": "versione beta {version}",
     "alerts": "Avvisi di Helios AI"
   },
+  "chat": {
+    "title": "Copilota Helios AI",
+    "placeholder": "Chiedi su ScPrime, Trading...",
+    "send": "Invia"
+  },
   "nav": {
     "dashboard": "Dashboard",
     "trading": "Trading",
@@ -98,6 +103,45 @@
     "apiSecretPlaceholder": "Segreto API",
     "addButton": "Aggiungi Connessione"
   },
+  "tradingBot": {
+    "title": "Bot di Trading (Grid)",
+    "config": {
+      "title": "Configurazione",
+      "lowerPrice": "Prezzo Inferiore (USDT)",
+      "upperPrice": "Prezzo Superiore (USDT)",
+      "gridSize": "Livelli Griglia",
+      "investment": "Investimento (USDT)"
+    },
+    "buttons": {
+      "configure": "Imposta Griglia",
+      "propose": "Suggerimento Helios AI",
+      "start": "Avvia Bot",
+      "stop": "Ferma Bot"
+    },
+    "status": {
+      "title": "Stato & PNL",
+      "state": "Stato",
+      "pnl": "PNL Realizzato",
+      "openOrders": "Ordini Aperti"
+    }
+  },
+  "botTerminal": {
+    "noConfig": "Nessuna configurazione attiva. Si prega di configurare il bot.",
+    "buttons": {
+      "configure": "Configura"
+    }
+  },
+  "botConfigModal": {
+    "title": "Configura Bot di Trading",
+    "lowerPrice": "Prezzo Inferiore (USDT)",
+    "upperPrice": "Prezzo Superiore (USDT)",
+    "gridSize": "Livelli Griglia",
+    "investment": "Investimento (USDT)",
+    "buttons": {
+      "save": "Salva e Ricarica Bot",
+      "propose": "Suggerimento Helios AI"
+    }
+  },
   "common": {
     "loading": "Caricamento..."
   },
@@ -117,6 +161,13 @@
       "MEDIUM_RISK_SWING": "Medio Rischio (Swing)",
       "HIGH_RISK_MOMENTUM": "Alto Rischio (Momentum)",
       "AUTOMATIC": "Automatico"
+    },
+    "botState": {
+      "IDLE": "INATTIVO",
+      "RUNNING": "IN ESECUZIONE",
+      "PAUSED": "IN PAUSA",
+      "ERROR": "ERRORE",
+      "CONFIGURED": "CONFIGURATO"
     }
   }
 }

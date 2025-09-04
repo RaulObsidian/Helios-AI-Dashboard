@@ -98,3 +98,40 @@ export const getHostStatus = async (apiPassword) => {
         throw new Error('Failed to execute or parse spc command for host status.');
     }
 };
+
+/**
+ * Obtiene métricas detalladas del nodo de almacenamiento.
+ * @returns {Promise<object>} - Un objeto con las métricas del nodo.
+ */
+export const getNodeMetrics = async (apiPassword) => {
+    try {
+        const options = {
+            env: { SPC_API_PASSWORD: apiPassword }
+        };
+        const { stdout } = await execa(SPC_PATH, ['host', '-v'], options);
+
+        // Busca: "Storage: 1.23 TB / 4.56 TB (26.9%)"
+        const utilization = parseNumericValue(stdout, /\((\d+\.\d+)%\)/);
+        // Busca: "Storage Price: 1,500 SCP / TB / Month"
+        const priceScpTb = parseNumericValue(stdout, /Storage Price:\s+([\d,.]+) SCP/);
+        // Busca: "Suggested Price: 1,450 SCP / TB / Month"
+        const suggestedPriceScpTb = parseNumericValue(stdout, /Suggested Price:\s+([\d,.]+) SCP/);
+        
+        // Para el estado de los incentivos, necesitamos una lógica más compleja
+        // que podría basarse en si el precio actual está dentro de un rango del sugerido.
+        // Por ahora, lo simularemos como 'OK'.
+        const incentiveStatus = 'OK'; 
+
+        return {
+            utilization,
+            priceScpTb,
+            suggestedPriceScpTb,
+            incentiveStatus,
+            incentiveLimitScpTb: 2000, // Este valor también es un placeholder por ahora
+        };
+
+    } catch (error) {
+        console.error('Error fetching node metrics:', error.stderr || error.message);
+        throw new Error('Failed to execute or parse spc command for node metrics.');
+    }
+};

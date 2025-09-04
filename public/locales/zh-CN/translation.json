@@ -4,6 +4,11 @@
     "subtitle": "测试版 {version}",
     "alerts": "Helios AI 警报"
   },
+  "chat": {
+    "title": "Helios AI 助手",
+    "placeholder": "询问有关 ScPrime、交易...",
+    "send": "发送"
+  },
   "nav": {
     "dashboard": "仪表盘",
     "trading": "交易",
@@ -123,6 +128,45 @@
         }
     }
   },
+  "tradingBot": {
+    "title": "网格交易机器人",
+    "config": {
+      "title": "配置",
+      "lowerPrice": "价格下限 (USDT)",
+      "upperPrice": "价格上限 (USDT)",
+      "gridSize": "网格级别",
+      "investment": "投资额 (USDT)"
+    },
+    "buttons": {
+      "configure": "设置网格",
+      "propose": "Helios AI 建议",
+      "start": "启动机器人",
+      "stop": "停止机器人"
+    },
+    "status": {
+      "title": "状态与盈亏",
+      "state": "状态",
+      "pnl": "已实现盈亏",
+      "openOrders": "未结订单"
+    }
+  },
+  "botTerminal": {
+    "noConfig": "没有活动配置。请配置机器人。",
+    "buttons": {
+      "configure": "配置"
+    }
+  },
+  "botConfigModal": {
+    "title": "配置交易机器人",
+    "lowerPrice": "价格下限 (USDT)",
+    "upperPrice": "价格上限 (USDT)",
+    "gridSize": "网格级别",
+    "investment": "投资额 (USDT)",
+    "buttons": {
+      "save": "保存并重新加载机器人",
+      "propose": "Helios AI 建议"
+    }
+  },
   "common": {
     "loading": "加载中..."
   },
@@ -142,6 +186,13 @@
       "MEDIUM_RISK_SWING": "中风险波段",
       "HIGH_RISK_MOMENTUM": "高风险动量",
       "AUTOMATIC": "自动"
+    },
+    "botState": {
+      "IDLE": "空闲",
+      "RUNNING": "运行中",
+      "PAUSED": "已暂停",
+      "ERROR": "错误",
+      "CONFIGURED": "已配置"
     }
   }
 }

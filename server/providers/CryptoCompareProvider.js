@@ -8,11 +8,11 @@ export class CryptoCompareProvider extends BaseProvider {
         this.baseUrl = 'https://min-api.cryptocompare.com/data/pricemultifull';
     }
 
-    async _fetchImplementation(currency) {
+    async _fetch() {
         if (!this.apiKey) {
             throw new Error('CryptoCompare API Key is required.');
         }
-        const url = `${this.baseUrl}?fsyms=SCP&tsyms=${currency.toUpperCase()}&api_key=${this.apiKey}`;
+        const url = `${this.baseUrl}?fsyms=SCP&tsyms=USD&api_key=${this.apiKey}`;
         const response = await fetch(url);
         if (!response.ok) {
             throw new Error(`API request failed with status ${response.status}`);
@@ -20,15 +20,15 @@ export class CryptoCompareProvider extends BaseProvider {
         return await response.json();
     }
 
-    _normalize(raw_data, currency) {
-        const data = raw_data.RAW?.SCP?.[currency.toUpperCase()];
-        if (!data) {
-            throw new Error(`Currency ${currency} not found in CryptoCompare response`);
+    _normalize(data) {
+        const rawData = data.RAW?.SCP?.['USD'];
+        if (!rawData) {
+            throw new Error(`USD data not found in CryptoCompare response`);
         }
         return {
-            price: data.PRICE || 0,
-            marketCap: data.MKTCAP || 0,
-            volume: data.VOLUME24HOURTO || 0,
+            price: rawData.PRICE || 0,
+            marketCap: rawData.MKTCAP || 0,
+            volume: rawData.VOLUME24HOURTO || 0,
             provider: this.id,
         };
     }

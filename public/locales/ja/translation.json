@@ -4,6 +4,11 @@
     "subtitle": "ベータ版 {version}",
     "alerts": "ヘリオスAIアラート"
   },
+  "chat": {
+    "title": "ヘリオスAIコパイロット",
+    "placeholder": "ScPrime、取引について質問...",
+    "send": "送信"
+  },
   "nav": {
     "dashboard": "ダッシュボード",
     "trading": "取引",
@@ -123,6 +128,45 @@
         }
     }
   },
+  "tradingBot": {
+    "title": "グリッド取引ボット",
+    "config": {
+      "title": "設定",
+      "lowerPrice": "下限価格 (USDT)",
+      "upperPrice": "上限価格 (USDT)",
+      "gridSize": "グリッドレベル",
+      "investment": "投資額 (USDT)"
+    },
+    "buttons": {
+      "configure": "グリッド設定",
+      "propose": "ヘリオスAIの提案",
+      "start": "ボット開始",
+      "stop": "ボット停止"
+    },
+    "status": {
+      "title": "ステータス & PNL",
+      "state": "状態",
+      "pnl": "実現損益",
+      "openOrders": "未約定注文"
+    }
+  },
+  "botTerminal": {
+    "noConfig": "アクティブな設定がありません。ボットを設定してください。",
+    "buttons": {
+      "configure": "設定"
+    }
+  },
+  "botConfigModal": {
+    "title": "取引ボットの設定",
+    "lowerPrice": "下限価格 (USDT)",
+    "upperPrice": "上限価格 (USDT)",
+    "gridSize": "グリッドレベル",
+    "investment": "投資額 (USDT)",
+    "buttons": {
+      "save": "保存してボットを再読み込み",
+      "propose": "ヘリオスAIの提案"
+    }
+  },
   "common": {
     "loading": "読み込み中..."
   },
@@ -142,6 +186,13 @@
       "MEDIUM_RISK_SWING": "中リスクスイング",
       "HIGH_RISK_MOMENTUM": "高リスクモメンタム",
       "AUTOMATIC": "自動"
+    },
+    "botState": {
+      "IDLE": "待機中",
+      "RUNNING": "実行中",
+      "PAUSED": "一時停止中",
+      "ERROR": "エラー",
+      "CONFIGURED": "設定済み"
     }
   }
 }

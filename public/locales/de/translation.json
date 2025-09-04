@@ -4,6 +4,11 @@
     "subtitle": "Beta-Version {version}",
     "alerts": "Helios AI Benachrichtigungen"
   },
+  "chat": {
+    "title": "Helios AI Copilot",
+    "placeholder": "Fragen zu ScPrime, Handel...",
+    "send": "Senden"
+  },
   "nav": {
     "dashboard": "Dashboard",
     "trading": "Handel",
@@ -123,6 +128,45 @@
         }
     }
   },
+  "tradingBot": {
+    "title": "Grid-Trading-Bot",
+    "config": {
+      "title": "Konfiguration",
+      "lowerPrice": "Unterer Preis (USDT)",
+      "upperPrice": "Oberer Preis (USDT)",
+      "gridSize": "Grid-Stufen",
+      "investment": "Investition (USDT)"
+    },
+    "buttons": {
+      "configure": "Grid festlegen",
+      "propose": "Helios AI Vorschlag",
+      "start": "Bot starten",
+      "stop": "Bot stoppen"
+    },
+    "status": {
+      "title": "Status & PNL",
+      "state": "Zustand",
+      "pnl": "Realisierter PNL",
+      "openOrders": "Offene Aufträge"
+    }
+  },
+  "botTerminal": {
+    "noConfig": "Keine aktive Konfiguration. Bitte konfigurieren Sie den Bot.",
+    "buttons": {
+      "configure": "Konfigurieren"
+    }
+  },
+  "botConfigModal": {
+    "title": "Trading-Bot konfigurieren",
+    "lowerPrice": "Unterer Preis (USDT)",
+    "upperPrice": "Oberer Preis (USDT)",
+    "gridSize": "Grid-Stufen",
+    "investment": "Investition (USDT)",
+    "buttons": {
+      "save": "Speichern & Bot neuladen",
+      "propose": "Helios AI Vorschlag"
+    }
+  },
   "common": {
     "loading": "Wird geladen..."
   },
@@ -142,6 +186,13 @@
       "MEDIUM_RISK_SWING": "Medium Risk Swing",
       "HIGH_RISK_MOMENTUM": "High Risk Momentum",
       "AUTOMATIC": "Automatic"
+    },
+    "botState": {
+      "IDLE": "INAKTIV",
+      "RUNNING": "LÄUFT",
+      "PAUSED": "PAUSIERT",
+      "ERROR": "FEHLER",
+      "CONFIGURED": "KONFIGURIERT"
     }
   }
 }

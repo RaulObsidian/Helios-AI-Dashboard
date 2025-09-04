@@ -1,8 +1,16 @@
 import { create } from 'zustand';
-import type { AppState, AppConfig, TradingConnection, WalletState, MarketData, Alert } from './types.ts';
+import type { AppState, AppConfig, TradingConnection, WalletState, MarketData, Alert, BotState } from './types.ts';
 import { SetupType, NodeManagementStrategy, TradingStrategy, DataProvider, ChartType, ConnectionStatus } from './types.ts';
 
 // --- Estado Inicial Simulado ---
+const initialBotState: BotState = {
+    state: 'IDLE',
+    strategy: null,
+    config: null,
+    pnl: 0,
+    openOrders: 0,
+};
+
 const initialConfig: AppConfig = {
     hardwareProfile: SetupType.XA_MINER,
     tradingEnabled: true,
@@ -11,7 +19,7 @@ const initialConfig: AppConfig = {
     language: 'en',
     currency: 'USD',
     connectedWallets: [],
-    priceProvider: DataProvider.COINGECKO,
+    priceProvider: DataProvider.AUTO,
     nodeAddress: 'localhost:4280',
     apiPassword: '',
     tradingConnections: [],
@@ -32,7 +40,7 @@ const initialConfig: AppConfig = {
     }
 };
 
-const initialState: Omit<AppState, 'config'> = {
+const initialState: Omit<AppState, 'config' | 'botState'> = {
     marketData: {
         provider: DataProvider.COINGECKO,
         priceUSD: 0.035,
@@ -74,36 +82,39 @@ const initialState: Omit<AppState, 'config'> = {
 
 // --- Definición del Store ---
 interface AppStateWithActions extends AppState {
-    prevMarketData: MarketData | null; // Para comparar cambios de precio
-    marketDataError: string | null; // Nuevo estado para el error
-    alerts: Alert[]; // <-- AÑADIDO
-    config: AppConfig;
+    prevMarketData: MarketData | null;
+    marketDataError: string | null;
+    alerts: Alert[];
     fetchHostState: () => Promise<void>;
     fetchWalletState: () => Promise<void>;
-    fetchMarketData: () => Promise<void>; // Nueva acción
-    fetchAlerts: () => Promise<void>; // <-- AÑADIDO
-    dismissAlert: (id: string) => void; // <-- AÑADIDO
+    fetchNodeMetrics: () => Promise<void>;
+    fetchMarketData: () => Promise<void>;
+    fetchAlerts: () => Promise<void>;
+    dismissAlert: (id: string) => void;
     setLanguage: (lang: string) => void;
     setNodeConnectionStatus: (status: ConnectionStatus) => void;
     updateConfig: (newConfig: Partial<AppConfig>) => void;
     addTradingConnection: (connection: TradingConnection) => void;
     removeTradingConnection: (id: string) => void;
+    // Acciones del Bot
+    fetchBotStatus: () => Promise<void>;
+    configureBot: (config: object) => Promise<void>;
+    startBot: () => Promise<void>;
+    stopBot: () => Promise<void>;
 }
 
 export const useAppStore = create<AppStateWithActions>((set, get) => ({
     ...initialState,
-    alerts: [], // <-- AÑADIDO
+    botState: initialBotState,
+    alerts: [],
     prevMarketData: null,
     marketDataError: null,
     config: initialConfig,
     fetchHostState: async () => {
         try {
             const response = await fetch('http://localhost:3001/api/host-status');
-            if (!response.ok) {
-                throw new Error('Network response was not ok for host status');
-            }
+            if (!response.ok) throw new Error('Network response was not ok for host status');
             const data = await response.json();
-            console.log("Datos recibidos de /api/host-status:", data); // <-- AÑADIMOS ESTO
             set({ 
                 blockHeight: data.blockHeight,
                 nodeConnectionStatus: ConnectionStatus.CONNECTED 
@@ -116,40 +127,36 @@ export const useAppStore = create<AppStateWithActions>((set, get) => ({
     fetchWalletState: async () => {
         try {
             const response = await fetch('http://localhost:3001/api/wallet-status');
-            if (!response.ok) {
-                throw new Error('Network response was not ok for wallet status');
-            }
+            if (!response.ok) throw new Error('Network response was not ok for wallet status');
             const data: WalletState = await response.json();
             set({ walletState: data });
         } catch (error) {
             console.error("Failed to fetch wallet state:", error);
         }
     },
+    fetchNodeMetrics: async () => {
+        try {
+            const response = await fetch('http://localhost:3001/api/node-metrics');
+            if (!response.ok) throw new Error('Network response was not ok for node metrics');
+            const data = await response.json();
+            set({ nodeMetrics: data });
+        } catch (error) {
+            console.error("Failed to fetch node metrics:", error);
+        }
+    },
     fetchMarketData: async () => {
         const { marketData, config } = get();
         const provider = config.priceProvider;
-
-        if (provider === DataProvider.AUTO) {
-            console.log("Market data provider is set to Automatic. Skipping fetch.");
-            return;
-        }
-
         try {
-            const provider = config.priceProvider;
-            const url = provider === DataProvider.AUTO 
-                ? `http://localhost:3001/api/market-data?provider=Automatic`
-                : `http://localhost:3001/api/market-data?provider=${provider}`;
-
+            const url = `http://localhost:3001/api/market-data?provider=${provider}`;
             const response = await fetch(url);
             if (!response.ok) {
                 const errorBody = await response.json();
                 throw new Error(errorBody.details || `Network response was not ok for ${provider}`);
             }
             const apiData = await response.json();
-            console.log(`[${provider}] Precio recibido:`, apiData.price); // <-- AÑADIMOS ESTO
-            
             const newMarketData: MarketData = {
-                provider: provider,
+                provider: apiData.provider || provider,
                 priceUSD: apiData.price || 0,
                 marketCapUSD: apiData.marketCap || 0,
                 volume24hUSD: apiData.volume || 0,
@@ -159,12 +166,12 @@ export const useAppStore = create<AppStateWithActions>((set, get) => ({
             set({
                 marketData: newMarketData,
                 prevMarketData: marketData,
-                marketDataError: null, // Limpia el error si tiene éxito
+                marketDataError: null,
             });
         } catch (error: any) {
             const errorMessage = `Failed to fetch from ${provider}: ${error.message}`;
             console.error(errorMessage);
-            set({ marketDataError: errorMessage }); // Guarda el mensaje de error
+            set({ marketDataError: errorMessage });
         }
     },
     setLanguage: (lang: string) => set(state => ({ config: { ...state.config, language: lang } })),
@@ -189,4 +196,60 @@ export const useAppStore = create<AppStateWithActions>((set, get) => ({
     dismissAlert: (id) => set(state => ({
         alerts: state.alerts.filter(alert => alert.id !== id)
     })),
+
+    // --- Acciones del Bot ---
+    fetchBotStatus: async () => {
+        try {
+            const response = await fetch('http://localhost:3001/api/trading/bot/status');
+            if (!response.ok) throw new Error('Failed to fetch bot status');
+            const data = await response.json();
+            set({ botState: data });
+        } catch (error) {
+            console.error("Error fetching bot status:", error);
+        }
+    },
+    configureBot: async (config) => {
+        try {
+            const response = await fetch('http://localhost:3001/api/trading/bot/configure', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(config),
+            });
+            if (!response.ok) throw new Error('Failed to configure bot');
+            const data = await response.json();
+            set({ botState: data });
+        } catch (error) {
+            console.error("Error configuring bot:", error);
+        }
+    },
+    startBot: async () => {
+        try {
+            const response = await fetch('http://localhost:3001/api/trading/bot/start', { method: 'POST' });
+            if (!response.ok) throw new Error('Failed to start bot');
+            const data = await response.json();
+            set({ botState: data });
+        } catch (error) {
+            console.error("Error starting bot:", error);
+        }
+    },
+    stopBot: async () => {
+        try {
+            const response = await fetch('http://localhost:3001/api/trading/bot/stop', { method: 'POST' });
+            if (!response.ok) throw new Error('Failed to stop bot');
+            const data = await response.json();
+            set({ botState: data });
+        } catch (error) {
+            console.error("Error stopping bot:", error);
+        }
+    },
 }));
+
+// --- Mock de datos para desarrollo ---
+if (import.meta.env.DEV) {
+    const mockAlerts: Alert[] = [
+        { id: '1', type: 'info', message: 'alerts.mock.price_update', recommendation: 'Consider adjusting your storage price.', timestamp: new Date().toISOString() },
+        { id: '2', type: 'warning', message: 'alerts.mock.low_balance', recommendation: 'Deposit funds to avoid service interruption.', timestamp: new Date().toISOString() },
+        { id: '3', type: 'error', message: 'alerts.mock.api_fail', recommendation: 'Check API keys for CoinMarketCap.', timestamp: new Date().toISOString() },
+    ];
+    useAppStore.setState({ alerts: mockAlerts });
+}

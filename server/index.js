@@ -1,4 +1,3 @@
-// server/index.js
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
@@ -7,50 +6,54 @@ import { SmartSelector } from './SmartSelector.js';
 import { SecurityManager } from './SecurityManager.js';
 import { HeliosMemory } from './HeliosMemory.js';
 import { AutonomousDirector } from './AutonomousDirector.js';
+import { HeliosAssistant } from './HeliosAssistant.js';
 
-const heliosMemory = new HeliosMemory();
-let securityManager; // Se inicializará cuando el usuario se conecte
-let selector; // Se inicializará después de securityManager
-let director; // Se inicializará después de securityManager
-
-// Cargar variables de entorno desde el archivo .env
+// --- Inicialización de Servicios ---
 dotenv.config();
 
 const app = express();
 const port = 3001;
-
-// Variable para almacenar la contraseña de la API en memoria
 let apiPassword = '';
 
+// Servicios Principales
+const heliosMemory = new HeliosMemory();
+let securityManager; // Se inicializa al conectar
+const selector = new SmartSelector(heliosMemory, null); // Inicializa sin securityManager
+const director = new AutonomousDirector(heliosMemory, selector);
+const assistant = new HeliosAssistant();
+assistant.initialize(); // Carga la DB de conocimiento (sin API Key al inicio)
+
 // --- Middleware ---
-app.use(cors({
-  origin: 'http://localhost:5173'
-}));
+app.use(cors({ origin: 'http://localhost:5173' }));
 app.use(express.json());
 
 // --- Rutas de la API ---
 
-/**
- * Endpoint para recibir y almacenar la contraseña de la API.
- */
-app.post('/api/connect', (req, res) => {
+app.post('/api/connect', async (req, res) => { // Convertido a async
     const { password } = req.body;
     if (typeof password === 'string') {
         apiPassword = password;
-        // Inicializa el SecurityManager con la contraseña maestra del usuario
         securityManager = new SecurityManager(password || 'default-password');
-        selector = new SmartSelector(heliosMemory, securityManager); // Ahora inicializamos el selector aquí
-        director = new AutonomousDirector(heliosMemory, selector);
-        console.log("API password set and all services initialized.");
+        
+        // Inyecta el securityManager en los servicios que lo necesitan
+        selector.securityManager = securityManager;
+        await selector._initializeApiProviders(); // Ahora inicializa los proveedores con clave
+
+        // Re-inicializar el asistente con la clave guardada, si existe
+        const llmKeyRecord = await heliosMemory.getApiKey('LLM');
+        if (llmKeyRecord && llmKeyRecord.api_key) {
+            const decryptedKey = securityManager.decryptData(llmKeyRecord.api_key);
+            await assistant.initialize(decryptedKey);
+            console.log("Assistant re-initialized with stored LLM key.");
+        }
+
+        console.log("API password set and SecurityManager initialized.");
         res.json({ success: true, message: 'API password set.' });
     } else {
         res.status(400).json({ success: false, error: 'Invalid password format.' });
     }
 });
 
-/**
- * Endpoint para guardar una clave de API cifrada.
- */
 app.post('/api/keys', async (req, res) => {
     if (!securityManager) {
         return res.status(401).json({ error: 'Not connected. Please set API password first.' });
@@ -60,22 +63,26 @@ app.post('/api/keys', async (req, res) => {
         const encryptedKey = securityManager.encryptData(apiKey);
         const encryptedSecret = apiSecret ? securityManager.encryptData(apiSecret) : null;
         await heliosMemory.saveApiKey(provider, encryptedKey, encryptedSecret);
+        
+        // Re-inicializar proveedores para que la nueva clave esté disponible
+        await selector._initializeApiProviders();
+
+        // Si la clave guardada es para el LLM, re-inicializar el asistente
+        if (provider === 'LLM') {
+            await assistant.initialize(apiKey);
+        }
+
         res.json({ success: true, message: `${provider} API key saved.` });
     } catch (error) {
         res.status(500).json({ error: 'Failed to save API key.', details: error.message });
     }
 });
 
-/**
- * Endpoint para obtener el estado financiero de la cartera y el nodo.
- * Combina datos de 'wallet' y 'host -v'.
- */
 app.get('/api/wallet-status', async (req, res) => {
     try {
         const walletState = await getWalletAndHostState(apiPassword);
         res.json(walletState);
     } catch (error) {
-        // Enviar una respuesta de error estandarizada
         res.status(500).json({
             error: 'Failed to retrieve wallet status.',
             details: error.message
@@ -83,9 +90,6 @@ app.get('/api/wallet-status', async (req, res) => {
     }
 });
 
-/**
- * Endpoint para obtener el estado general del host, como la altura del bloque y los peers.
- */
 app.get('/api/host-status', async (req, res) => {
     try {
         const hostStatus = await getHostStatus(apiPassword);
@@ -98,34 +102,98 @@ app.get('/api/host-status', async (req, res) => {
     }
 });
 
-/**
- * Endpoint para obtener datos de mercado de CoinGecko.
- * Actúa como un proxy para evitar problemas de CORS en el frontend.
- */
 app.get('/api/market-data', async (req, res) => {
-    const provider = req.query.provider || 'Automatic'; // Usa Automático por defecto
+    const provider = req.query.provider || 'Automatic';
     try {
         const marketData = await selector.getMarketData(provider);
         res.json(marketData);
     } catch (error) {
-        res.status(500).json({
-            error: `Failed to retrieve market data for selection ${provider}.`,
-            details: error.message
-        });
+        res.status(500).json({ error: `Failed to retrieve market data for selection ${provider}.`, details: error.message });
     }
 });
 
-/**
- * Endpoint para obtener las alertas y recomendaciones del Director de IA.
- */
-app.get('/api/ai/recommendations', (req, res) => {
+app.post('/api/assistant/ask', async (req, res) => {
+    if (!assistant) {
+        return res.status(503).json({ error: 'Helios Assistant is not yet initialized.' });
+    }
+    const { query, context } = req.body;
+    try {
+        const response = await assistant.ask(query, context);
+        res.json({ response });
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to get response from assistant.', details: error.message });
+    }
+});
+
+    app.get('/api/ai/recommendations', (req, res) => {
     if (!director) {
-        return res.json({ alerts: [] }); // Si el director no está listo, devuelve un array vacío.
+        return res.json({ alerts: [] });
     }
     const alerts = director.getAlerts();
     res.json({ alerts });
 });
 
+app.get('/api/node-metrics', async (req, res) => {
+    try {
+        // Necesitamos importar getNodeMetrics
+        const { getNodeMetrics } = await import('./spcService.js');
+        const metrics = await getNodeMetrics(apiPassword);
+        res.json(metrics);
+    } catch (error) {
+        res.status(500).json({
+            error: 'Failed to retrieve node metrics.',
+            details: error.message
+        });
+    }
+});
+
+// --- Rutas de Trading Bot ---
+
+app.get('/api/trading/bot/status', (req, res) => {
+    try {
+        const status = director.getBotStatus();
+        res.json(status);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to get bot status.', details: error.message });
+    }
+});
+
+app.post('/api/trading/bot/configure', (req, res) => {
+    try {
+        const config = req.body;
+        const status = director.configureBot(config);
+        res.json(status);
+    } catch (error) {
+        res.status(400).json({ error: 'Failed to configure bot.', details: error.message });
+    }
+});
+
+app.post('/api/trading/bot/start', async (req, res) => {
+    try {
+        const status = await director.startBot();
+        res.json(status);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to start bot.', details: error.message });
+    }
+});
+
+app.post('/api/trading/bot/stop', (req, res) => {
+    try {
+        const status = director.stopBot();
+        res.json(status);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to stop bot.', details: error.message });
+    }
+});
+
+app.get('/api/trading/bot/propose-config', async (req, res) => {
+    try {
+        const config = await director.proposeGridConfig();
+        res.json(config);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to propose bot configuration.', details: error.message });
+    }
+});
 
 // --- Inicio del Servidor ---
 app.listen(port, () => {
@@ -134,8 +202,6 @@ app.listen(port, () => {
 
     // Iniciar el ciclo de diagnóstico del Director
     setInterval(() => {
-        if (director) {
-            director.runDiagnostics();
-        }
-    }, 60000); // Ejecutar diagnósticos cada 60 segundos
+        director.runDiagnostics();
+    }, 60000);
 });

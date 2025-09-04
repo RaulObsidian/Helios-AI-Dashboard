@@ -7,7 +7,7 @@ export class CoinPaprikaProvider extends BaseProvider {
         this.baseUrl = 'https://api.coinpaprika.com/v1/tickers/scp-scprime';
     }
 
-    async _fetchImplementation(currency) {
+    async _fetch() {
         const response = await fetch(this.baseUrl);
         if (!response.ok) {
             throw new Error(`API request failed with status ${response.status}`);
@@ -15,10 +15,10 @@ export class CoinPaprikaProvider extends BaseProvider {
         return await response.json();
     }
 
-    _normalize(raw_data, currency) {
-        const quote = raw_data.quotes[currency.toUpperCase()];
+    _normalize(data) {
+        const quote = data.quotes['USD']; // Asumimos USD
         if (!quote) {
-            throw new Error(`Currency ${currency} not found in CoinPaprika response`);
+            throw new Error(`USD quote not found in CoinPaprika response`);
         }
         return {
             price: quote.price || 0,
