@@ -96,10 +96,10 @@ const Header: React.FC = () => {
           <select 
             value={i18n.language}
             onChange={handleLanguageChange}
-            className="bg-transparent text-white border-none focus:ring-0 cursor-pointer"
+            className="mt-1 block w-full pl-3 pr-10 py-1 text-base border-gray-600 bg-helios-dark text-white focus:outline-none focus:ring-helios-accent focus:border-helios-accent sm:text-sm rounded-md"
           >
             {Object.entries(supportedLngs).map(([code, name]) => (
-              <option key={code} value={code} className="bg-helios-gray">{name}</option>
+              <option key={code} value={code}>{name}</option>
             ))}
           </select>
         </div>
