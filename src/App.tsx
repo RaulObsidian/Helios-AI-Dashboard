@@ -7,6 +7,7 @@ import Sidebar from './components/Sidebar';
 import Trading from './pages/Trading';
 import Logs from './pages/Logs';
 import Settings from './pages/Settings';
+import AnalysisCenter from './pages/AnalysisCenter';
 
 function App() {
   const fetchHostState = useAppStore((state) => state.fetchHostState);
@@ -14,6 +15,7 @@ function App() {
   const fetchNodeMetrics = useAppStore((state) => state.fetchNodeMetrics);
   const fetchMarketData = useAppStore((state) => state.fetchMarketData);
   const fetchAlerts = useAppStore((state) => state.fetchAlerts);
+  const fetchBotStatus = useAppStore((state) => state.fetchBotStatus);
 
   useEffect(() => {
     const fetchData = () => {
@@ -22,13 +24,14 @@ function App() {
       fetchNodeMetrics();
       fetchMarketData();
       fetchAlerts();
+      fetchBotStatus();
     };
 
     fetchData(); // Llama una vez al inicio
     const intervalId = setInterval(fetchData, 15000); // Y luego cada 15 segundos
 
     return () => clearInterval(intervalId);
-  }, [fetchHostState, fetchWalletState, fetchNodeMetrics, fetchMarketData]);
+  }, [fetchHostState, fetchWalletState, fetchNodeMetrics, fetchMarketData, fetchAlerts, fetchBotStatus]);
 
   return (
     <div className="flex h-screen bg-helios-dark text-gray-200 font-sans">
@@ -39,6 +42,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/trading" element={<Trading />} />
+            <Route path="/analysis" element={<AnalysisCenter />} />
             <Route path="/logs" element={<Logs />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>

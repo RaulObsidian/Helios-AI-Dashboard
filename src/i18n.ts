@@ -26,6 +26,9 @@ i18n
     // Opciones del backend
     backend: {
       loadPath: '/locales/{{lng}}/translation.json', // Ruta a los archivos de traducción
+      // Añade parámetros a la URL para evitar problemas de caché del navegador
+      // durante el desarrollo.
+      queryStringParams: { v: new Date().getTime() },
     },
 
     interpolation: {

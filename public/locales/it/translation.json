@@ -12,6 +12,7 @@
   "nav": {
     "dashboard": "Dashboard",
     "trading": "Trading",
+    "analysis": "Centro di Analisi",
     "logs": "Log",
     "settings": "Impostazioni"
   },
@@ -125,6 +126,28 @@
       "openOrders": "Ordini Aperti"
     }
   },
+  "analysisCenter": {
+    "cockpitTitle": "Helios AI - Cockpit Istituzionale 2.0",
+    "workspaceSelectLabel": "Seleziona Workspace",
+    "workspaces": {
+      "technical": "1. Analisi Tecnica ed Esecuzione (Master)",
+      "orderflow": "2. Flusso degli Ordini e Liquidazioni (Vista HFT)",
+      "macro": "3. Macroeconomia e Altseason",
+      "fundamentals": "4. Fondamentali e On-Chain"
+    },
+    "drawingToolsTooltip": "Gli strumenti di disegno manuale richiedono la Libreria di Grafici Avanzata (Aggiornamento futuro)",
+    "drawingToolsLabel": "Strumenti di Disegno (Prossimamente)"
+  },
+  "aiAnalysisPanel": {
+    "title": "Analisi di Helios AI",
+    "loading": "Analisi dei dati di mercato...",
+    "error": "Si è verificato un errore durante l'analisi. Riprova.",
+    "welcome": "Seleziona un comando di analisi per iniziare.",
+    "explanationTitle": "Spiegazione IA",
+    "buttons": {
+      "supportResistance": "Trova Supporti e Resistenze"
+    }
+  },
   "botTerminal": {
     "noConfig": "Nessuna configurazione attiva. Si prega di configurare il bot.",
     "buttons": {
@@ -137,6 +160,10 @@
     "upperPrice": "Prezzo Superiore (USDT)",
     "gridSize": "Livelli Griglia",
     "investment": "Investimento (USDT)",
+    "rationaleTitle": "Giustificazione IA",
+    "errors": {
+      "thesis": "Impossibile recuperare l'ultima tesi di trading. Lo scheduler potrebbe non essere stato ancora eseguito. Riprova tra un momento."
+    },
     "buttons": {
       "save": "Salva e Ricarica Bot",
       "propose": "Suggerimento Helios AI"

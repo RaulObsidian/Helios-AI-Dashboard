@@ -12,6 +12,7 @@
   "nav": {
     "dashboard": "Painel",
     "trading": "Negociação",
+    "analysis": "Centro de Análise",
     "logs": "Registros",
     "settings": "Configurações"
   },
@@ -101,32 +102,7 @@
     "connectionsTitle": "Conexões de Exchange",
     "apiKeyPlaceholder": "Chave de API",
     "apiSecretPlaceholder": "Segredo de API",
-    "addButton": "Adicionar Conexão",
-    "tutorial": {
-        "title": "Como Conectar uma Conta de Exchange",
-        "intro": "Para permitir que a Helios AI negocie em seu nome, você precisa conectar sua conta de exchange usando Chaves de API.",
-        "security": {
-            "title": "IMPORTANTE: Segurança em Primeiro Lugar!",
-            "item1": "NUNCA compartilhe sua senha de login.",
-            "item1_body": "Este aplicativo nunca a solicitará.",
-            "item2": "Conceda APENAS permissões de 'Negociação'.",
-            "item2_body": "A IA só precisa de permissão para colocar e cancelar ordens.",
-            "item3": "SEMPRE DESATIVE as permissões de 'Saque'.",
-            "item3_body": "Este é o passo mais crítico. Garante que a IA nunca poderá mover seus fundos para fora da exchange."
-        },
-        "howTo": {
-            "title": "Passos Gerais para Criar Chaves de API",
-            "intro": "Os passos exatos variam entre as exchanges, mas o processo é geralmente o mesmo:",
-            "step1": "Faça login na sua conta no site da sua exchange.",
-            "step2": "Encontre 'Gerenciamento de API' ou 'Chaves de API' nas configurações da sua conta.",
-            "step3": "Clique em 'Criar API'.",
-            "step4": "Dê um nome memorável à chave (ex: 'HeliosAI').",
-            "step5": "Defina as permissões: APENAS 'Negociação à Vista' ativada. DESATIVE 'Saques'.",
-            "step6": "Complete qualquer verificação de segurança (2FA, código de e-mail).",
-            "step7": "Copie a 'Chave de API' e a 'Chave Secreta'.",
-            "step8": "Volte aqui, cole as chaves e clique em 'Adicionar Conexão'."
-        }
-    }
+    "addButton": "Adicionar Conexão"
   },
   "tradingBot": {
     "title": "Bot de Negociação (Grade)",
@@ -150,6 +126,28 @@
       "openOrders": "Ordens Abertas"
     }
   },
+  "analysisCenter": {
+    "cockpitTitle": "Helios AI - Cockpit Institucional 2.0",
+    "workspaceSelectLabel": "Selecionar Workspace",
+    "workspaces": {
+      "technical": "1. Análise Técnica e Execução (Mestre)",
+      "orderflow": "2. Fluxo de Ordens e Liquidações (Visão HFT)",
+      "macro": "3. Macroeconomia e Altseason",
+      "fundamentals": "4. Fundamentos e On-Chain"
+    },
+    "drawingToolsTooltip": "Ferramentas de desenho manual requerem a Biblioteca de Gráficos Avançada (Atualização futura)",
+    "drawingToolsLabel": "Ferramentas de Desenho (Em breve)"
+  },
+  "aiAnalysisPanel": {
+    "title": "Análise da Helios AI",
+    "loading": "Analisando dados de mercado...",
+    "error": "Ocorreu um erro durante a análise. Por favor, tente novamente.",
+    "welcome": "Selecione um comando de análise para começar.",
+    "explanationTitle": "Explicação da IA",
+    "buttons": {
+      "supportResistance": "Encontrar Suporte e Resistência"
+    }
+  },
   "botTerminal": {
     "noConfig": "Nenhuma configuração ativa. Por favor, configure o bot.",
     "buttons": {
@@ -162,6 +160,10 @@
     "upperPrice": "Preço Superior (USDT)",
     "gridSize": "Níveis da Grade",
     "investment": "Investimento (USDT)",
+    "rationaleTitle": "Justificativa da IA",
+    "errors": {
+      "thesis": "Não foi possível recuperar a última tese de negociação. O agendador pode ainda não ter sido executado. Por favor, tente novamente em um momento."
+    },
     "buttons": {
       "save": "Salvar e Recarregar Bot",
       "propose": "Sugestão da Helios AI"

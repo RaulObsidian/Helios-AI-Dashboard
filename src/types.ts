@@ -170,21 +170,6 @@ export interface WalletState {
     unlockedBalance: number;
 }
 
-export interface AppState {
-    marketData: MarketData | null;
-    nodeMetrics: NodeMetrics;
-    tradingLog: TradeLog[];
-    eventLog: string[];
-    errorLog: AppError[];
-    priceHistory: PriceHistoryPoint[];
-    ohlcData: Record<string, OHLCData[]>;
-    nodeConnectionStatus: ConnectionStatus;
-    walletState: WalletState;
-    publicIP: string;
-    blockHeight: number | null;
-    config: AppConfig;
-}
-
 export interface BotState {
     state: 'IDLE' | 'RUNNING' | 'PAUSED' | 'ERROR' | 'CONFIGURED';
     strategy: string | null;
@@ -223,10 +208,9 @@ export interface Alert {
     timestamp: string;
 }
 
-export interface Alert {
-    id: string;
-    type: string;
-    message: string;
-    recommendation: string;
-    timestamp: string;
+export interface DrawingInstruction {
+    type: 'horizontal_line';
+    price: number;
+    color: string;
+    text: string;
 }

@@ -1,7 +1,7 @@
 {
   "header": {
     "title": "Helios AI Dashboard",
-    "subtitle": "version beta {version}",
+    "subtitle": "beta version {version}",
     "alerts": "Helios AI Alerts"
   },
   "chat": {
@@ -12,6 +12,7 @@
   "nav": {
     "dashboard": "Dashboard",
     "trading": "Trading",
+    "analysis": "Analysis Center",
     "logs": "Logs",
     "settings": "Settings"
   },
@@ -57,7 +58,7 @@
     "title": "Market Data",
     "price": "SCP Price",
     "mcap": "Market Cap",
-    "volume": "24h Volume",
+    "volume": "Volume 24h",
     "source": "Source",
     "simulated": "Simulated",
     "errorTitle": "Data Error",
@@ -101,35 +102,10 @@
     "connectionsTitle": "Exchange Connections",
     "apiKeyPlaceholder": "API Key",
     "apiSecretPlaceholder": "API Secret",
-    "addButton": "Add Connection",
-    "tutorial": {
-        "title": "How to Connect an Exchange Account",
-        "intro": "To allow Helios AI to trade on your behalf, you need to connect your exchange account using API Keys.",
-        "security": {
-            "title": "IMPORTANT: Security First!",
-            "item1": "NEVER share your login password.",
-            "item1_body": "This app will never ask for it.",
-            "item2": "Grant 'Trading' permissions ONLY.",
-            "item2_body": "The AI only needs permission to place and cancel orders.",
-            "item3": "ALWAYS DISABLE 'Withdrawal' permissions.",
-            "item3_body": "This is the most critical step. It ensures the AI can never move your funds out of the exchange."
-        },
-        "howTo": {
-            "title": "General Steps to Create API Keys",
-            "intro": "The exact steps vary between exchanges, but the process is generally the same:",
-            "step1": "Log in to your exchange account on their website.",
-            "step2": "Find 'API Management' or 'API Keys' in your account settings.",
-            "step3": "Click 'Create API'.",
-            "step4": "Give the key a memorable name (e.g., 'HeliosAI').",
-            "step5": "Set permissions: ONLY 'Spot Trading' enabled. DISABLE 'Withdrawals'.",
-            "step6": "Complete any security verification (2FA, email code).",
-            "step7": "Copy both the 'API Key' and 'Secret Key'.",
-            "step8": "Return here, paste the keys, and click 'Add Connection'."
-        }
-    }
+    "addButton": "Add Connection"
   },
   "tradingBot": {
-    "title": "Grid Trading Bot",
+    "title": "Trading Bot (Grid)",
     "config": {
       "title": "Configuration",
       "lowerPrice": "Lower Price (USDT)",
@@ -144,10 +120,32 @@
       "stop": "Stop Bot"
     },
     "status": {
-      "title": "Status & PNL",
+      "title": "Status & P&L",
       "state": "State",
-      "pnl": "Realized PNL",
+      "pnl": "Realized P&L",
       "openOrders": "Open Orders"
+    }
+  },
+  "analysisCenter": {
+    "cockpitTitle": "Helios AI - Institutional Cockpit 2.0",
+    "workspaceSelectLabel": "Select Workspace",
+    "workspaces": {
+      "technical": "1. Technical Analysis & Execution (Master)",
+      "orderflow": "2. Order Flow & Liquidations (HFT View)",
+      "macro": "3. Macroeconomics & Altseason",
+      "fundamentals": "4. Fundamentals & On-Chain"
+    },
+    "drawingToolsTooltip": "Manual drawing tools require the Advanced Charting Library (Upcoming update)",
+    "drawingToolsLabel": "Drawing Tools (Coming Soon)"
+  },
+  "aiAnalysisPanel": {
+    "title": "Helios AI Analysis",
+    "loading": "Analyzing market data...",
+    "error": "An error occurred during analysis. Please try again.",
+    "welcome": "Select an analysis command to begin.",
+    "explanationTitle": "AI Explanation",
+    "buttons": {
+      "supportResistance": "Find Support & Resistance"
     }
   },
   "botTerminal": {
@@ -162,6 +160,10 @@
     "upperPrice": "Upper Price (USDT)",
     "gridSize": "Grid Levels",
     "investment": "Investment (USDT)",
+    "rationaleTitle": "AI Rationale",
+    "errors": {
+      "thesis": "Could not fetch the latest trading thesis. The Scheduler may not have run yet. Please try again in a moment."
+    },
     "buttons": {
       "save": "Save & Reload Bot",
       "propose": "Helios AI Suggestion"
@@ -172,7 +174,7 @@
   },
   "enums": {
     "setupType": {
-      "DIY": "DIY",
+      "DIY": "Custom (DIY)",
       "XA_MINER": "XA-Miner"
     },
     "nodeManagementStrategy": {
@@ -182,10 +184,17 @@
       "AUTOMATIC": "Automatic"
     },
     "tradingStrategy": {
-      "LOW_RISK_DCA": "Low Risk DCA",
-      "MEDIUM_RISK_SWING": "Medium Risk Swing",
-      "HIGH_RISK_MOMENTUM": "High Risk Momentum",
+      "LOW_RISK_DCA": "Low Risk (DCA)",
+      "MEDIUM_RISK_SWING": "Medium Risk (Swing)",
+      "HIGH_RISK_MOMENTUM": "High Risk (Momentum)",
       "AUTOMATIC": "Automatic"
+    },
+    "botState": {
+      "IDLE": "IDLE",
+      "RUNNING": "RUNNING",
+      "PAUSED": "PAUSED",
+      "ERROR": "ERROR",
+      "CONFIGURED": "CONFIGURED"
     }
   }
 }

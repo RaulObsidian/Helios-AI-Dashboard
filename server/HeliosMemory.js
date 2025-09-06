@@ -81,4 +81,20 @@ export class HeliosMemory {
         const sql = `INSERT INTO event_log (type, message, source) VALUES (?, ?, ?)`;
         return await this.run(sql, [type, message, source]);
     }
+
+    /**
+     * Guarda la última tesis de trading generada por el Scheduler.
+     * @param {object} thesis - El objeto de la tesis.
+     */
+    async saveTradingThesis(thesis) {
+        return this.setConfig('latest_trading_thesis', thesis);
+    }
+
+    /**
+     * Obtiene la última tesis de trading guardada.
+     * @returns {Promise<object|null>}
+     */
+    async getLatestTradingThesis() {
+        return this.getConfig('latest_trading_thesis', null);
+    }
 }

@@ -171,7 +171,18 @@ export const useAppStore = create<AppStateWithActions>((set, get) => ({
         } catch (error: any) {
             const errorMessage = `Failed to fetch from ${provider}: ${error.message}`;
             console.error(errorMessage);
-            set({ marketDataError: errorMessage });
+            set({ 
+                marketDataError: errorMessage,
+                // Restablecer a un estado válido en caso de error para evitar inconsistencias de tipo
+                marketData: {
+                    provider: provider,
+                    priceUSD: 0,
+                    marketCapUSD: 0,
+                    volume24hUSD: 0,
+                    tickVolume: 0,
+                    buySellRatio: 0,
+                }
+            });
         }
     },
     setLanguage: (lang: string) => set(state => ({ config: { ...state.config, language: lang } })),

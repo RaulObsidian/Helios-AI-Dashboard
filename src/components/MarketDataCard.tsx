@@ -1,18 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAppStore } from '../store';
-import { ChartBarIcon } from './icons';
-
-// Componente genérico de tarjeta
-const Card: React.FC<{ title: string; icon: React.ReactNode; children: React.ReactNode; className?: string }> = ({ title, icon, children, className = '' }) => (
-    <div className={`bg-helios-gray rounded-lg shadow-lg p-6 flex flex-col ${className}`}>
-        <div className="flex items-center text-helios-accent mb-4">
-            {icon}
-            <h2 className="text-xl font-bold ml-3">{title}</h2>
-        </div>
-        <div className="flex-grow">{children}</div>
-    </div>
-);
+import { Panel } from './ui/Panel';
 
 const formatCurrency = (num: number) => `${(num / 1_000_000).toFixed(2)}M`;
 const formatPrice = (num: number) => `${num.toFixed(4)}`;
@@ -23,27 +12,27 @@ const MarketDataCard: React.FC = () => {
 
     if (marketDataError) {
         return (
-            <Card title={t('marketData.title')} icon={<ChartBarIcon className="w-6 h-6" />}>
-                <div className="text-center text-helios-red">
+            <Panel title={t('marketData.title')}>
+                <div className="text-center text-red-400">
                     <p className="font-bold">{t('marketData.errorTitle')}</p>
                     <p className="text-xs mt-2">{marketDataError}</p>
                     <p className="text-xs mt-2">{t('marketData.errorSuggestion')}</p>
                 </div>
-            </Card>
+            </Panel>
         );
     }
 
     if (!marketData) {
         return (
-            <Card title={t('marketData.title')} icon={<ChartBarIcon className="w-6 h-6" />}>
-                <p className="text-gray-400">{t('common.loading')}</p>
-            </Card>
+            <Panel title={t('marketData.title')}>
+                <p className="text-[var(--text-secondary)]">{t('common.loading')}</p>
+            </Panel>
         );
     }
 
     const getDynamicColor = (current: number, prev: number | undefined) => {
         if (prev === undefined || current === prev) return 'text-white';
-        return current > prev ? 'text-helios-green' : 'text-helios-red';
+        return current > prev ? 'text-green-400' : 'text-red-400';
     };
 
     const priceColor = getDynamicColor(marketData.priceUSD, prevMarketData?.priceUSD);
@@ -51,23 +40,23 @@ const MarketDataCard: React.FC = () => {
     const volumeColor = getDynamicColor(marketData.volume24hUSD, prevMarketData?.volume24hUSD);
 
     return (
-        <Card title={t('marketData.title')} icon={<ChartBarIcon className="w-6 h-6" />}>
+        <Panel title={t('marketData.title')}>
             <div className="space-y-5">
                 <div className="text-center">
-                    <p className="text-sm text-gray-400">{t('marketData.price')}</p>
+                    <p className="text-sm text-[var(--text-secondary)]">{t('marketData.price')}</p>
                     <p className={`text-3xl font-bold ${priceColor}`}>{formatPrice(marketData.priceUSD)}</p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4 text-center text-sm">
                     {marketData.marketCapUSD > 0 && (
                         <div>
-                            <p className="text-gray-400">{t('marketData.mcap')}</p>
+                            <p className="text-[var(--text-secondary)]">{t('marketData.mcap')}</p>
                             <p className={`font-semibold ${mcapColor}`}>{formatCurrency(marketData.marketCapUSD)}</p>
                         </div>
                     )}
 
                     <div>
-                        <p className="text-gray-400">{t('marketData.volume')}</p>
+                        <p className="text-[var(--text-secondary)]">{t('marketData.volume')}</p>
                         <p className={`font-semibold ${volumeColor}`}>{formatCurrency(marketData.volume24hUSD)}</p>
                     </div>
                 </div>
@@ -75,7 +64,7 @@ const MarketDataCard: React.FC = () => {
                     <span>{t('marketData.source')}: {marketData.provider}</span>
                 </div>
             </div>
-        </Card>
+        </Panel>
     );
 };
 

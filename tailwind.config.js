@@ -7,12 +7,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        'helios-dark': '#111827',    // Un gris muy oscuro para el fondo principal
-        'helios-gray': '#1F2937',    // Un gris oscuro para el fondo de las tarjetas
-        'helios-accent': '#38BDF8',  // Un azul cielo vibrante para acentos
-        'helios-green': '#34D399',   // Un verde esmeralda para indicadores positivos
-        'helios-red': '#F87171',      // Un rojo claro para indicadores negativos
+        'helios-dark': '#0d1117', // Añadido para consistencia
+        'background-main': 'var(--background-main)',
+        'background-panel': 'var(--background-panel)',
+        'text-primary': 'var(--text-primary)',
+        'text-secondary': 'var(--text-secondary)',
+        'helios-accent': 'var(--helios-accent)',
+        'border-color': 'var(--border-color)',
       },
+      boxShadow: {
+        'neo-sm': '3px 3px 6px var(--shadow-dark), -3px -3px 6px var(--shadow-light)',
+        'neo': '5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light)',
+      }
     },
   },
   plugins: [],

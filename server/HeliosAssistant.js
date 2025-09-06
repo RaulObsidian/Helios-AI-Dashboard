@@ -8,40 +8,41 @@ const DB_PATH = path.resolve(process.cwd(), 'helios_vector_db');
 
 export class HeliosAssistant {
     constructor() {
-        this.model = null;
         this.vectorStore = null;
+        this.llmChain = null;
         this.apiKey = null;
     }
 
-    async initialize(apiKey) {
-        this.apiKey = apiKey;
+    async initialize(apiKey = null) {
+        this.apiKey = apiKey || process.env.OPENAI_API_KEY;
+        if (!this.apiKey) {
+            console.warn("HeliosAssistant: OPENAI_API_KEY not found. Assistant will not be functional.");
+            return;
+        }
+
         try {
-            console.log("Inicializando Asistente Helios...");
-            const embeddings = new HuggingFaceTransformersEmbeddings({
-                model: 'Xenova/all-MiniLM-L6-v2'
-            });
+            const directory = path.resolve(__dirname, 'helios_vector_db');
+            const embeddings = new OpenAIEmbeddings({ openAIApiKey: this.apiKey });
+            this.vectorStore = await FaissStore.load(directory, embeddings);
 
-            this.vectorStore = await FaissStore.load(DB_PATH, embeddings);
-            console.log("Base de datos vectorial FAISS cargada.");
+            const model = new ChatOpenAI({ openAIApiKey: this.apiKey, temperature: 0.2 });
+            const template = `Eres HeliosAI, un asistente experto en la red ScPrime y análisis de datos de almacenamiento descentralizado. Tu objetivo es ayudar al usuario a entender el estado de su nodo, el mercado y tomar decisiones informadas. Sé conciso y preciso.
+            Contexto relevante: {context}
+            Pregunta del usuario: {question}
+            Respuesta de HeliosAI:`;
+            const prompt = new PromptTemplate({ template, inputVariables: ["context", "question"] });
 
-            if (!this.apiKey) {
-                console.log("Asistente Helios inicializado en modo placeholder (sin API Key).");
-                return;
-            }
-
-            const modelName = process.env.LLM_MODEL_NAME || "gemini-1.5-flash"; // Fallback por si no está en .env
-            console.log(`Intentando inicializar Google GenAI con el modelo: ${modelName}...`);
-            const genAI = new GoogleGenerativeAI(this.apiKey);
-            this.model = genAI.getGenerativeModel({ model: modelName });
-            console.log("Modelo Google GenAI creado. Asistente Helios inicializado correctamente.");
+            this.llmChain = new LLMChain({ llm: model, prompt });
+            console.log("HeliosAssistant initialized successfully.");
 
         } catch (error) {
-            console.error("Error al inicializar HeliosAssistant:", error);
-            this.model = null; // Asegurarse de que el modelo es nulo si falla
+            console.error("Failed to initialize HeliosAssistant:", error);
+            this.vectorStore = null;
+            this.llmChain = null;
         }
     }
 
-    async ask(query, appState = {}) {
+    async ask(query, context = {}) {
         if (!this.model || !this.vectorStore) {
             return "Helios Assistant está activo, pero el motor LLM no está configurado. Por favor, añade tu API Key en la configuración.";
         }

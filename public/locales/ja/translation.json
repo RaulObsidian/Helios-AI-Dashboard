@@ -12,6 +12,7 @@
   "nav": {
     "dashboard": "ダッシュボード",
     "trading": "取引",
+    "analysis": "分析センター",
     "logs": "ログ",
     "settings": "設定"
   },
@@ -101,32 +102,7 @@
     "connectionsTitle": "取引所接続",
     "apiKeyPlaceholder": "APIキー",
     "apiSecretPlaceholder": "APIシークレット",
-    "addButton": "接続を追加",
-    "tutorial": {
-        "title": "取引所アカウントの接続方法",
-        "intro": "Helios AIがあなたに代わって取引できるようにするには、APIキーを使用して取引所アカウントを接続する必要があります。",
-        "security": {
-            "title": "重要：セキュリティ第一！",
-            "item1": "ログインパスワードは絶対に共有しないでください。",
-            "item1_body": "このアプリがそれを尋ねることは決してありません。",
-            "item2": "「取引」権限のみを付与してください。",
-            "item2_body": "AIは注文の発行とキャンセルのみの権限が必要です。",
-            "item3": "常に「出金」権限を無効にしてください。",
-            "item3_body": "これは最も重要なステップです。これにより、AIがあなたの資金を取引所から移動させることができなくなります。"
-        },
-        "howTo": {
-            "title": "APIキーを作成する一般的な手順",
-            "intro": "正確な手順は取引所によって異なりますが、プロセスは一般的に同じです：",
-            "step1": "取引所のウェブサイトでアカウントにログインします。",
-            "step2": "アカウント設定で「API管理」または「APIキー」を見つけます。",
-            "step3": "「APIを作成」をクリックします。",
-            "step4": "キーに覚えやすい名前を付けます（例：「HeliosAI」）。",
-            "step5": "権限を設定します：「スポット取引」のみを有効にします。「出金」は無効にします。",
-            "step6": "セキュリティ検証（2FA、メールコードなど）を完了します。",
-            "step7": "「APIキー」と「シークレットキー」の両方をコピーします。",
-            "step8": "ここに戻り、キーを貼り付けて「接続を追加」をクリックします。"
-        }
-    }
+    "addButton": "接続を追加"
   },
   "tradingBot": {
     "title": "グリッド取引ボット",
@@ -150,6 +126,28 @@
       "openOrders": "未約定注文"
     }
   },
+  "analysisCenter": {
+    "cockpitTitle": "ヘリオスAI - 機関投資家向けコックピット2.0",
+    "workspaceSelectLabel": "ワークスペースを選択",
+    "workspaces": {
+      "technical": "1. テクニカル分析と実行（マスター）",
+      "orderflow": "2. オーダーフローと清算（HFTビュー）",
+      "macro": "3. マクロ経済とアルトシーズン",
+      "fundamentals": "4. ファンダメンタルズとオンチェーン"
+    },
+    "drawingToolsTooltip": "手動描画ツールには高度なチャートライブラリが必要です（将来のアップグレード）",
+    "drawingToolsLabel": "描画ツール（近日公開）"
+  },
+  "aiAnalysisPanel": {
+    "title": "ヘリオスAI分析",
+    "loading": "市場データを分析中...",
+    "error": "分析中にエラーが発生しました。もう一度お試しください。",
+    "welcome": "分析コマンドを選択して開始してください。",
+    "explanationTitle": "AIによる説明",
+    "buttons": {
+      "supportResistance": "サポートとレジスタンスの検索"
+    }
+  },
   "botTerminal": {
     "noConfig": "アクティブな設定がありません。ボットを設定してください。",
     "buttons": {
@@ -162,6 +160,10 @@
     "upperPrice": "上限価格 (USDT)",
     "gridSize": "グリッドレベル",
     "investment": "投資額 (USDT)",
+    "rationaleTitle": "AIの論理的根拠",
+    "errors": {
+      "thesis": "最新の取引テーゼを取得できませんでした。スケジューラがまだ実行されていない可能性があります。しばらくしてからもう一度お試しください。"
+    },
     "buttons": {
       "save": "保存してボットを再読み込み",
       "propose": "ヘリオスAIの提案"

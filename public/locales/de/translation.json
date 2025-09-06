@@ -12,6 +12,7 @@
   "nav": {
     "dashboard": "Dashboard",
     "trading": "Handel",
+    "analysis": "Analysezentrum",
     "logs": "Protokolle",
     "settings": "Einstellungen"
   },
@@ -101,32 +102,7 @@
     "connectionsTitle": "Börsenverbindungen",
     "apiKeyPlaceholder": "API-Schlüssel",
     "apiSecretPlaceholder": "API-Geheimnis",
-    "addButton": "Verbindung hinzufügen",
-    "tutorial": {
-        "title": "Wie man ein Börsenkonto verbindet",
-        "intro": "Damit Helios AI in Ihrem Namen handeln kann, müssen Sie Ihr Börsenkonto über API-Schlüssel verbinden.",
-        "security": {
-            "title": "WICHTIG: Sicherheit zuerst!",
-            "item1": "Teilen Sie NIEMALS Ihr Anmeldepasswort.",
-            "item1_body": "Diese App wird Sie niemals danach fragen.",
-            "item2": "Erteilen Sie NUR 'Handels'-Berechtigungen.",
-            "item2_body": "Die KI benötigt nur die Berechtigung, Aufträge zu platzieren und zu stornieren.",
-            "item3": "Deaktivieren Sie IMMER 'Auszahlungs'-Berechtigungen.",
-            "item3_body": "Dies ist der wichtigste Schritt. Er stellt sicher, dass die KI Ihr Geld niemals von der Börse abheben kann."
-        },
-        "howTo": {
-            "title": "Allgemeine Schritte zur Erstellung von API-Schlüsseln",
-            "intro": "Die genauen Schritte variieren je nach Börse, aber der Prozess ist im Allgemeinen derselbe:",
-            "step1": "Melden Sie sich auf der Website Ihrer Börse in Ihrem Konto an.",
-            "step2": "Finden Sie 'API-Verwaltung' oder 'API-Schlüssel' in Ihren Kontoeinstellungen.",
-            "step3": "Klicken Sie auf 'API erstellen'.",
-            "step4": "Geben Sie dem Schlüssel einen einprägsamen Namen (z.B. 'HeliosAI').",
-            "step5": "Legen Sie die Berechtigungen fest: NUR 'Spot-Handel' aktivieren. 'Auszahlungen' DEAKTIVIEREN.",
-            "step6": "Schließen Sie alle Sicherheitsüberprüfungen ab (2FA, E-Mail-Code).",
-            "step7": "Kopieren Sie sowohl den 'API-Schlüssel' als auch den 'Geheimen Schlüssel'.",
-            "step8": "Kehren Sie hierher zurück, fügen Sie die Schlüssel ein und klicken Sie auf 'Verbindung hinzufügen'."
-        }
-    }
+    "addButton": "Verbindung hinzufügen"
   },
   "tradingBot": {
     "title": "Grid-Trading-Bot",
@@ -150,6 +126,28 @@
       "openOrders": "Offene Aufträge"
     }
   },
+  "analysisCenter": {
+    "cockpitTitle": "Helios AI - Institutional Cockpit 2.0",
+    "workspaceSelectLabel": "Workspace auswählen",
+    "workspaces": {
+      "technical": "1. Technische Analyse & Ausführung (Master)",
+      "orderflow": "2. Orderflow & Liquidationen (HFT-Ansicht)",
+      "macro": "3. Makroökonomie & Altseason",
+      "fundamentals": "4. Fundamentaldaten & On-Chain"
+    },
+    "drawingToolsTooltip": "Manuelle Zeichenwerkzeuge erfordern die erweiterte Charting-Bibliothek (Zukünftiges Upgrade)",
+    "drawingToolsLabel": "Zeichenwerkzeuge (Demnächst)"
+  },
+  "aiAnalysisPanel": {
+    "title": "Helios AI-Analyse",
+    "loading": "Analysiere Marktdaten...",
+    "error": "Während der Analyse ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+    "welcome": "Wählen Sie einen Analysebefehl, um zu beginnen.",
+    "explanationTitle": "KI-Erklärung",
+    "buttons": {
+      "supportResistance": "Unterstützung & Widerstand finden"
+    }
+  },
   "botTerminal": {
     "noConfig": "Keine aktive Konfiguration. Bitte konfigurieren Sie den Bot.",
     "buttons": {
@@ -162,6 +160,10 @@
     "upperPrice": "Oberer Preis (USDT)",
     "gridSize": "Grid-Stufen",
     "investment": "Investition (USDT)",
+    "rationaleTitle": "KI-Begründung",
+    "errors": {
+      "thesis": "Die neueste Handels-These konnte nicht abgerufen werden. Der Scheduler wurde möglicherweise noch nicht ausgeführt. Bitte versuchen Sie es in einem Moment erneut."
+    },
     "buttons": {
       "save": "Speichern & Bot neuladen",
       "propose": "Helios AI Vorschlag"

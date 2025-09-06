@@ -177,6 +177,19 @@ app.post('/api/trading/bot/start', async (req, res) => {
     }
 });
 
+app.get('/api/trading/bot/latest-thesis', async (req, res) => {
+    try {
+        const thesis = await heliosMemory.getLatestTradingThesis();
+        if (thesis) {
+            res.json(thesis);
+        } else {
+            res.status(404).json({ error: 'No trading thesis has been generated yet.' });
+        }
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to get latest thesis.', details: error.message });
+    }
+});
+
 app.post('/api/trading/bot/stop', (req, res) => {
     try {
         const status = director.stopBot();
@@ -194,6 +207,62 @@ app.get('/api/trading/bot/propose-config', async (req, res) => {
         res.status(500).json({ error: 'Failed to propose bot configuration.', details: error.message });
     }
 });
+
+// --- Rutas del Centro de Análisis ---
+
+app.get('/api/analysis/history', async (req, res) => {
+    try {
+        // TODO: Reemplazar con datos reales de la base de datos o de un proveedor.
+        // Por ahora, generamos datos de prueba realistas.
+        let ohlcv = [];
+        let lastClose = 0.045;
+        for (let i = 0; i < 200; i++) {
+            const open = lastClose;
+            const close = open + (Math.random() - 0.5) * 0.005;
+            const high = Math.max(open, close) + Math.random() * 0.002;
+            const low = Math.min(open, close) - Math.random() * 0.002;
+            ohlcv.push({
+                time: Date.now() / 1000 - (200 - i) * 3600, // Velas de 1 hora
+                open,
+                high,
+                low,
+                close,
+                volume: Math.random() * 100000,
+            });
+            lastClose = close;
+        }
+        res.json(ohlcv);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch chart history.', details: error.message });
+    }
+});
+
+app.get('/api/analysis/bot-state', (req, res) => {
+    try {
+        const status = director.getBotStatus();
+        res.json(status);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to get bot state.', details: error.message });
+    }
+});
+
+app.post('/api/analysis/execute-command', async (req, res) => {
+    const { command } = req.body;
+    if (command === 'find_support_resistance') {
+        try {
+            // Obtenemos los mismos datos de prueba para el análisis
+            const historyResponse = await fetch('http://localhost:3001/api/analysis/history');
+            const historyData = await historyResponse.json();
+            const result = director.analysisService.findSupportResistance(historyData);
+            res.json(result);
+        } catch (error) {
+            res.status(500).json({ error: 'Failed to execute analysis command.', details: error.message });
+        }
+    } else {
+        res.status(400).json({ error: `Unknown analysis command: ${command}` });
+    }
+});
+
 
 // --- Inicio del Servidor ---
 app.listen(port, () => {

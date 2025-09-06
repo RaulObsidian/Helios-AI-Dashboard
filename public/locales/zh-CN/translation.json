@@ -12,6 +12,7 @@
   "nav": {
     "dashboard": "仪表盘",
     "trading": "交易",
+    "analysis": "分析中心",
     "logs": "日志",
     "settings": "设置"
   },
@@ -101,32 +102,7 @@
     "connectionsTitle": "交易所连接",
     "apiKeyPlaceholder": "API 密钥",
     "apiSecretPlaceholder": "API 秘密",
-    "addButton": "添加连接",
-    "tutorial": {
-        "title": "如何连接交易所账户",
-        "intro": "要允许 Helios AI 代表您进行交易，您需要使用 API 密钥连接您的交易所账户。",
-        "security": {
-            "title": "重要：安全第一！",
-            "item1": "绝不分享您的登录密码。",
-            "item1_body": "此应用程序绝不会要求您提供。",
-            "item2": "仅授予“交易”权限。",
-            "item2_body": "AI 只需要下订单和取消订单的权限。",
-            "item3": "始终禁用“提款”权限。",
-            "item3_body": "这是最关键的一步。它确保 AI 永远无法将您的资金从交易所中移出。"
-        },
-        "howTo": {
-            "title": "创建 API 密钥的一般步骤",
-            "intro": "具体步骤因交易所而异，但过程大致相同：",
-            "step1": "在交易所网站上登录您的账户。",
-            "step2": "在您的账户设置中找到“API 管理”或“API 密钥”。",
-            "step3": "点击“创建 API”。",
-            "step4": "为密钥指定一个好记的名称（例如“HeliosAI”）。",
-            "step5": "设置权限：仅启用“现货交易”。禁用“提款”。",
-            "step6": "完成任何安全验证（2FA、电子邮件代码）。",
-            "step7": "复制“API 密钥”和“秘密密钥”。",
-            "step8": "返回此处，粘贴密钥，然后点击“添加连接”。"
-        }
-    }
+    "addButton": "添加连接"
   },
   "tradingBot": {
     "title": "网格交易机器人",
@@ -150,6 +126,28 @@
       "openOrders": "未结订单"
     }
   },
+  "analysisCenter": {
+    "cockpitTitle": "Helios AI - 机构驾驶舱 2.0",
+    "workspaceSelectLabel": "选择工作区",
+    "workspaces": {
+      "technical": "1. 技术分析与执行（主）",
+      "orderflow": "2. 订单流与清算（HFT视图）",
+      "macro": "3. 宏观经济与山寨季",
+      "fundamentals": "4. 基本面与链上数据"
+    },
+    "drawingToolsTooltip": "手动绘图工具需要高级图表库（未来升级）",
+    "drawingToolsLabel": "绘图工具（即将推出）"
+  },
+  "aiAnalysisPanel": {
+    "title": "Helios AI 分析",
+    "loading": "正在分析市场数据...",
+    "error": "分析过程中发生错误。请重试。",
+    "welcome": "请选择一个分析命令以开始。",
+    "explanationTitle": "AI 解释",
+    "buttons": {
+      "supportResistance": "查找支撑位和阻力位"
+    }
+  },
   "botTerminal": {
     "noConfig": "没有活动配置。请配置机器人。",
     "buttons": {
@@ -162,6 +160,10 @@
     "upperPrice": "价格上限 (USDT)",
     "gridSize": "网格级别",
     "investment": "投资额 (USDT)",
+    "rationaleTitle": "AI 原理",
+    "errors": {
+      "thesis": "无法检索最新的交易论点。调度程序可能尚未运行。请稍后再试。"
+    },
     "buttons": {
       "save": "保存并重新加载机器人",
       "propose": "Helios AI 建议"

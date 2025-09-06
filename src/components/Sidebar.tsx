@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink as RouterNavLink } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { CpuChipIcon, ChartBarIcon, ScaleIcon, BookOpenIcon, CogIcon } from './icons';
+import { CpuChipIcon, ChartBarIcon, ScaleIcon, BookOpenIcon, CogIcon, ChartBarSquareIcon } from './icons';
 import { APP_VERSION } from '../version';
 import { SidebarChat } from './SidebarChat';
 
@@ -33,6 +33,7 @@ const Sidebar: React.FC = () => {
       <nav className="flex-grow space-y-2">
         <NavLink icon={<ChartBarIcon className="w-6 h-6" />} label={t('nav.dashboard')} to="/" />
         <NavLink icon={<ScaleIcon className="w-6 h-6" />} label={t('nav.trading')} to="/trading" />
+        <NavLink icon={<ChartBarSquareIcon className="w-6 h-6" />} label={t('nav.analysis')} to="/analysis" />
         <NavLink icon={<BookOpenIcon className="w-6 h-6" />} label={t('nav.logs')} to="/logs" />
         <NavLink icon={<CogIcon className="w-6 h-6" />} label={t('nav.settings')} to="/settings" />
       </nav>

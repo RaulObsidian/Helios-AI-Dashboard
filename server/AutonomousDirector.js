@@ -2,6 +2,7 @@
 import { TradingBot } from './TradingBot.js';
 import { ExchangeConnector } from './ExchangeConnector.js';
 import { GridStrategy } from './strategies/GridStrategy.js';
+import { AnalysisService } from './analysisService.js';
 
 export class AutonomousDirector {
     constructor(heliosMemory, smartSelector) {
@@ -9,9 +10,10 @@ export class AutonomousDirector {
         this.selector = smartSelector;
         this.alerts = [];
 
-        // Inicializar los componentes de trading
+        // Inicializar los componentes de trading y análisis
         this.exchangeConnector = new ExchangeConnector(smartSelector);
         this.bot = new TradingBot(this.exchangeConnector);
+        this.analysisService = new AnalysisService(this.memory);
 
         // Escuchar eventos del bot para logging o alertas
         this.bot.on('error', (errorMsg) => {
