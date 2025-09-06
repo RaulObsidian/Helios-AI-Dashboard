@@ -57,8 +57,8 @@ const initialState: Omit<AppState, 'config' | 'botState'> = {
         incentiveLimitScpTb: 2000,
     },
     tradingLog: [
-        { id: 1, timestamp: new Date().toISOString(), strategy: TradingStrategy.LOW_RISK_DCA, action: 'tradinglog.action.buy', amountSCP: 500, priceUSD: 0.034, status: 'Completed' },
-        { id: 2, timestamp: new Date().toISOString(), strategy: TradingStrategy.LOW_RISK_DCA, action: 'tradinglog.action.sell', amountSCP: 250, priceUSD: 0.036, status: 'Completed' },
+        { id: 1, timestamp: new Date().toISOString(), strategy: TradingStrategy.LOW_RISK_DCA, action: 'tradingLog.action.buy', amountSCP: 500, priceUSD: 0.034, status: 'Completed' },
+        { id: 2, timestamp: new Date().toISOString(), strategy: TradingStrategy.LOW_RISK_DCA, action: 'tradingLog.action.sell', amountSCP: 250, priceUSD: 0.036, status: 'Completed' },
     ],
     eventLog: [
         'AI Agent Initialized: Monitoring node and market data.',

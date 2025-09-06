@@ -57,6 +57,19 @@ const AnalysisCenter: React.FC = () => {
                         value={activeWorkspace}
                         onChange={(e) => setActiveWorkspace(e.target.value as WorkspaceType)}
                         label={t('analysisCenter.workspaceSelectLabel')}
+                        MenuProps={{
+                            PaperProps: {
+                                sx: {
+                                    backgroundColor: '#161b22', // Fondo oscuro para el menú
+                                    '& .MuiMenuItem-root': {
+                                        color: 'white', // Texto blanco para las opciones
+                                        '&:hover': {
+                                            backgroundColor: '#30363d' // Color de fondo al pasar el ratón
+                                        }
+                                    },
+                                },
+                            },
+                        }}
                     >
                         <MenuItem value="TECHNICAL">{t('analysisCenter.workspaces.technical')}</MenuItem>
                         <MenuItem value="ORDERFLOW" disabled>{t('analysisCenter.workspaces.orderflow')}</MenuItem>
