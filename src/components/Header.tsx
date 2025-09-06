@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { GlobeAltIcon, CheckCircleIcon, XCircleIcon } from './icons';
+import { GlobeAltIcon, CheckCircleIcon, XCircleIcon, ChevronDownIcon } from './icons';
 import { useAppStore } from '../store';
 import { NotificationCenter } from './NotificationCenter';
 import { supportedLngs } from '../i18n';
@@ -93,15 +93,20 @@ const Header: React.FC = () => {
 
         <div className="flex items-center space-x-2">
           <GlobeAltIcon className="w-6 h-6 text-gray-400" />
-          <select 
-            value={i18n.language}
-            onChange={handleLanguageChange}
-            className="mt-1 block w-full pl-3 pr-10 py-1 text-base border-gray-600 bg-helios-dark text-white focus:outline-none focus:ring-helios-accent focus:border-helios-accent sm:text-sm rounded-md"
-          >
-            {Object.entries(supportedLngs).map(([code, name]) => (
-              <option key={code} value={code}>{name}</option>
-            ))}
-          </select>
+          <div className="relative">
+            <select 
+              value={i18n.language}
+              onChange={handleLanguageChange}
+              className="appearance-none block w-full pl-3 pr-10 py-1 border border-gray-600 bg-helios-dark text-white rounded-md focus:outline-none focus:ring-helios-accent focus:border-helios-accent sm:text-sm"
+            >
+              {Object.entries(supportedLngs).map(([code, name]) => (
+                <option key={code} value={code}>{name}</option>
+              ))}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+              <ChevronDownIcon className="w-5 h-5" />
+            </div>
+          </div>
         </div>
         <NotificationCenter />
       </div>

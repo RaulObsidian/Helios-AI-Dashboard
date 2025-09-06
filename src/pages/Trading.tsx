@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppStore } from '../store';
 import type { TradingConnection } from '../types';
 import { DataProvider, ConnectionStatus } from '../types';
-import { KeyIcon, XCircleIcon } from '../components/icons';
+import { KeyIcon, XCircleIcon, ChevronDownIcon } from '../components/icons';
 import { BotTerminalView } from '../components/BotTerminalView';
 import { BotConfigModal } from '../components/BotConfigModal';
 
@@ -84,15 +84,20 @@ const Trading: React.FC = () => {
                     <Section title={t('tradingPage.connectionsTitle')}>
                         {/* Formulario para añadir nueva conexión */}
                         <div className="flex flex-col md:flex-row gap-4">
-                            <select 
-                                value={selectedExchange}
-                                onChange={(e) => setSelectedExchange(e.target.value as DataProvider)}
-                                className="flex-1 mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-600 bg-helios-dark focus:outline-none focus:ring-helios-accent focus:border-helios-accent sm:text-sm rounded-md"
-                            >
-                                <option value={DataProvider.TRADEOGRE}>TradeOgre</option>
-                                <option value={DataProvider.COINGECKO}>CoinGecko (Data Only)</option>
-                                <option value={DataProvider.COINMARKETCAP}>CoinMarketCap (Data Only)</option>
-                            </select>
+                            <div className="relative flex-1">
+                                <select 
+                                    value={selectedExchange}
+                                    onChange={(e) => setSelectedExchange(e.target.value as DataProvider)}
+                                    className="appearance-none block w-full px-3 py-2 border border-gray-600 bg-helios-dark rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-helios-accent focus:border-helios-accent sm:text-sm"
+                                >
+                                    <option value={DataProvider.TRADEOGRE}>TradeOre</option>
+                                    <option value={DataProvider.COINGECKO}>CoinGecko (Data Only)</option>
+                                    <option value={DataProvider.COINMARKETCAP}>CoinMarketCap (Data Only)</option>
+                                </select>
+                                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                                    <ChevronDownIcon className="w-5 h-5" />
+                                </div>
+                            </div>
                             <input type="text" placeholder={t('tradingPage.apiKeyPlaceholder')} value={newApiKey} onChange={e => setNewApiKey(e.target.value)} className="flex-2 input-style bg-helios-dark border border-gray-600 rounded-md px-3 py-1.5 text-sm" />
                             <input type="password" placeholder={t('tradingPage.apiSecretPlaceholder')} value={newApiSecret} onChange={e => setNewApiSecret(e.target.value)} className="flex-2 input-style bg-helios-dark border border-gray-600 rounded-md px-3 py-1.5 text-sm" />
                             <button onClick={handleAddConnection} className="btn btn-primary">{t('tradingPage.addButton')}</button>

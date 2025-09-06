@@ -1,3 +1,4 @@
+import { ChevronDownIcon } from '../components/icons';
 import { useTranslation } from 'react-i18next';
 import { useAppStore } from '../store';
 import type { AppConfig } from '../types';
@@ -18,13 +19,18 @@ const SettingsSection: React.FC<{ title: string; children: React.ReactNode }> = 
 const SelectControl: React.FC<{ label: string; value: string; onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void; options: readonly string[]; t: (key: string) => string; translationPrefix?: string; }> = ({ label, value, onChange, options, t, translationPrefix }) => (
     <div>
         <label className="block text-sm font-medium text-gray-300">{label}</label>
-        <select 
-            value={value} 
-            onChange={onChange}
-            className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-600 bg-helios-dark focus:outline-none focus:ring-helios-accent focus:border-helios-accent sm:text-sm rounded-md"
-        >
-            {options.map(option => <option key={option} value={option}>{translationPrefix ? t(`${translationPrefix}.${option}`) : option}</option>)}
-        </select>
+        <div className="mt-1 relative">
+            <select 
+                value={value} 
+                onChange={onChange}
+                className="appearance-none block w-full pl-3 pr-10 py-2 border border-gray-600 bg-helios-dark rounded-md focus:outline-none focus:ring-helios-accent focus:border-helios-accent sm:text-sm"
+            >
+                {options.map(option => <option key={option} value={option}>{translationPrefix ? t(`${translationPrefix}.${option}`) : option}</option>)}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-400">
+                <ChevronDownIcon className="w-5 h-5" />
+            </div>
+        </div>
     </div>
 );
 

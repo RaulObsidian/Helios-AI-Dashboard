@@ -102,7 +102,32 @@
     "connectionsTitle": "Connexions aux Échanges",
     "apiKeyPlaceholder": "Clé API",
     "apiSecretPlaceholder": "Secret API",
-    "addButton": "Ajouter une Connexion"
+    "addButton": "Ajouter une Connexion",
+    "tutorial": {
+      "title": "Tutoriel API Rapide",
+      "intro": "Pour utiliser le bot de trading, vous devez connecter un compte d'échange à l'aide de clés API. Suivez ces meilleures pratiques :",
+      "security": {
+        "title": "La Sécurité d'Abord",
+        "item1": "Permissions",
+        "item1_body": "Créez une clé API qui peut UNIQUEMENT 'Lire les Informations' et 'Activer le Trading'. N'activez JAMAIS les permissions de 'Retrait'.",
+        "item2": "Restriction d'IP",
+        "item2_body": "Si possible, restreignez la clé API pour qu'elle ne puisse être utilisée que depuis l'adresse IP de votre nœud pour une sécurité maximale.",
+        "item3": "Stockage Sécurisé",
+        "item3_body": "Vos clés sont cryptées dans votre base de données locale à l'aide de votre mot de passe de connexion. Elles ne sont jamais envoyées à nos serveurs."
+      },
+      "howTo": {
+        "title": "Comment Ajouter une Connexion",
+        "intro": "Suivez ces étapes pour connecter votre échange :",
+        "step1": "Allez à la section 'Gestion API' de votre échange (par ex. CoinEx, TradeOgre).",
+        "step2": "Créez une nouvelle clé API.",
+        "step3": "Donnez-lui un nom reconnaissable (par ex. 'HeliosBot').",
+        "step4": "Assurez-vous que les permissions sont limitées à 'Trading' et 'Lecture'.",
+        "step5": "Copiez la 'Clé d'Accès' (Clé API) et la 'Clé Secrète' (Secret API).",
+        "step6": "Sélectionnez le bon échange dans le menu déroulant ci-dessus.",
+        "step7": "Collez les clés dans les champs correspondants.",
+        "step8": "Cliquez sur 'Ajouter une Connexion'."
+      }
+    }
   },
   "tradingBot": {
     "title": "Bot de Trading (Grille)",

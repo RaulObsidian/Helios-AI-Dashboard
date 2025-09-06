@@ -102,7 +102,32 @@
     "connectionsTitle": "Conexões de Exchange",
     "apiKeyPlaceholder": "Chave de API",
     "apiSecretPlaceholder": "Segredo de API",
-    "addButton": "Adicionar Conexão"
+    "addButton": "Adicionar Conexão",
+    "tutorial": {
+      "title": "Tutorial Rápido de API",
+      "intro": "Para usar o bot de negociação, você precisa conectar uma conta de exchange usando chaves de API. Siga estas boas práticas:",
+      "security": {
+        "title": "Segurança em Primeiro Lugar",
+        "item1": "Permissões",
+        "item1_body": "Crie uma chave de API que SÓ possa 'Ler Informações' e 'Ativar Negociação'. NUNCA ative permissões de 'Saque'.",
+        "item2": "Restrição de IP",
+        "item2_body": "Se possível, restrinja a chave de API para que ela só possa ser usada do endereço IP do seu nó para máxima segurança.",
+        "item3": "Armazenamento Seguro",
+        "item3_body": "Suas chaves são criptografadas em seu banco de dados local usando sua senha de conexão. Elas nunca são enviadas para nossos servidores."
+      },
+      "howTo": {
+        "title": "Como Adicionar uma Conexão",
+        "intro": "Siga estes passos para conectar sua exchange:",
+        "step1": "Vá para a seção 'Gerenciamento de API' em sua exchange (ex: CoinEx, TradeOgre).",
+        "step2": "Crie uma nova chave de API.",
+        "step3": "Dê um nome reconhecível (ex: 'HeliosBot').",
+        "step4": "Certifique-se de que as permissões estão limitadas a 'Negociação' e 'Leitura'.",
+        "step5": "Copie a 'Chave de Acesso' (Chave de API) e a 'Chave Secreta' (Segredo de API).",
+        "step6": "Selecione a exchange correta no menu suspenso acima.",
+        "step7": "Cole as chaves nos campos correspondentes.",
+        "step8": "Clique em 'Adicionar Conexão'."
+      }
+    }
   },
   "tradingBot": {
     "title": "Bot de Negociação (Grade)",

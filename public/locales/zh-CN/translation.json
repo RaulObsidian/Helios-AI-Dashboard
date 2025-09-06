@@ -102,7 +102,32 @@
     "connectionsTitle": "交易所连接",
     "apiKeyPlaceholder": "API 密钥",
     "apiSecretPlaceholder": "API 秘密",
-    "addButton": "添加连接"
+    "addButton": "添加连接",
+    "tutorial": {
+      "title": "API 快速教程",
+      "intro": "要使用交易机器人，您需要使用API密钥连接交易所账户。请遵循以下最佳实践：",
+      "security": {
+        "title": "安全第一",
+        "item1": "权限",
+        "item1_body": "创建一个只能‘读取信息’和‘启用交易’的API密钥。绝不要启用‘提款’权限。",
+        "item2": "IP 限制",
+        "item2_body": "如果可能，请限制API密钥，使其只能从您节点的IP地址使用，以实现最大程度的安全性。",
+        "item3": "安全存储",
+        "item3_body": "您的密钥使用您的连接密码在本地数据库中加密。它们绝不会发送到我们的服务器。"
+      },
+      "howTo": {
+        "title": "如何添加连接",
+        "intro": "请按照以下步骤连接您的交易所：",
+        "step1": "进入您交易所的‘API管理’部分（例如 CoinEx, TradeOgre）。",
+        "step2": "创建一个新的API密钥。",
+        "step3": "给它一个可识别的名称（例如‘HeliosBot’）。",
+        "step4": "确保权限仅限于‘交易’和‘读取’。",
+        "step5": "复制‘访问密钥’（API Key）和‘秘密密钥’（API Secret）。",
+        "step6": "从上面的下拉菜单中选择正确的交易所。",
+        "step7": "将密钥粘贴到相应的字段中。",
+        "step8": "点击‘添加连接’。"
+      }
+    }
   },
   "tradingBot": {
     "title": "网格交易机器人",

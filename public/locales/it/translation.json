@@ -102,7 +102,32 @@
     "connectionsTitle": "Connessioni Exchange",
     "apiKeyPlaceholder": "Chiave API",
     "apiSecretPlaceholder": "Segreto API",
-    "addButton": "Aggiungi Connessione"
+    "addButton": "Aggiungi Connessione",
+    "tutorial": {
+      "title": "Tutorial API Rapido",
+      "intro": "Per utilizzare il bot di trading, è necessario collegare un account di exchange tramite chiavi API. Segui queste best practice:",
+      "security": {
+        "title": "La Sicurezza Prima di Tutto",
+        "item1": "Permessi",
+        "item1_body": "Crea una chiave API che possa SOLO 'Leggere Informazioni' e 'Abilitare il Trading'. NON abilitare MAI i permessi di 'Prelievo'.",
+        "item2": "Restrizione IP",
+        "item2_body": "Se possibile, limita la chiave API in modo che possa essere utilizzata solo dall'indirizzo IP del tuo nodo per la massima sicurezza.",
+        "item3": "Archiviazione Sicura",
+        "item3_body": "Le tue chiavi vengono crittografate nel tuo database locale utilizzando la tua password di connessione. Non vengono mai inviate ai nostri server."
+      },
+      "howTo": {
+        "title": "Come Aggiungere una Connessione",
+        "intro": "Segui questi passaggi per collegare il tuo exchange:",
+        "step1": "Vai alla sezione 'Gestione API' sul tuo exchange (es. CoinEx, TradeOgre).",
+        "step2": "Crea una nuova chiave API.",
+        "step3": "Dalle un nome riconoscibile (es. 'HeliosBot').",
+        "step4": "Assicurati che i permessi siano limitati a 'Trading' e 'Lettura'.",
+        "step5": "Copia la 'Chiave di Accesso' (API Key) e la 'Chiave Segreta' (API Secret).",
+        "step6": "Seleziona l'exchange corretto dal menu a tendina in alto.",
+        "step7": "Incolla le chiavi nei campi corrispondenti.",
+        "step8": "Clicca su 'Aggiungi Connessione'."
+      }
+    }
   },
   "tradingBot": {
     "title": "Bot di Trading (Grid)",

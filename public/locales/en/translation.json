@@ -102,7 +102,32 @@
     "connectionsTitle": "Exchange Connections",
     "apiKeyPlaceholder": "API Key",
     "apiSecretPlaceholder": "API Secret",
-    "addButton": "Add Connection"
+    "addButton": "Add Connection",
+    "tutorial": {
+      "title": "Quick API Tutorial",
+      "intro": "To use the trading bot, you need to connect an exchange account using API keys. Follow these best practices:",
+      "security": {
+        "title": "Security First",
+        "item1": "Permissions",
+        "item1_body": "Create an API key that can ONLY 'Read Info' and 'Enable Trading'. NEVER enable 'Withdrawal' permissions.",
+        "item2": "IP Restriction",
+        "item2_body": "If possible, restrict the API key so it can only be used from your node's IP address for maximum security.",
+        "item3": "Secure Storage",
+        "item3_body": "Your keys are encrypted in your local database using your connection password. They are never sent to our servers."
+      },
+      "howTo": {
+        "title": "How to Add a Connection",
+        "intro": "Follow these steps to connect your exchange:",
+        "step1": "Go to the 'API Management' section on your exchange (e.g., CoinEx, TradeOgre).",
+        "step2": "Create a new API key.",
+        "step3": "Give it a recognizable name (e.g., 'HeliosBot').",
+        "step4": "Ensure permissions are limited to 'Trading' and 'Reading'.",
+        "step5": "Copy the 'Access Key' (API Key) and the 'Secret Key' (API Secret).",
+        "step6": "Select the correct exchange from the dropdown menu above.",
+        "step7": "Paste the keys into the corresponding fields.",
+        "step8": "Click 'Add Connection'."
+      }
+    }
   },
   "tradingBot": {
     "title": "Trading Bot (Grid)",

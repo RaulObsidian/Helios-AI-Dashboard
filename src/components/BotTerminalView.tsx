@@ -49,15 +49,15 @@ export const BotTerminalView: React.FC<{ onConfigureClick: () => void }> = ({ on
             <div className="bg-gray-800 p-2 flex items-center justify-end space-x-4 rounded-b-md">
                 <button onClick={onConfigureClick} disabled={isRunning} className="btn btn-secondary disabled:opacity-50 flex items-center">
                     <CogIcon className="w-5 h-5 mr-2" />
-                    {t('botTerminal.buttons.configure')}
+                    {t('tradingBot.buttons.configure')}
                 </button>
                 <button onClick={startBot} disabled={isRunning} className="btn btn-success disabled:opacity-50 flex items-center">
                     <PlayIcon className="w-5 h-5 mr-2" />
-                    {t('botTerminal.buttons.start')}
+                    {t('tradingBot.buttons.start')}
                 </button>
                 <button onClick={stopBot} disabled={!isRunning} className="btn btn-danger disabled:opacity-50 flex items-center">
                     <StopIcon className="w-5 h-5 mr-2" />
-                    {t('botTerminal.buttons.stop')}
+                    {t('tradingBot.buttons.stop')}
                 </button>
             </div>
         </div>
