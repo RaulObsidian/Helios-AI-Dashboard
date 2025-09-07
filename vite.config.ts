@@ -3,6 +3,7 @@ import react from '@vitejs/plugin-react'
 
 // https://vite.dev/config/
 export default defineConfig({
+  base: '/Helios-AI-Dashboard/', // <--- AÑADIDO: Ruta base para GitHub Pages
   plugins: [react()],
   // Optimiza las dependencias para un arranque más rápido en desarrollo.
   optimizeDeps: {

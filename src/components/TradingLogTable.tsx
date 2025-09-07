@@ -23,7 +23,7 @@ const TradingLogTable: React.FC = () => {
                         {tradingLog.map((log) => (
                             <tr key={log.id} className="border-b border-[var(--border-color)] hover:bg-[var(--background-main)]">
                                 <td className="px-4 py-3 text-gray-300">{new Date(log.timestamp).toLocaleTimeString()}</td>
-                                <td className={`px-4 py-3 font-bold ${log.action === 'tradinglog.action.buy' ? 'text-green-400' : 'text-red-400'}`}>
+                                <td className={`px-4 py-3 font-bold ${log.action === 'tradingLog.action.buy' ? 'text-green-400' : 'text-red-400'}`}>
                                     {t(`tradingLog.action.${log.action.split('.').pop()}`)}
                                 </td>
                                 <td className="px-4 py-3 text-right">{log.amountSCP.toLocaleString()}</td>

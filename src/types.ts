@@ -74,7 +74,7 @@ export interface TradeLog {
     id: number;
     timestamp: string;
     strategy: TradingStrategy;
-    action: 'tradinglog.action.buy' | 'tradinglog.action.sell';
+        action: 'tradingLog.action.buy' | 'tradingLog.action.sell';
     amountSCP: number;
     priceUSD: number;
     status: string;

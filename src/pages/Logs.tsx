@@ -27,7 +27,7 @@ const TradingLogTable: React.FC = () => {
                         {tradingLog.map((log) => (
                             <tr key={log.id} className="hover:bg-gray-700">
                                 <td className="px-4 py-3 text-gray-300">{new Date(log.timestamp).toLocaleString()}</td>
-                                <td className={`px-4 py-3 font-bold ${log.action === 'tradinglog.action.buy' ? 'text-helios-green' : 'text-helios-red'}`}>
+                                <td className={`px-4 py-3 font-bold ${log.action === 'tradingLog.action.buy' ? 'text-helios-green' : 'text-helios-red'}`}>
                                     {t(log.action)}
                                 </td>
                                 <td className="px-4 py-3 text-right">{log.amountSCP.toLocaleString()}</td>
