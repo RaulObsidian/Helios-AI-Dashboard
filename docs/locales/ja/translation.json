@@ -1,0 +1,225 @@
+{
+  "header": {
+    "title": "ヘリオスAIダッシュボード",
+    "subtitle": "ベータ版 {version}",
+    "alerts": "ヘリオスAIアラート"
+  },
+  "chat": {
+    "title": "ヘリオスAIコパイロット",
+    "placeholder": "ScPrime、取引について質問...",
+    "send": "送信"
+  },
+  "nav": {
+    "dashboard": "ダッシュボード",
+    "trading": "取引",
+    "analysis": "分析センター",
+    "logs": "ログ",
+    "settings": "設定"
+  },
+  "connection": {
+    "title": "ノード接続",
+    "nodeAddress": "ノードアドレス",
+    "apiPassword": "APIパスワード",
+    "passwordPlaceholder": "APIパスワードを入力",
+    "connect": "接続",
+    "disconnect": "切断",
+    "connecting": "接続中...",
+    "status": {
+      "disconnected": "切断されました",
+      "connecting": "接続中",
+      "connected": "接続済み",
+      "failed": "接続に失敗しました"
+    }
+  },
+  "walletStatus": {
+    "title": "ウォレットの状況",
+    "totalBalance": "総残高",
+    "unlocked": "ロック解除済み",
+    "collateral": "担保",
+    "profitBreakdown": "利益の内訳",
+    "nodeProfits": "ノード",
+    "tradingProfits": "取引"
+  },
+  "nodeStatus": {
+    "title": "ノードの状況",
+    "blockHeight": "ブロック高",
+    "utilization": "使用率",
+    "currentPrice": "現在の価格",
+    "suggestion": "AIの提案",
+    "incentives": "インセンティブ",
+    "unit": "SCP/TB",
+    "status": {
+      "title": "ステータス",
+      "ok": "OK",
+      "exceeded": "超過"
+    }
+  },
+  "marketData": {
+    "title": "市場データ",
+    "price": "SCP価格",
+    "mcap": "時価総額",
+    "volume": "24時間取引量",
+    "source": "ソース",
+    "simulated": "シミュレーション",
+    "errorTitle": "データエラー",
+    "errorSuggestion": "別のプロバイダーを試すか、設定で自動を選択してください。"
+  },
+  "tradingLog": {
+    "title": "取引ログ",
+    "header": {
+      "time": "時間",
+      "action": "アクション",
+      "amount": "数量 (SCP)",
+      "price": "価格"
+    },
+    "action": {
+      "buy": "購入",
+      "sell": "売却"
+    }
+  },
+  "eventLog": {
+    "title": "エージェントイベントログ"
+  },
+  "chart": {
+    "title": "SCPライブ価格"
+  },
+  "settings": {
+    "title": "設定",
+    "agent": {
+      "title": "エージェント",
+      "profile": "ハードウェアプロファイル",
+      "nodeManagement": "ノード管理戦略",
+      "strategy": "取引戦略"
+    },
+    "data": {
+      "title": "データ",
+      "provider": "価格提供者",
+      "automatic": "自動"
+    }
+  },
+  "tradingPage": {
+    "title": "自動取引",
+    "connectionsTitle": "取引所接続",
+    "apiKeyPlaceholder": "APIキー",
+    "apiSecretPlaceholder": "APIシークレット",
+    "addButton": "接続を追加",
+    "tutorial": {
+      "title": "APIクイックチュートリアル",
+      "intro": "取引ボットを使用するには、APIキーを使用して取引所アカウントを接続する必要があります。以下のベストプラクティスに従ってください：",
+      "security": {
+        "title": "セキュリティ第一",
+        "item1": "権限",
+        "item1_body": "「情報読み取り」と「取引有効化」のみが可能なAPIキーを作成してください。絶対に「出金」権限を有効にしないでください。",
+        "item2": "IP制限",
+        "item2_body": "可能であれば、最大限のセキュリティを確保するために、APIキーがノードのIPアドレスからのみ使用できるように制限してください。",
+        "item3": "安全な保管",
+        "item3_body": "キーは接続パスワードを使用してローカルデータベースに暗号化されて保存されます。当社のサーバーに送信されることはありません。"
+      },
+      "howTo": {
+        "title": "接続の追加方法",
+        "intro": "取引所を接続するには、次の手順に従ってください：",
+        "step1": "取引所の「API管理」セクションに移動します（例：CoinEx、TradeOgre）。",
+        "step2": "新しいAPIキーを作成します。",
+        "step3": "わかりやすい名前を付けます（例：'HeliosBot'）。",
+        "step4": "権限が「取引」と「読み取り」に限定されていることを確認してください。",
+        "step5": "「アクセスキー」（APIキー）と「シークレットキー」（APIシークレット）をコピーします。",
+        "step6": "上のドロップダウンメニューから正しい取引所を選択します。",
+        "step7": "対応するフィールドにキーを貼り付けます。",
+        "step8": "「接続を追加」をクリックします。"
+      }
+    }
+  },
+  "tradingBot": {
+    "title": "グリッド取引ボット",
+    "config": {
+      "title": "設定",
+      "lowerPrice": "下限価格 (USDT)",
+      "upperPrice": "上限価格 (USDT)",
+      "gridSize": "グリッドレベル",
+      "investment": "投資額 (USDT)"
+    },
+    "buttons": {
+      "configure": "グリッド設定",
+      "propose": "ヘリオスAIの提案",
+      "start": "ボット開始",
+      "stop": "ボット停止"
+    },
+    "status": {
+      "title": "ステータス & PNL",
+      "state": "状態",
+      "pnl": "実現損益",
+      "openOrders": "未約定注文"
+    }
+  },
+  "analysisCenter": {
+    "cockpitTitle": "ヘリオスAI - 機関投資家向けコックピット2.0",
+    "workspaceSelectLabel": "ワークスペースを選択",
+    "workspaces": {
+      "technical": "1. テクニカル分析と実行（マスター）",
+      "orderflow": "2. オーダーフローと清算（HFTビュー）",
+      "macro": "3. マクロ経済とアルトシーズン",
+      "fundamentals": "4. ファンダメンタルズとオンチェーン"
+    },
+    "drawingToolsTooltip": "手動描画ツールには高度なチャートライブラリが必要です（将来のアップグレード）",
+    "drawingToolsLabel": "描画ツール（近日公開）"
+  },
+  "aiAnalysisPanel": {
+    "title": "ヘリオスAI分析",
+    "loading": "市場データを分析中...",
+    "error": "分析中にエラーが発生しました。もう一度お試しください。",
+    "welcome": "分析コマンドを選択して開始してください。",
+    "explanationTitle": "AIによる説明",
+    "buttons": {
+      "supportResistance": "サポートとレジスタンスの検索"
+    }
+  },
+  "botTerminal": {
+    "noConfig": "アクティブな設定がありません。ボットを設定してください。",
+    "buttons": {
+      "configure": "設定"
+    }
+  },
+  "botConfigModal": {
+    "title": "取引ボットの設定",
+    "lowerPrice": "下限価格 (USDT)",
+    "upperPrice": "上限価格 (USDT)",
+    "gridSize": "グリッドレベル",
+    "investment": "投資額 (USDT)",
+    "rationaleTitle": "AIの論理的根拠",
+    "errors": {
+      "thesis": "最新の取引テーゼを取得できませんでした。スケジューラがまだ実行されていない可能性があります。しばらくしてからもう一度お試しください。"
+    },
+    "buttons": {
+      "save": "保存してボットを再読み込み",
+      "propose": "ヘリオスAIの提案"
+    }
+  },
+  "common": {
+    "loading": "読み込み中..."
+  },
+  "enums": {
+    "setupType": {
+      "DIY": "DIY",
+      "XA_MINER": "XA-Miner"
+    },
+    "nodeManagementStrategy": {
+      "MAX_PERFORMANCE": "最大パフォーマンス",
+      "BALANCED": "バランス",
+      "LOW_IMPACT": "低影響",
+      "AUTOMATIC": "自動"
+    },
+    "tradingStrategy": {
+      "LOW_RISK_DCA": "低リスクDCA",
+      "MEDIUM_RISK_SWING": "中リスクスイング",
+      "HIGH_RISK_MOMENTUM": "高リスクモメンタム",
+      "AUTOMATIC": "自動"
+    },
+    "botState": {
+      "IDLE": "待機中",
+      "RUNNING": "実行中",
+      "PAUSED": "一時停止中",
+      "ERROR": "エラー",
+      "CONFIGURED": "設定済み"
+    }
+  }
+}

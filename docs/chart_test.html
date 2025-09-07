@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lightweight Chart Test</title>
+    <script type="module">
+        // Utiliza una ruta relativa a la raíz del servidor de desarrollo
+        import { createChart } from '/node_modules/lightweight-charts/dist/lightweight-charts.esm.js';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const chartContainer = document.getElementById('chart');
+            if (chartContainer) {
+                const chart = createChart(chartContainer, { width: 600, height: 300 });
+                const candlestickSeries = chart.addCandlestickSeries();
+
+                const data = [
+                    { time: '2023-01-01', open: 10, high: 20, low: 5, close: 15 },
+                    { time: '2023-01-02', open: 15, high: 25, low: 10, close: 20 },
+                ];
+                candlestickSeries.setData(data);
+            }
+        });
+    </script>
+</head>
+<body>
+    <h1>Chart Test</h1>
+    <div id="chart" style="width: 600px; height: 300px;"></div>
+</body>
+</html>

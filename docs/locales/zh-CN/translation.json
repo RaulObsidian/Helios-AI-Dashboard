@@ -1,0 +1,225 @@
+{
+  "header": {
+    "title": "Helios AI 仪表盘",
+    "subtitle": "测试版 {version}",
+    "alerts": "Helios AI 警报"
+  },
+  "chat": {
+    "title": "Helios AI 助手",
+    "placeholder": "询问有关 ScPrime、交易...",
+    "send": "发送"
+  },
+  "nav": {
+    "dashboard": "仪表盘",
+    "trading": "交易",
+    "analysis": "分析中心",
+    "logs": "日志",
+    "settings": "设置"
+  },
+  "connection": {
+    "title": "节点连接",
+    "nodeAddress": "节点地址",
+    "apiPassword": "API 密码",
+    "passwordPlaceholder": "输入 API 密码",
+    "connect": "连接",
+    "disconnect": "断开连接",
+    "connecting": "连接中...",
+    "status": {
+      "disconnected": "已断开",
+      "connecting": "连接中",
+      "connected": "已连接",
+      "failed": "连接失败"
+    }
+  },
+  "walletStatus": {
+    "title": "钱包状态",
+    "totalBalance": "总余额",
+    "unlocked": "已解锁",
+    "collateral": "抵押品",
+    "profitBreakdown": "利润明细",
+    "nodeProfits": "节点",
+    "tradingProfits": "交易"
+  },
+  "nodeStatus": {
+    "title": "节点状态",
+    "blockHeight": "区块高度",
+    "utilization": "利用率",
+    "currentPrice": "当前价格",
+    "suggestion": "AI 建议",
+    "incentives": "激励",
+    "unit": "SCP/TB",
+    "status": {
+      "title": "状态",
+      "ok": "正常",
+      "exceeded": "已超出"
+    }
+  },
+  "marketData": {
+    "title": "市场数据",
+    "price": "SCP 价格",
+    "mcap": "市值",
+    "volume": "24小时交易量",
+    "source": "来源",
+    "simulated": "模拟",
+    "errorTitle": "数据错误",
+    "errorSuggestion": "请尝试其他提供商或在设置中选择自动。"
+  },
+  "tradingLog": {
+    "title": "交易日志",
+    "header": {
+      "time": "时间",
+      "action": "操作",
+      "amount": "数量 (SCP)",
+      "price": "价格"
+    },
+    "action": {
+      "buy": "买入",
+      "sell": "卖出"
+    }
+  },
+  "eventLog": {
+    "title": "代理事件日志"
+  },
+  "chart": {
+    "title": "SCP 实时价格"
+  },
+  "settings": {
+    "title": "设置",
+    "agent": {
+      "title": "代理",
+      "profile": "硬件配置文件",
+      "nodeManagement": "节点管理策略",
+      "strategy": "交易策略"
+    },
+    "data": {
+      "title": "数据",
+      "provider": "价格提供商",
+      "automatic": "自动"
+    }
+  },
+  "tradingPage": {
+    "title": "自动交易",
+    "connectionsTitle": "交易所连接",
+    "apiKeyPlaceholder": "API 密钥",
+    "apiSecretPlaceholder": "API 秘密",
+    "addButton": "添加连接",
+    "tutorial": {
+      "title": "API 快速教程",
+      "intro": "要使用交易机器人，您需要使用API密钥连接交易所账户。请遵循以下最佳实践：",
+      "security": {
+        "title": "安全第一",
+        "item1": "权限",
+        "item1_body": "创建一个只能‘读取信息’和‘启用交易’的API密钥。绝不要启用‘提款’权限。",
+        "item2": "IP 限制",
+        "item2_body": "如果可能，请限制API密钥，使其只能从您节点的IP地址使用，以实现最大程度的安全性。",
+        "item3": "安全存储",
+        "item3_body": "您的密钥使用您的连接密码在本地数据库中加密。它们绝不会发送到我们的服务器。"
+      },
+      "howTo": {
+        "title": "如何添加连接",
+        "intro": "请按照以下步骤连接您的交易所：",
+        "step1": "进入您交易所的‘API管理’部分（例如 CoinEx, TradeOgre）。",
+        "step2": "创建一个新的API密钥。",
+        "step3": "给它一个可识别的名称（例如‘HeliosBot’）。",
+        "step4": "确保权限仅限于‘交易’和‘读取’。",
+        "step5": "复制‘访问密钥’（API Key）和‘秘密密钥’（API Secret）。",
+        "step6": "从上面的下拉菜单中选择正确的交易所。",
+        "step7": "将密钥粘贴到相应的字段中。",
+        "step8": "点击‘添加连接’。"
+      }
+    }
+  },
+  "tradingBot": {
+    "title": "网格交易机器人",
+    "config": {
+      "title": "配置",
+      "lowerPrice": "价格下限 (USDT)",
+      "upperPrice": "价格上限 (USDT)",
+      "gridSize": "网格级别",
+      "investment": "投资额 (USDT)"
+    },
+    "buttons": {
+      "configure": "设置网格",
+      "propose": "Helios AI 建议",
+      "start": "启动机器人",
+      "stop": "停止机器人"
+    },
+    "status": {
+      "title": "状态与盈亏",
+      "state": "状态",
+      "pnl": "已实现盈亏",
+      "openOrders": "未结订单"
+    }
+  },
+  "analysisCenter": {
+    "cockpitTitle": "Helios AI - 机构驾驶舱 2.0",
+    "workspaceSelectLabel": "选择工作区",
+    "workspaces": {
+      "technical": "1. 技术分析与执行（主）",
+      "orderflow": "2. 订单流与清算（HFT视图）",
+      "macro": "3. 宏观经济与山寨季",
+      "fundamentals": "4. 基本面与链上数据"
+    },
+    "drawingToolsTooltip": "手动绘图工具需要高级图表库（未来升级）",
+    "drawingToolsLabel": "绘图工具（即将推出）"
+  },
+  "aiAnalysisPanel": {
+    "title": "Helios AI 分析",
+    "loading": "正在分析市场数据...",
+    "error": "分析过程中发生错误。请重试。",
+    "welcome": "请选择一个分析命令以开始。",
+    "explanationTitle": "AI 解释",
+    "buttons": {
+      "supportResistance": "查找支撑位和阻力位"
+    }
+  },
+  "botTerminal": {
+    "noConfig": "没有活动配置。请配置机器人。",
+    "buttons": {
+      "configure": "配置"
+    }
+  },
+  "botConfigModal": {
+    "title": "配置交易机器人",
+    "lowerPrice": "价格下限 (USDT)",
+    "upperPrice": "价格上限 (USDT)",
+    "gridSize": "网格级别",
+    "investment": "投资额 (USDT)",
+    "rationaleTitle": "AI 原理",
+    "errors": {
+      "thesis": "无法检索最新的交易论点。调度程序可能尚未运行。请稍后再试。"
+    },
+    "buttons": {
+      "save": "保存并重新加载机器人",
+      "propose": "Helios AI 建议"
+    }
+  },
+  "common": {
+    "loading": "加载中..."
+  },
+  "enums": {
+    "setupType": {
+      "DIY": "DIY",
+      "XA_MINER": "XA-Miner"
+    },
+    "nodeManagementStrategy": {
+      "MAX_PERFORMANCE": "最高性能",
+      "BALANCED": "均衡",
+      "LOW_IMPACT": "低影响",
+      "AUTOMATIC": "自动"
+    },
+    "tradingStrategy": {
+      "LOW_RISK_DCA": "低风险定投",
+      "MEDIUM_RISK_SWING": "中风险波段",
+      "HIGH_RISK_MOMENTUM": "高风险动量",
+      "AUTOMATIC": "自动"
+    },
+    "botState": {
+      "IDLE": "空闲",
+      "RUNNING": "运行中",
+      "PAUSED": "已暂停",
+      "ERROR": "错误",
+      "CONFIGURED": "已配置"
+    }
+  }
+}

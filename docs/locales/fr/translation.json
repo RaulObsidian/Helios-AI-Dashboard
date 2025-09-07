@@ -1,0 +1,225 @@
+{
+  "header": {
+    "title": "Tableau de Bord Helios AI",
+    "subtitle": "version bêta {version}",
+    "alerts": "Alertes de Helios AI"
+  },
+  "chat": {
+    "title": "Copilote Helios AI",
+    "placeholder": "Question sur ScPrime, Trading...",
+    "send": "Envoyer"
+  },
+  "nav": {
+    "dashboard": "Tableau de bord",
+    "trading": "Trading",
+    "analysis": "Centre d'Analyse",
+    "logs": "Journaux",
+    "settings": "Paramètres"
+  },
+  "connection": {
+    "title": "Connexion au Nœud",
+    "nodeAddress": "Adresse du Nœud",
+    "apiPassword": "Mot de passe de l'API",
+    "passwordPlaceholder": "Entrez le mot de passe de l'API",
+    "connect": "Connecter",
+    "disconnect": "Déconnecter",
+    "connecting": "Connexion...",
+    "status": {
+      "disconnected": "Déconnecté",
+      "connecting": "Connexion",
+      "connected": "Connecté",
+      "failed": "Échec de la connexion"
+    }
+  },
+  "walletStatus": {
+    "title": "État du Portefeuille",
+    "totalBalance": "Solde Total",
+    "unlocked": "Débloqué",
+    "collateral": "Collatéral",
+    "profitBreakdown": "Répartition des Profits",
+    "nodeProfits": "Nœud",
+    "tradingProfits": "Trading"
+  },
+  "nodeStatus": {
+    "title": "État du Nœud",
+    "blockHeight": "Hauteur du Bloc",
+    "utilization": "Utilisation",
+    "currentPrice": "Prix Actuel",
+    "suggestion": "Suggestion de l'IA",
+    "incentives": "Incitatifs",
+    "unit": "SCP/TB",
+    "status": {
+      "title": "Statut",
+      "ok": "OK",
+      "exceeded": "Dépassé"
+    }
+  },
+  "marketData": {
+    "title": "Données du Marché",
+    "price": "Prix SCP",
+    "mcap": "Cap. Boursière",
+    "volume": "Volume 24h",
+    "source": "Source",
+    "simulated": "Simulé",
+    "errorTitle": "Erreur de Données",
+    "errorSuggestion": "Essayez un autre fournisseur ou sélectionnez Automatique dans les Paramètres."
+  },
+  "tradingLog": {
+    "title": "Journal de Trading",
+    "header": {
+      "time": "Heure",
+      "action": "Action",
+      "amount": "Montant (SCP)",
+      "price": "Prix"
+    },
+    "action": {
+      "buy": "ACHAT",
+      "sell": "VENTE"
+    }
+  },
+  "eventLog": {
+    "title": "Journal des Événements de l'Agent"
+  },
+  "chart": {
+    "title": "Prix SCP en Direct"
+  },
+  "settings": {
+    "title": "Paramètres",
+    "agent": {
+      "title": "Agent",
+      "profile": "Profil Matériel",
+      "nodeManagement": "Stratégie de Gestion du Nœud",
+      "strategy": "Stratégie de Trading"
+    },
+    "data": {
+      "title": "Données",
+      "provider": "Fournisseur de Prix",
+      "automatic": "Automatique"
+    }
+  },
+  "tradingPage": {
+    "title": "Trading Automatisé",
+    "connectionsTitle": "Connexions aux Échanges",
+    "apiKeyPlaceholder": "Clé API",
+    "apiSecretPlaceholder": "Secret API",
+    "addButton": "Ajouter une Connexion",
+    "tutorial": {
+      "title": "Tutoriel API Rapide",
+      "intro": "Pour utiliser le bot de trading, vous devez connecter un compte d'échange à l'aide de clés API. Suivez ces meilleures pratiques :",
+      "security": {
+        "title": "La Sécurité d'Abord",
+        "item1": "Permissions",
+        "item1_body": "Créez une clé API qui peut UNIQUEMENT 'Lire les Informations' et 'Activer le Trading'. N'activez JAMAIS les permissions de 'Retrait'.",
+        "item2": "Restriction d'IP",
+        "item2_body": "Si possible, restreignez la clé API pour qu'elle ne puisse être utilisée que depuis l'adresse IP de votre nœud pour une sécurité maximale.",
+        "item3": "Stockage Sécurisé",
+        "item3_body": "Vos clés sont cryptées dans votre base de données locale à l'aide de votre mot de passe de connexion. Elles ne sont jamais envoyées à nos serveurs."
+      },
+      "howTo": {
+        "title": "Comment Ajouter une Connexion",
+        "intro": "Suivez ces étapes pour connecter votre échange :",
+        "step1": "Allez à la section 'Gestion API' de votre échange (par ex. CoinEx, TradeOgre).",
+        "step2": "Créez une nouvelle clé API.",
+        "step3": "Donnez-lui un nom reconnaissable (par ex. 'HeliosBot').",
+        "step4": "Assurez-vous que les permissions sont limitées à 'Trading' et 'Lecture'.",
+        "step5": "Copiez la 'Clé d'Accès' (Clé API) et la 'Clé Secrète' (Secret API).",
+        "step6": "Sélectionnez le bon échange dans le menu déroulant ci-dessus.",
+        "step7": "Collez les clés dans les champs correspondants.",
+        "step8": "Cliquez sur 'Ajouter une Connexion'."
+      }
+    }
+  },
+  "tradingBot": {
+    "title": "Bot de Trading (Grille)",
+    "config": {
+      "title": "Configuration",
+      "lowerPrice": "Prix Inférieur (USDT)",
+      "upperPrice": "Prix Supérieur (USDT)",
+      "gridSize": "Niveaux de Grille",
+      "investment": "Investissement (USDT)"
+    },
+    "buttons": {
+      "configure": "Définir la Grille",
+      "propose": "Suggestion d'Helios AI",
+      "start": "Démarrer le Bot",
+      "stop": "Arrêter le Bot"
+    },
+    "status": {
+      "title": "Statut & PNL",
+      "state": "État",
+      "pnl": "PNL Réalisé",
+      "openOrders": "Ordres Ouverts"
+    }
+  },
+  "analysisCenter": {
+    "cockpitTitle": "Helios AI - Cockpit Institutionnel 2.0",
+    "workspaceSelectLabel": "Sélectionner l'Espace de Travail",
+    "workspaces": {
+      "technical": "1. Analyse Technique & Exécution (Maître)",
+      "orderflow": "2. Flux d'Ordres & Liquidations (Vue HFT)",
+      "macro": "3. Macroéconomie & Altseason",
+      "fundamentals": "4. Fondamentaux & On-Chain"
+    },
+    "drawingToolsTooltip": "Les outils de dessin manuels nécessitent la Bibliothèque de Graphiques Avancée (Mise à jour future)",
+    "drawingToolsLabel": "Outils de Dessin (Bientôt disponible)"
+  },
+  "aiAnalysisPanel": {
+    "title": "Analyse d'Helios AI",
+    "loading": "Analyse des données du marché...",
+    "error": "Une erreur est survenue lors de l'analyse. Veuillez réessayer.",
+    "welcome": "Sélectionnez une commande d'analyse pour commencer.",
+    "explanationTitle": "Explication de l'IA",
+    "buttons": {
+      "supportResistance": "Trouver Supports & Résistances"
+    }
+  },
+  "botTerminal": {
+    "noConfig": "Aucune configuration active. Veuillez configurer le bot.",
+    "buttons": {
+      "configure": "Configurer"
+    }
+  },
+  "botConfigModal": {
+    "title": "Configurer le Bot de Trading",
+    "lowerPrice": "Prix Inférieur (USDT)",
+    "upperPrice": "Prix Supérieur (USDT)",
+    "gridSize": "Niveaux de Grille",
+    "investment": "Investissement (USDT)",
+    "rationaleTitle": "Justification de l'IA",
+    "errors": {
+      "thesis": "Impossible de récupérer la dernière thèse de trading. Le planificateur n'a peut-être pas encore été exécuté. Veuillez réessayer dans un instant."
+    },
+    "buttons": {
+      "save": "Sauvegarder & Recharger le Bot",
+      "propose": "Suggestion d'Helios AI"
+    }
+  },
+  "common": {
+    "loading": "Chargement..."
+  },
+  "enums": {
+    "setupType": {
+      "DIY": "DIY",
+      "XA_MINER": "XA-Miner"
+    },
+    "nodeManagementStrategy": {
+      "MAX_PERFORMANCE": "Performance Max",
+      "BALANCED": "Équilibré",
+      "LOW_IMPACT": "Faible Impact",
+      "AUTOMATIC": "Automatique"
+    },
+    "tradingStrategy": {
+      "LOW_RISK_DCA": "Faible Risque (DCA)",
+      "MEDIUM_RISK_SWING": "Risque Moyen (Swing)",
+      "HIGH_RISK_MOMENTUM": "Haut Risque (Momentum)",
+      "AUTOMATIC": "Automatique"
+    },
+    "botState": {
+      "IDLE": "INACTIF",
+      "RUNNING": "EN COURS",
+      "PAUSED": "EN PAUSE",
+      "ERROR": "ERREUR",
+      "CONFIGURED": "CONFIGURÉ"
+    }
+  }
+}
