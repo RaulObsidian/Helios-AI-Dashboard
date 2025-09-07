@@ -24,7 +24,7 @@ const assistant = new HeliosAssistant();
 assistant.initialize(); // Carga la DB de conocimiento (sin API Key al inicio)
 
 // --- Middleware ---
-app.use(cors({ origin: 'http://localhost:5173' }));
+app.use(cors({ origin: '*' })); // Temporalmente permite todas las solicitudes para depuración CORS
 app.use(express.json());
 
 // --- Rutas de la API ---
